@@ -3,8 +3,8 @@
 Jugador::Jugador() {
 	this->idJugador = this->NuevoID( 0 );
 	this->nombre = "";
-	this->soldados = new Lista<Soldado*>();
-	// this->minasActivas = nullptr;
+	this->soldados = NULL;
+	this->minasActivas = NULL;
 }
 
 int Jugador::NuevoID( int numero = 0 ) {
@@ -57,6 +57,14 @@ int Jugador::getIdJugador() {
 
 Jugador * Jugador::getJugador() {
 	return this;
+}
+
+void Jugador::setMinasActivas(Lista<Mina *> *minasActivas) {
+    this->minasActivas = minasActivas;
+}
+
+void Jugador::setSoldados(Lista<Soldado *> *soldados) {
+    this->soldados = soldados;
 }
 
 // Acciones

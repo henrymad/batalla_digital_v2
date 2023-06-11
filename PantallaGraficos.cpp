@@ -2,14 +2,14 @@
 #include <iostream>
 using namespace std;
 
-void InterfacePantalla::imprimirPantalla(std::string titulo,std::string opcion1,std::string opcion2){
+void PantallaGraficos::imprimirPantalla(std::string titulo,std::string opcion1,std::string opcion2){
     cout<<titulo<<endl;
     this->imprimirLineaHorizontal(40);
     cout<<">> "<<opcion1<<endl;
     cout<<">> "<<opcion2<<endl;
 }
 
-void InterfacePantalla::imprimirPantalla(std::string titulo,std::string opcion1,std::string opcion2, std::string opcion3){
+void PantallaGraficos::imprimirPantalla(std::string titulo,std::string opcion1,std::string opcion2, std::string opcion3){
     cout<<titulo<<endl;
     this->imprimirLineaHorizontal(40);
     cout<<">> "<<opcion1<<endl;
@@ -17,18 +17,18 @@ void InterfacePantalla::imprimirPantalla(std::string titulo,std::string opcion1,
     cout<<">> "<<opcion3<<endl;
 }
 
-void InterfacePantalla::imprimirTitulo() {
+void PantallaGraficos::imprimirTitulo() {
     cout<<this->titulo<<endl;
 }
 
-void InterfacePantalla::imprimirLineaHorizontal(int cantidadaLineas) {
+void PantallaGraficos::imprimirLineaHorizontal(int cantidadaLineas) {
     for(int i=0;i<cantidadaLineas;i++){
         cout<<"-";
     }
     cout<<""<<endl;
 }
 
-void InterfacePantalla::imprimirEspaciosVertical(int cantidadDeEspacios) {
+void PantallaGraficos::imprimirEspaciosVertical(int cantidadDeEspacios) {
     for(int i=0;i<cantidadDeEspacios;i++){
         cout<<" "<<endl;
     }
@@ -36,26 +36,26 @@ void InterfacePantalla::imprimirEspaciosVertical(int cantidadDeEspacios) {
 
 
 
-std::string InterfacePantalla::entradaUsuarioTexto(std::string textoInput){
+std::string PantallaGraficos::entradaUsuarioTexto(std::string textoInput){
     std::string  input;
     cout<<textoInput;
     cin>>input;
     return input;
 }
 
-void InterfacePantalla::imprimirItemsMenu() {
+void PantallaGraficos::imprimirItemsMenu() {
     cout<<">> "<<"Historial (H)"<<endl;
 }
 
-InterfacePantalla::InterfacePantalla() {
+PantallaGraficos::PantallaGraficos() {
 
 }
 
-InterfacePantalla::~InterfacePantalla() {
+PantallaGraficos::~PantallaGraficos() {
 
 }
 
-int InterfacePantalla::entradaUsuarioNumero(std::string textoInput) {
+int PantallaGraficos::entradaUsuarioNumero(std::string textoInput) {
     int  input;
     cout<<textoInput;
     cin>>input;

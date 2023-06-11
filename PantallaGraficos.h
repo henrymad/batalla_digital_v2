@@ -3,15 +3,15 @@
 
 #include<string>
 
-class InterfacePantalla {
+class PantallaGraficos {
 private:
     std::string titulo;
     std::string opcion1;
     std::string opcion2;
 
 public:
-    InterfacePantalla();
-    virtual ~InterfacePantalla();
+    PantallaGraficos();
+    virtual ~PantallaGraficos();
 
     void imprimirPantalla(std::string titulo,std::string opcion1,std::string opcion2);
     void imprimirPantalla(std::string titulo,std::string opcion1,std::string opcion2, std::string opcion3);

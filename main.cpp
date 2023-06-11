@@ -1,6 +1,12 @@
 #include <iostream>
+#include "Juego.h"
+
 using namespace std;
 
 int main(){
- cout<<"Hola mundo"<<endl;
+    Juego *juego = new Juego();
+    juego->configurarPartida();
+    cout<<"Hola mundo"<<endl;
+    delete juego;
+ return 0;
 }

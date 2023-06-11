@@ -27,6 +27,8 @@ public:
 	void setNombreJugador( string );
 	string getNombreJugador();
 	void reiniciarID();
+    void setMinasActivas(Lista<Mina *> * minasActivas);
+    void setSoldados(Lista<Soldado *> * soldados);
 	// Acciones
 	// void moverSoldado( Tablero3D *, Coordenada *, Soldado * ); 
 	// void moverSoldado( Tablero3D *, Coordenada *, int );
