@@ -5,7 +5,7 @@
 
 class Mina {
 private:
-	int jugador = 0;
+	int jugador;
 	Coordenada * coordenada;
 public:
 	Mina();

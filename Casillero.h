@@ -1,5 +1,5 @@
-#ifndef _CASILLERO_INCLUDED_
-#define _CASILLERO_INCLUDED_
+#ifndef _CASILLERO_
+#define _CASILLERO_
 
 #include <string>
 #include "Lista.h"
@@ -14,8 +14,8 @@ class Casillero {
 private:
 	Coordenada coordenada;
     TipoTerrenoCelda terreno;
-	int estadoInactivoCasillero = 0;	// Lo imagino bool
-	int turnosDeInactividad = 0;		// valor >= 0 y cambia con cada turno
+	int estadoInactivoCasillero;	// Lo imagino bool
+	int turnosDeInactividad;		// valor >= 0 y cambia con cada turno
 	/* Ac� ir�an los posibles elementos que puede contener un casillero
 	*    Avi�n, Barco, Mina, Soldado, ...
 	*/
@@ -23,7 +23,7 @@ private:
 	Lista< Mina *> * minas;
 public:
 	Casillero();
-	Casillero( Coordenada );
+	//Casillero( Coordenada );
 	Casillero( Coordenada, TipoTerrenoCelda );
 	virtual ~Casillero();
 	Coordenada getCoordenada();
@@ -37,5 +37,5 @@ public:
 	Mina * getMina( int );
 };
 
-#endif  // _CASILLERO_INCLUDED_
+#endif  // _CASILLERO_
 

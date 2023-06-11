@@ -2,7 +2,7 @@
 
 #include "Tablero3D.h"
 
-Tablero3D::Tablero3D() {
+/**Tablero3D::Tablero3D() {
 	this->tablero = NULL;
 	this->size_x = CANTIDAD_DE_CASILLERO_EJE_X;
 	this->size_y = CANTIDAD_DE_CASILLERO_EJE_Y;
@@ -24,9 +24,10 @@ Tablero3D::Tablero3D() {
 		}
 		this->tablero->agregar(elemento);
 	}
-}
+}**/
 
-Tablero3D::Tablero3D( int x, int y, int z) {
+/**Tablero3D::Tablero3D( int x, int y, int z) {
+    //Utilizar notacion camel-case
 	this->tablero = NULL;
 	this->size_x = x;
 	this->size_y = y;
@@ -48,9 +49,9 @@ Tablero3D::Tablero3D( int x, int y, int z) {
 		}
 		this->tablero->agregar( elemento );
 	}
-}
+}++/
 
-Tablero3D::~Tablero3D() {
+/**Tablero3D::~Tablero3D() {
 	for ( int x = 0; x < this->size_x; x++ ) {
 		Lista < Lista < Casillero * > * > * elemento;
 		elemento = this->tablero->obtenerDato( x );
@@ -65,9 +66,9 @@ Tablero3D::~Tablero3D() {
 	this->size_y = 0;
 	this->size_z = 0;
 	this->tablero = nullptr;
-}
+}**/
 
-void Tablero3D::setCasillero( Casillero * casillero, int x, int y, int z ) {
+/**void Tablero3D::setCasillero( Casillero * casillero, int x, int y, int z ) {
 	if (this->checkCoordenadas(x, y, z)) {
 		return;
 	}
@@ -78,9 +79,9 @@ void Tablero3D::setCasillero( Casillero * casillero, int x, int y, int z ) {
 	elemento = this->tablero->obtenerDato( x );
 	subelemento = elemento->obtenerDato( y );
 	subelemento->asignar( casillero, z );
-}
+}**/
 
-Casillero * Tablero3D::getCasillero( int x, int y, int z ) {
+/**Casillero * Tablero3D::getCasillero( int x, int y, int z ) {
 	if ( this->checkCoordenadas( x, y, z ) ) {
 		return nullptr;
 	}
@@ -93,7 +94,7 @@ Casillero * Tablero3D::getCasillero( int x, int y, int z ) {
 	Casillero * Casillero;
 	Casillero = subelemento->obtenerDato( z );
 	return Casillero;
-}
+}**/
 
 int Tablero3D::getSize_x() {
 	return this->size_x;

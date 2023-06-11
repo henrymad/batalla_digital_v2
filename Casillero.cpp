@@ -1,14 +1,14 @@
 #include "Casillero.h"
 
 Casillero::Casillero() {
-	this->terreno = TipoTerrenoCasillero::tierra;
+	//this->terreno = TipoTerrenoCelda::tierra;
 	this->estadoInactivoCasillero = 0;
 	this->turnosDeInactividad = 0;
-	this->soldado = nullptr;
-	this->minas = nullptr;
+	this->soldado = NULL;
+	this->minas = NULL;
 }
 
-Casillero::Casillero( Coordenada coordenada ) {
+/**Casillero::Casillero( Coordenada coordenada ) {
 	this->terreno = TipoTerrenoCasillero::tierra;
 	this->estadoInactivoCasillero = 0;
 	this->turnosDeInactividad = 0;
@@ -16,15 +16,15 @@ Casillero::Casillero( Coordenada coordenada ) {
 	this->coordenada = coordenada;
 	this->soldado = nullptr;
 	this->minas = nullptr;
-}
+}**/
 
-Casillero::Casillero( Coordenada coordenada, TipoTerrenoCasillero terreno ) {
+Casillero::Casillero( Coordenada coordenada, TipoTerrenoCelda terreno ) {
 	this->coordenada = coordenada;
 	this->terreno = terreno;
 	this->estadoInactivoCasillero = 0;
 	this->turnosDeInactividad = 0;
-	this->soldado = nullptr;
-	this->minas = nullptr;
+	this->soldado = NULL;
+	this->minas = NULL;
 }
 
 Casillero::~Casillero() {
@@ -38,7 +38,7 @@ Coordenada Casillero::getCoordenada() {
 	return this->coordenada;
 }
 
-TipoTerrenoCasillero Casillero::getTipoTerreno() {
+TipoTerrenoCelda Casillero::getTipoTerreno() {
 	return this->terreno;
 }
 
@@ -49,7 +49,7 @@ void Casillero::setCoordenada( Coordenada coordenada ) {
 	this->coordenada = coordenada;
 }
 
-void Casillero::setTipoTerreno( TipoTerrenoCasillero terreno ) {
+void Casillero::setTipoTerreno( TipoTerrenoCelda terreno ) {
 	this->terreno = terreno;
 }
 
@@ -57,8 +57,8 @@ void Casillero::setSoldado( Soldado * soldado) {
 	this->soldado = soldado;
 }
 
-void Casillero::agregarMina( Mina * mina ) {
-	if ( mina != nullptr ) {
+/**void Casillero::agregarMina( Mina * mina ) {
+	if ( mina != NULL ) {
 		if ( mina->getJugador() > 0 ) {
 			bool encontrado = false;
 			Lista< Mina * > * listaminas = this->minas;
@@ -75,7 +75,7 @@ void Casillero::agregarMina( Mina * mina ) {
 			}
 		}
 	}
-}
+}**/
 
 Soldado * Casillero::getSoldado() {
 	return this->soldado;
@@ -85,8 +85,8 @@ Lista< Mina * > * Casillero::getListaMinas() {
 	return this->minas;
 }
 
-Mina * Casillero::getMina( int jugador ) {
-	Mina * mina = nullptr;
+/**Mina * Casillero::getMina( int jugador ) {
+	Mina * mina = NULL;
 	bool encontrado = false;
 	Lista< Mina * > * listaminas = this->minas;
 	listaminas->iniciarCursor();
@@ -98,4 +98,5 @@ Mina * Casillero::getMina( int jugador ) {
 		}
 	}
 	return mina;
-}
+}**/
+

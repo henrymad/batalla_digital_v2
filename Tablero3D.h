@@ -1,5 +1,5 @@
-#ifndef _TABLERO2_H_
-#define _TABLERO2_H_
+#ifndef TABLERO2_H_
+#define TABLERO2_H_
 
 #include <iostream>
 
@@ -26,6 +26,6 @@ public:
 
 };
 
-#endif	//  _TABLERO2_H_
+#endif	//TABLERO2_H_
 
   
