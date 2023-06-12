@@ -1,6 +1,8 @@
 #include "Juego.h"
-#include "NumeroRandom.h"
 #include "PropiedadesDelJuego.h"
+#include <time.h>
+#include <stdlib.h>
+
 
 Juego::Juego() {
     this->nivelPartida = 0;
@@ -28,6 +30,7 @@ void Juego::configurarPartida() {
         this->pantallaGraficos->imprimirEspaciosVertical(1);
 
         this->configurarJugadores();
+        this->configurarTablero(this->nivelPartida);
 
     }
 }
@@ -48,15 +51,41 @@ void Juego::configurarJugadores() {
 
 Lista<Soldado *> *Juego::configurarSoldados(int cantidadDeSoldados, int idJugador) {
     Lista<Soldado*> *resultado = new Lista<Soldado*>();
-
+    srand(time(NULL));
     for(int i=0;i<cantidadDeSoldados;i++){
         Soldado *soldado = new Soldado();
-        soldado->getCoordenada()->setCoordenadaX(NumeroRandom::numeroAleatorioSuperficie(CANTIDAD_DE_CASILLERO_EJE_X));
-        soldado->getCoordenada()->setCoordenadaY(NumeroRandom::numeroAleatorioSuperficie(CANTIDAD_DE_CASILLERO_EJE_Y));
-        soldado->getCoordenada()->setCoordenadaZ(NumeroRandom::numeroAleatorioAltura(CANTIDAD_DE_CASILLERO_EJE_Z));
+        soldado->getCoordenada()->setCoordenadaX(rand()%CANTIDAD_DE_CASILLERO_EJE_X);
+        soldado->getCoordenada()->setCoordenadaY(rand()%CANTIDAD_DE_CASILLERO_EJE_Y);
+        soldado->getCoordenada()->setCoordenadaZ(rand()%CANTIDAD_DE_CASILLERO_EJE_Z);
         soldado->setJugador(idJugador);
         resultado->agregar(soldado);
         cout<<soldado->getCoordenada()->getCoordenadaX()<<","<<soldado->getCoordenada()->getCoordenadaY()<<","<<soldado->getCoordenada()->getCoordenadaZ()<<","<<endl;
     }
     return resultado;
+}
+
+void Juego::configurarTablero(int nivelPartida) {
+    this->tablero = new Tablero3D(nivelPartida);
+    this->tablero->getCasilleros()->iniciarCursor();
+    int countX=0;
+    int countY=0;
+    cout<<this->tablero->getCasilleros()->contarElementos()<<endl;
+    while(this->tablero->getCasilleros()->avanzarCursor()){
+        Lista<Lista<Casillero*>*> *subLista = this->tablero->getCasilleros()->obtenerCursor();
+        subLista->iniciarCursor();
+        while(subLista->avanzarCursor()){
+            Lista<Casillero*> *casilleros = subLista->obtenerCursor();
+            cout<<casilleros->contarElementos()<<endl;
+            if(casilleros->obtener(countY)->getTerreno() == TIERRA){
+                cout<<'T';
+            }else{
+                cout<<'A';
+            }
+
+            countY +=1;
+        }
+
+        countX +=1;
+        cout<<"  "<<countX<<endl;
+    }
 }

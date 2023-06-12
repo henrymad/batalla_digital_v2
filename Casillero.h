@@ -14,6 +14,12 @@ class Casillero {
 private:
 	Coordenada coordenada;
     TipoTerrenoCelda terreno;
+    EstadoCelda estadoCelda;
+
+    // opcionales
+    std::string estado;
+    std::string tipoTerreno;
+
 	int estadoInactivoCasillero;	// Lo imagino bool
 	int turnosDeInactividad;		// valor >= 0 y cambia con cada turno
 	/* Ac� ir�an los posibles elementos que puede contener un casillero
@@ -30,6 +36,15 @@ public:
     TipoTerrenoCelda getTipoTerreno();
 	void setCoordenada( Coordenada );
 	void setTipoTerreno( TipoTerrenoCelda );
+    void setEstadoCelda(EstadoCelda estadoCelda);
+    EstadoCelda getEstadoCelda();
+
+    void setEstado(std::string estado);
+    std::string getEstado();
+
+    void setTerreno(std::string tipoTerreno);
+    std::string getTerreno();
+
 	void setSoldado( Soldado * );
 	void agregarMina( Mina * );
 	Soldado * getSoldado();

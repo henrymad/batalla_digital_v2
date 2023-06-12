@@ -17,7 +17,7 @@ private:
 
 
     void configurarJugadores();
-    void configurarTablero(Lista<Jugador*> *jugadores, int nivelPartida);
+    void configurarTablero(int nivelPartida);
     Lista<Soldado*> *configurarSoldados(int cantidadDeSoldados,int idJugador);
 
 public:

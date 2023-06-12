@@ -85,6 +85,30 @@ Lista< Mina * > * Casillero::getListaMinas() {
 	return this->minas;
 }
 
+void Casillero::setEstadoCelda(EstadoCelda estadoCelda) {
+    this->estadoCelda = estadoCelda;
+}
+
+EstadoCelda Casillero::getEstadoCelda() {
+    return this->estadoCelda;
+}
+
+void Casillero::setEstado(std::string estado) {
+    this->estado = estado;
+}
+
+std::string Casillero::getEstado() {
+    return this->estado;
+}
+
+std::string Casillero::getTerreno() {
+    return this->tipoTerreno;
+}
+
+void Casillero::setTerreno(std::string tipoTerreno) {
+    this->tipoTerreno = tipoTerreno;
+}
+
 /**Mina * Casillero::getMina( int jugador ) {
 	Mina * mina = NULL;
 	bool encontrado = false;

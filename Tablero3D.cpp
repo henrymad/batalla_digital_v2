@@ -1,6 +1,48 @@
-#include <new>
 
 #include "Tablero3D.h"
+#include "PropiedadesDelJuego.h"
+
+Tablero3D::Tablero3D(int nivelPartida) {
+    this->casilleros = new Lista <Lista <Lista < Casillero * > * > * >();
+    this->sizeX = CANTIDAD_DE_CASILLERO_EJE_X;
+    this->sizeY = CANTIDAD_DE_CASILLERO_EJE_Y;
+    this->sizeZ = CANTIDAD_DE_CASILLERO_EJE_Z;
+    int count = 0;
+    for (int x = 0; x < this->sizeX; x++) {
+        Lista < Lista < Casillero * > * > * elemento;
+        elemento = new Lista < Lista < Casillero * > * >;
+        for (int y = 0; y < this->sizeY; y++) {
+            Lista < Casillero * > * subelemento;
+            subelemento = new Lista < Casillero * >;
+
+            for (int z = 0; z < this->sizeZ; z++) {
+                Casillero * casillero;
+                casillero = new Casillero();
+                casillero->setEstado("casillaVacia");
+                if(nivelPartida == 5){
+                    if(count<=5){
+                        casillero->getCoordenada().setCoordenadaX(x);
+                        casillero->getCoordenada().setCoordenadaY(y);
+                        casillero->getCoordenada().setCoordenadaZ(z);
+                        casillero->setTerreno(TIERRA);
+                    }else{
+                        casillero->getCoordenada().setCoordenadaX(x);
+                        casillero->getCoordenada().setCoordenadaY(y);
+                        casillero->getCoordenada().setCoordenadaZ(z);
+                        casillero->setTerreno(AGUA);
+                    }
+
+                }
+                subelemento->agregar( casillero);
+            }
+            count +=1;
+            cout<<count<<endl;
+            elemento->agregar(subelemento);
+        }
+        this->casilleros->agregar(elemento);
+    }
+}
+
 
 /**Tablero3D::Tablero3D() {
 	this->tablero = NULL;
@@ -120,3 +162,12 @@ bool Tablero3D::checkCoordenadas( int x, int y, int z ) {
 	}
 	return true;
 }
+
+Lista<Lista<Lista<Casillero *> *> *> *Tablero3D::getCasilleros() {
+    return this->casilleros;
+}
+
+Tablero3D::Tablero3D() {
+
+}
+
