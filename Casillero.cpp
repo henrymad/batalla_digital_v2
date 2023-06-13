@@ -2,29 +2,43 @@
 
 Casillero::Casillero() {
 	this->terreno = TipoTerrenoCasillero::tierra;
+	this->estado = EstadoCasillero::casillerovacio;
 	this->estadoInactivoCasillero = 0;
 	this->turnosDeInactividad = 0;
-	this->soldado = nullptr;
-	this->minas = nullptr;
+	this->coordenada = NULL;
+	this->soldado = NULL;
+	this->minas = NULL;
 }
 
-Casillero::Casillero( Coordenada coordenada ) {
+Casillero::Casillero( Coordenada * coordenada ) {
 	this->terreno = TipoTerrenoCasillero::tierra;
+	this->estado = EstadoCasillero::casillerovacio;
 	this->estadoInactivoCasillero = 0;
 	this->turnosDeInactividad = 0;
 	// Lo puedo hacer porque sobrecargue el '='
 	this->coordenada = coordenada;
-	this->soldado = nullptr;
-	this->minas = nullptr;
+	this->soldado = NULL;
+	this->minas = NULL;
 }
 
-Casillero::Casillero( Coordenada coordenada, TipoTerrenoCasillero terreno ) {
+Casillero::Casillero( Coordenada * coordenada, TipoTerrenoCasillero terreno ) {
 	this->coordenada = coordenada;
 	this->terreno = terreno;
+	this->estado = EstadoCasillero::casillerovacio;
 	this->estadoInactivoCasillero = 0;
 	this->turnosDeInactividad = 0;
-	this->soldado = nullptr;
-	this->minas = nullptr;
+	this->soldado = NULL;
+	this->minas = NULL;
+}
+
+Casillero::Casillero( Coordenada * coordenada, TipoTerrenoCasillero terreno, EstadoCasillero estado ) {
+	this->coordenada = coordenada;
+	this->terreno = terreno;
+	this->estado = EstadoCasillero::casillerovacio;
+	this->estadoInactivoCasillero = 0;
+	this->turnosDeInactividad = 0;
+	this->soldado = NULL;
+	this->minas = NULL;
 }
 
 Casillero::~Casillero() {
@@ -32,19 +46,9 @@ Casillero::~Casillero() {
 	this->turnosDeInactividad = 0;
 }
 
-// Getters
-
-Coordenada Casillero::getCoordenada() {
-	return this->coordenada;
-}
-
-TipoTerrenoCasillero Casillero::getTipoTerreno() {
-	return this->terreno;
-}
-
 // Setters
 
-void Casillero::setCoordenada( Coordenada coordenada ) {
+void Casillero::setCoordenada( Coordenada * coordenada ) {
 	// Lo puedo hacer porque sobrecargue el '='
 	this->coordenada = coordenada;
 }
@@ -53,8 +57,18 @@ void Casillero::setTipoTerreno( TipoTerrenoCasillero terreno ) {
 	this->terreno = terreno;
 }
 
+void Casillero::setEstadoCasillero( EstadoCasillero estado ) {
+	this->estado = estado;
+}
+
 void Casillero::setSoldado( Soldado * soldado) {
 	this->soldado = soldado;
+}
+
+void Casillero::setTurnosDeInactividad( int turnos ) {
+	if ( turnos >= 0 ) {
+		this->turnosDeInactividad = turnos;
+	}
 }
 
 void Casillero::agregarMina( Mina * mina ) {
@@ -75,6 +89,20 @@ void Casillero::agregarMina( Mina * mina ) {
 			}
 		}
 	}
+}
+
+// Getters
+
+Coordenada* Casillero::getCoordenada() {
+	return this->coordenada;
+}
+
+TipoTerrenoCasillero Casillero::getTipoTerreno() {
+	return this->terreno;
+}
+
+EstadoCasillero Casillero::getEstadoCasillero() {
+	return this->estado;
 }
 
 Soldado * Casillero::getSoldado() {
@@ -98,4 +126,8 @@ Mina * Casillero::getMina( int jugador ) {
 		}
 	}
 	return mina;
+}
+
+int Casillero::getTurnosDeInactividad() {
+	return  this->turnosDeInactividad;
 }
