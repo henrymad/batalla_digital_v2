@@ -2,14 +2,17 @@
 
 Mina::Mina() {
 	this->jugador = 0;
-	this->coordenada = nullptr;
+	this->coordenada = NULL;
 }
 
 Mina::Mina( Coordenada * coordenada, int jugador ) {
 	if ( jugador != 0 ) {
 		this->jugador = jugador;
 	}
-	this->coordenada = coordenada;
+	this->coordenada = NULL;
+	if ( coordenada->getCoordenada_z() <= NIVEL_SUPERFICIE ) {
+		this->coordenada = coordenada;
+	}
 }
 
 Mina::Mina( Coordenada * coordenada ) {
@@ -19,7 +22,7 @@ Mina::Mina( Coordenada * coordenada ) {
 
 Mina::~Mina() {
 	this->jugador = 0;
-	this->coordenada = nullptr;
+	this->coordenada = NULL;
 }
 
 // Getters
@@ -35,7 +38,10 @@ int Mina::getJugador() {
 // Setters
 
 void Mina::setCoordenada(Coordenada * coodenada) {
-	this->coordenada = coordenada;
+	this->coordenada = NULL;
+	if ( coordenada->getCoordenada_z() <= NIVEL_SUPERFICIE ) {
+		this->coordenada = coordenada;
+	}
 }
 
 void Mina::setJugador( int jugador ) {
