@@ -2,7 +2,7 @@
 
 Soldado::Soldado() {
 	this->jugador = 0;
-	this->coordenada = new Coordenada();
+	this->coordenada = nullptr;
 	this->idSoldado = this->NuevoID(0);
 }
 
@@ -10,7 +10,7 @@ Soldado::Soldado( int jugador ) {
 	if ( jugador > 0 ) {
 		this->jugador = jugador;
 	}
-	//this->coordenada = nullptr;
+	this->coordenada = nullptr;
 	this->idSoldado = this->NuevoID( 0 );
 }
 
@@ -18,13 +18,15 @@ Soldado::Soldado( int jugador, Coordenada * coordenada ) {
 	if ( jugador > 0 ) {
 		this->jugador = jugador;
 	}
-	this->coordenada = coordenada;
+	if (coordenada->getCoordenada_z() == NIVEL_SUPERFICIE) {
+		this->coordenada = coordenada;
+	}
 	this->idSoldado = this->NuevoID(0);
 }
 
 Soldado::~Soldado() {
 	this->jugador = 0;
-	//this->coordenada = nullptr;
+	this->coordenada = NULL;
 	this->idSoldado = 0;
 }
 
@@ -50,7 +52,9 @@ void Soldado::setJugador( int jugador ) {
 }
 
 void Soldado::setCoordenada( Coordenada * coordenada ) {
-	this->coordenada = coordenada;
+	if ( coordenada->getCoordenada_z() == NIVEL_SUPERFICIE ) {
+		this->coordenada = coordenada;
+	}
 }
 
 // Getters

@@ -1,7 +1,10 @@
 #ifndef _MINA_H_
 #define _MINA_H_
 
+#include <iostream>
+
 #include "Coordenada.h"
+#include "Definiciones.h"
 
 class Mina {
 private:

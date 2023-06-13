@@ -1,20 +1,23 @@
 #ifndef _SOLDADO_INCLUDED_
 #define _SOLDADO_INCLUDED_
 
+#include <iostream>
+
 #include "Coordenada.h"
+#include "Definiciones.h"
 
 class Soldado {
 private:
-	int idSoldado;
-	int jugador;
+	int idSoldado = 0;		// Autonumerico [1-n] gestionado en la class Jugador.
+	int jugador = 0;
 	Coordenada * coordenada;
+	int NuevoID( int );
 
 public:
 	Soldado();
 	Soldado( int );
 	Soldado( int, Coordenada * );
 	~Soldado();
-	int NuevoID(int);
 	void setJugador( int );
 	void setCoordenada( Coordenada * );
 	int getJugador();

@@ -2,11 +2,9 @@
 #define _JUGADOR_H_
 
 #include <string>
-#include "Lista.h"
+#include "lista.h"
 
-// #include "Tablero3D.h"
-#include "Soldado.h"
-#include "Mina.h"
+#include "Casillero.h"
 
 using namespace std;
 
@@ -16,11 +14,11 @@ private:
 	string nombre;
 	Lista<Soldado *> * soldados;
 	Lista<Mina *> * minasActivas;
+	int NuevoID( int );
 public:
 	Jugador();
 	Jugador( string );
 	~Jugador();
-	int NuevoID( int );
 	int getCantidadSoldados();
 	int getIdJugador();
 	Jugador* getJugador();

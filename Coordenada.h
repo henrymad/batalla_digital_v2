@@ -1,24 +1,30 @@
+#ifndef _COORDENADA_H_
+#define _COORDENADA_H_
 
+// #include "Tablero3D.h"	/* Necesitaría tablero para validar rangos de las coordenadas */
 
-#ifndef COORDENADA_H
-#define COORDENADA_H
+/* Faltaria definir si la traslación de 0-size-1 a 1-size lo hacemos acá o en otra parte */
 
-class Coordenada{
+class Coordenada
+{
 private:
-    int coordenadaX;
-    int coordenadaY;
-    int coordenadaZ;
-public:
-    Coordenada();
-    int getCoordenadaX() const;
-    int getCoordenadaY() const;
-    int getCoordenadaZ() const;
+	int coordenada_x = 0;
+	int coordenada_y = 0;
+	int coordenada_z = 0;
 
-    void setCoordenadaX(int coordenadaX);
-    void setCoordenadaY(int coordenadaY);
-    void setCoordenadaZ(int coordenadaZ);
+public:
+	Coordenada();
+	Coordenada( int, int, int );
+	Coordenada( Coordenada const & );
+	~Coordenada();
+	Coordenada const & operator=( Coordenada const& );
+	void setCoordenada_x( int );
+	void setCoordenada_y( int );
+	void setCoordenada_z( int );
+	int getCoordenada_x();
+	int getCoordenada_y();
+	int getCoordenada_z();
 };
 
-
-#endif //COORDENADA_H
+#endif
 
