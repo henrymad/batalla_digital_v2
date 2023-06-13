@@ -19,13 +19,15 @@ GraficoCasillero::GraficoCasillero() {
 			}
 		}
 		this->miniTablero[0][0] = (char) TipoTerrenoCasillero::tierra;
-		this->miniTablero[0][1] = (char) EstadoCasillero::casillerovacio;
+		this->miniTablero[1][0] = (char) EstadoCasillero::casillerovacio;
 	}
+	this->tablero = NULL;
 }
 
-GraficoCasillero::GraficoCasillero( Casillero * casillero ) {
+GraficoCasillero::GraficoCasillero( Tablero3D * tablero, Casillero * casillero ) {
 	// Constructor básico
 	this->sizeFilas = 3;
+	this->tablero = tablero;
 	this->sizeColumnas = 3;
 	this->miniTablero = new (std::nothrow) char* [this->sizeFilas];
 	if (this->miniTablero != NULL) {
@@ -42,11 +44,60 @@ GraficoCasillero::GraficoCasillero( Casillero * casillero ) {
 			}
 		}
 		this->miniTablero[0][0] = (char) casillero->getTipoTerreno();
-		this->miniTablero[0][1] = (char) EstadoCasillero::casillerovacio;
+		this->miniTablero[1][0] = (char) casillero->getEstadoCasillero();
+		if ( casillero->getEstadoCasillero() == EstadoCasillero::soldado ) {
+			this->miniTablero[1][0] = 'S';
+			this->miniTablero[1][1] = (char) casillero->getSoldado()->getJugador();
+			this->miniTablero[1][2] = (char) casillero->getSoldado()->getIDSoldado();
+		}
+		else if ( casillero->getEstadoCasillero() == EstadoCasillero::mina ) {
+			this->miniTablero[1][0] = 'M';
+			this->miniTablero[1][1] = (char) casillero->getMina(0)->getJugador();		// Asumo una sola mina en la lista.
+		}
+		else if ( casillero->getEstadoCasillero() == EstadoCasillero::casilleroinactivo ) {
+			this->miniTablero[1][1] = 'X';
+			this->miniTablero[1][0] = (char) casillero->getTurnosDeInactividad();
+		}
+		else if ( casillero->getEstadoCasillero() == EstadoCasillero::barco ) {
+			this->miniTablero[1][0] = 'B';
+			this->miniTablero[1][1] = (char) casillero->getBarco()->getJugador();
+		}
+		else {
+			// Vacío
+		}
+		/*
+		* Ahora en el Casillero debo revisar el espacio aéreo.
+		*	Podría haber varios aviones a distintas alturas. Marco el de menor altura
+		*   Es un poco absurdo que un mismo jugador coloque dos aviones en un mismo casillero.
+		* 	Previendo "irregularidades" del terreno busco desde abajo hacia arriba a partir del
+		*    primer casillero en el eje z con TipoTerrenoCasillero::aire
+		*/
+		// Necesito tener acceso al Tablero.
+		if ( this->tablero != NULL ) {
+			int x, y, z;
+			if ( casillero != NULL ) {
+				x = casillero->getCoordenada()->getCoordenada_x();
+				y = casillero->getCoordenada()->getCoordenada_y();
+				// z = casillero->getCoordenada()->getCoordenada_z();
+				for ( int z = 1; z <= tablero->getSize_z(); z++ ) {
+					Casillero * aux = tablero->getCasillero(x, y, z);
+					if ( aux == NULL ) {
+						break;
+					}
+					else if ( aux->getTipoTerreno() != TipoTerrenoCasillero::aire )
+					{
+						if (aux->getAvion() != NULL) {
+							this->miniTablero[2][0] = 'A';
+							this->miniTablero[2][1] = (char)casillero->getAvion()->getJugador();
+							this->miniTablero[2][2] = (char)casillero->getAvion()->getIDAvion();
+							break;
+						}
+					}
+				}
+			}
+		}
 	}
-
 }
-
 
 GraficoCasillero::GraficoCasillero( TipoTerrenoCasillero terreno ) {
 	// Constructor básico
@@ -114,6 +165,10 @@ char ** GraficoCasillero::getMiniTablero() {
 }
 
 // Setters
+
+void GraficoCasillero::setSoldado( Tablero3D * tablero ) {
+	this->tablero = tablero;
+}
 
 void GraficoCasillero::setSoldado( Soldado * soldado ) {
 	if ( soldado != NULL ) {

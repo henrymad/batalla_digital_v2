@@ -20,8 +20,8 @@ int main()
     coordenada = new Coordenada();
     Soldado * soldado;
     soldado = new Soldado( equipo1->getIdJugador() );
-    Casillero* casillero1;
-    casillero1 = new Casillero;
+    Casillero * casillero1;
+    casillero1 = new Casillero(1, 1, NIVEL_SUPERFICIE);
     casillero1->setTipoTerreno( TipoTerrenoCasillero::tierra );
     casillero1->setSoldado(soldado);
     Tablero3D * tablero;
@@ -29,9 +29,9 @@ int main()
     tablero->setCasillero( casillero1, 1, 1, NIVEL_SUPERFICIE );
 
     GraficoCasillero * graficocasillero;
-    graficocasillero = new GraficoCasillero();
+    graficocasillero = new GraficoCasillero( tablero, casillero1 );
 
-    delete soldado;
+    delete soldado;                                                                                                             
     delete coordenada;
     delete equipo1;
 

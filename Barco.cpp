@@ -1,6 +1,5 @@
 #include "Barco.h"
 
-
 Barco::Barco() {
 	this->jugador = 0;
 	this->coordenada = NULL;
@@ -17,6 +16,7 @@ Barco::Barco( int jugador , Coordenada * coordenada ) {
 	if (jugador > 0) {
 		this->jugador = jugador;
 	}
+	this->coordenada = NULL;
 	if ( coordenada->getCoordenada_z() == NIVEL_SUPERFICIE ) {
 		this->coordenada = coordenada;
 	}

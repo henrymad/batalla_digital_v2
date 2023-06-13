@@ -4,10 +4,10 @@
 
 Tablero3D::Tablero3D() {
 	this->tablero = NULL;
-	this->size_x = CANTIDAD_DE_CASILLERO_EJE_X;
-	this->size_y = CANTIDAD_DE_CASILLERO_EJE_Y;
-	this->size_z = CANTIDAD_DE_CASILLERO_EJE_Z;
-	this->tablero = new Lista < Lista < Lista < Casillero * >* >* >;
+	this->size_x = FILAS_TABLERO;
+	this->size_y = COLUMNAS_TABLERO;
+	this->size_z = ALTURA_TABLERO;
+	this->tablero = new Lista < Lista < Lista < Casillero * > * > * >;
 
 	for (int x = 0; x < this->size_x; x++) {
 		Lista < Lista < Casillero * > * > * elemento;
@@ -17,7 +17,8 @@ Tablero3D::Tablero3D() {
 			subelemento = new Lista < Casillero * >;
 			for (int z = 0; z < this->size_z; z++) {
 				Casillero * casillero;
-				casillero = new Casillero();
+				casillero = new Casillero(x, y, z);
+				// casillero = new Casillero();
 				subelemento->agregar( casillero);
 			}
 			elemento->agregar(subelemento);
@@ -26,11 +27,11 @@ Tablero3D::Tablero3D() {
 	}
 }
 
-Tablero3D::Tablero3D( int x, int y, int z) {
+Tablero3D::Tablero3D( int size_x, int size_y, int size_z) {
 	this->tablero = NULL;
-	this->size_x = x;
-	this->size_y = y;
-	this->size_z = z;
+	this->size_x = size_x;
+	this->size_y = size_y;
+	this->size_z = size_z;
 	this->tablero = new Lista < Lista < Lista < Casillero* > * > * >;
 
 	for ( int x = 0; x < this->size_x; x++ ) {
@@ -41,12 +42,12 @@ Tablero3D::Tablero3D( int x, int y, int z) {
 			subelemento = new Lista < Casillero * >;
 			for ( int z = 0; z < this->size_z; z++ ) {
 				Casillero * casillero;
-				casillero = new Casillero();
-				subelemento->agregar( casillero );
+				casillero = new Casillero( x, y, z);
+				subelemento->agregarFinal( casillero );
 			}
-			elemento->agregar( subelemento );
+			elemento->agregarFinal( subelemento );
 		}
-		this->tablero->agregar( elemento );
+		this->tablero->agregarFinal( elemento );
 	}
 }
 
@@ -64,30 +65,37 @@ Tablero3D::~Tablero3D() {
 	this->size_x = 0;
 	this->size_y = 0;
 	this->size_z = 0;
-	this->tablero = nullptr;
+	this->tablero = NULL;
 }
 
 void Tablero3D::setCasillero( Casillero * casillero, int x, int y, int z ) {
-	if (this->checkCoordenadas(x, y, z)) {
+	if ( ! this->checkCoordenadas(x, y, z)) {
 		return;
 	}
 	Lista < Lista < Casillero * > * > * elemento;
 	Lista < Casillero * > * subelemento;
-	// Traslaciï¿½n de coordenadas
+
+	// Traslación de coordenadas
 	x--; y--; z--;
+	casillero->getCoordenada()->setCoordenada_x( x );
+	casillero->getCoordenada()->setCoordenada_y( y );
+	casillero->getCoordenada()->setCoordenada_z( z );
 	elemento = this->tablero->obtenerDato( x );
 	subelemento = elemento->obtenerDato( y );
 	subelemento->asignar( casillero, z );
 }
 
 Casillero * Tablero3D::getCasillero( int x, int y, int z ) {
-	if ( this->checkCoordenadas( x, y, z ) ) {
-		return nullptr;
+	if ( ! this->checkCoordenadas( x, y, z ) ) {
+		return NULL;
 	}
 	Lista < Lista < Casillero * > * > * elemento;
 	Lista < Casillero * > * subelemento;
-	// Traslaciï¿½n de coordenadas
+	// Traslación de coordenadas
 	x--; y--; z--;
+	if ( z == 18 ) {
+		z = z;
+	}
 	elemento = this->tablero->obtenerDato( x );
 	subelemento = elemento->obtenerDato( y );
 	Casillero * Casillero;
