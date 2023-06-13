@@ -2,7 +2,7 @@
 
 Soldado::Soldado() {
 	this->jugador = 0;
-	this->coordenada = nullptr;
+	this->coordenada = NULL;
 	this->idSoldado = this->NuevoID(0);
 }
 
@@ -10,7 +10,7 @@ Soldado::Soldado( int jugador ) {
 	if ( jugador > 0 ) {
 		this->jugador = jugador;
 	}
-	this->coordenada = nullptr;
+	this->coordenada = NULL;
 	this->idSoldado = this->NuevoID( 0 );
 }
 
@@ -31,7 +31,7 @@ Soldado::~Soldado() {
 }
 
 int Soldado::NuevoID(int numero = 0) {
-	// Cada vez que se instancia un nuevo jugador en la partida se crea un ID de bando del Jugador.
+	// Cada vez que se instancia un nuevo soldado en la partida se crea un ID para el bando del Jugador.
 	static int numeroInicial;
 	if (numero <= 0) {
 		numeroInicial = 1;

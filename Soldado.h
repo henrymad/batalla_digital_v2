@@ -8,7 +8,7 @@
 
 class Soldado {
 private:
-	int idSoldado = 0;		// Autonumerico [1-n] gestionado en la class Jugador.
+	int idSoldado = 0;		// Autonumerico [1-n].
 	int jugador = 0;
 	Coordenada * coordenada;
 	int NuevoID( int );

@@ -24,6 +24,18 @@ Avion::~Avion() {
 	this->coordenada = NULL;
 }
 
+int Avion::NuevoID(int numero = 0) {
+	// Cada vez que se instancia un nuevo soldado en la partida se crea un ID para el bando del Jugador.
+	static int numeroInicial;
+	if (numero <= 0) {
+		numeroInicial = 1;
+	}
+	else {
+		numeroInicial = numero;
+	}
+	return numeroInicial++;
+}
+
 Coordenada * Avion::getCoordenadas() {
 	return this->coordenada;
 }
@@ -44,6 +56,12 @@ void Avion::setCoordenadas( Coordenada * coordenada ) {
 	}
 }
 
+// Getters
+
 int Avion::getJugador() {
 	return this->jugador;
+}
+
+int Avion::getIDAvion() {
+	return this->idAvion;
 }
