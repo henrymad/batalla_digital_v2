@@ -31,72 +31,70 @@ void MostrarCasillero::setJugador( Jugador * jugador ) {
 
 string MostrarCasillero::emitir( int linea ) {
 	string lineatexto = "";
-	char** miniTablero;
+	char ** miniTablero;
 	if ( this->graficoCasillero == NULL ) {
 		return lineatexto;
 	}
 	miniTablero = this->graficoCasillero->getMiniTablero();
-	if (linea >= 1 && linea <= 3) {
-		switch (linea) {
-			case 1:
-				lineatexto = (miniTablero[linea][0] == (char)TipoTerrenoCasillero::tierra) ? "T" : "A";
-				if (this->jugador = NULL) {
-					// Vista Global Observador
-					lineatexto += " " + miniTablero[linea][1];
-					lineatexto += " " + miniTablero[linea][2];
+	switch ( linea ) {
+		case 0:
+			lineatexto = (miniTablero[ linea ][ 0 ] == (char) TipoTerrenoCasillero::tierra) ? "T" : "A";
+			if ( this->jugador == NULL ) {
+				// Vista Global Observador
+				lineatexto += "-" + std::string( 1, miniTablero[linea][1] );	// Están vacíos
+				lineatexto += "-" + std::string( 1, miniTablero[linea][2] );
+			}
+			else {
+				// Vista Jugador
+				if ( miniTablero[ linea ][ 1 ] == (char) this->jugador->getIdJugador() ) {
+					lineatexto += "-" + std::string(1, miniTablero[linea][1]);
+					lineatexto += "-" + std::string(1, miniTablero[linea][2]);
 				}
 				else {
-					// Vista Jugador
-					if (miniTablero[linea][1] == (char)this->jugador->getIdJugador()) {
-						lineatexto += " " + miniTablero[linea][1];
-						lineatexto += " " + miniTablero[linea][2];
-					}
-					else {
-						lineatexto += " 0 0";	// No visible
-					}
+					lineatexto += "-0-0";	// No visible
 				}
-				break;
-			case 2:
-				if (this->jugador = NULL) {
-					// Vista Global Observador
-					lineatexto += " " + miniTablero[linea][0];
-					lineatexto += " " + miniTablero[linea][1];
-					lineatexto += " " + miniTablero[linea][2];
-				}
-				else {
-					// Vista Jugador
-					if (miniTablero[linea][1] == (char)this->jugador->getIdJugador()) {
-						lineatexto += " " + miniTablero[linea][1];
-						lineatexto += " " + miniTablero[linea][2];
-					}
-					else {
-						lineatexto += " 0 0";	// No visible
-					}
-				}
-				break;
-			case 3:
-				if (this->jugador = NULL) {
-					// Vista Global Observador
-					lineatexto += " " + miniTablero[linea][0];
-					lineatexto += " " + miniTablero[linea][1];
-					lineatexto += " " + miniTablero[linea][2];
+			}
+			break;
+		case 1:
+			if ( this->jugador == NULL ) {
+				// Vista Global Observador
+				lineatexto = std::string(1, miniTablero[linea][0]);
+				lineatexto += "-" + std::string(1, miniTablero[linea][1]);
+				lineatexto += "-" + std::string(1, miniTablero[linea][2]);
+			}
+			else {
+				// Vista Jugador
+				if ( miniTablero[linea][0] == (char) this->jugador->getIdJugador() ) {
+					lineatexto = std::string(1, miniTablero[linea][0]);
+					lineatexto += "-" + std::string(1, miniTablero[linea][1]);
+					lineatexto += "-" + std::string(1, miniTablero[linea][2]);
 				}
 				else {
-					// Vista Jugador
-					if (miniTablero[linea][1] == (char)this->jugador->getIdJugador()) {
-						lineatexto += " " + miniTablero[linea][1];
-						lineatexto += " " + miniTablero[linea][2];
-					}
-					else {
-						lineatexto += " 0 0";	// No visible
-					}
+					lineatexto = " -0-0";	// No visible
 				}
-				break;
-			default:
-				break;
-				/*
-			*/
-		}
+			}
+			break;
+		case 2:
+			if ( this->jugador == NULL ) {
+				// Vista Global Observador
+				lineatexto = std::string(1, miniTablero[linea][0]);
+				lineatexto += "-" + std::string(1, miniTablero[linea][1]);
+				lineatexto += "-" + std::string(1, miniTablero[linea][2]);
+			}
+			else {
+				// Vista Jugador
+				if ( miniTablero[linea][1] == (char)this->jugador->getIdJugador() ) {
+					lineatexto = std::string(1, miniTablero[linea][0]);
+					lineatexto += "-" + std::string(1, miniTablero[linea][1]);
+					lineatexto += "-" + std::string(1, miniTablero[linea][2]);
+				}
+				else {
+					lineatexto += "-0-0";	// No visible
+				}
+			}
+			break;
+		default:
+			break;
 	}
 	return lineatexto;
 }

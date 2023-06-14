@@ -15,11 +15,11 @@ GraficoCasillero::GraficoCasillero() {
 
 		for ( int i = 0; i < this->sizeFilas; i++ ) {
 			for ( int j = 0; j < this->sizeColumnas; j++ ) {
-				this->miniTablero[i][j] = '0';
+				this->miniTablero[i][j] = ' ';
 			}
 		}
 		this->miniTablero[0][0] = (char) TipoTerrenoCasillero::tierra;
-		this->miniTablero[1][0] = (char) EstadoCasillero::casillerovacio;
+		this->miniTablero[1][0] = (char)EstadoCasillero::casillerovacio;
 	}
 	this->tablero = NULL;
 }
@@ -44,7 +44,7 @@ GraficoCasillero::GraficoCasillero( Tablero3D * tablero, Casillero * casillero )
 			}
 		}
 		this->miniTablero[0][0] = (char) casillero->getTipoTerreno();
-		this->miniTablero[1][0] = (char) casillero->getEstadoCasillero();
+		this->miniTablero[1][0] = ' '; // -> vacío (char)casillero->getEstadoCasillero();
 		if ( casillero->getEstadoCasillero() == EstadoCasillero::soldado ) {
 			this->miniTablero[1][0] = 'S';
 			this->miniTablero[1][1] = (char) casillero->getSoldado()->getJugador();

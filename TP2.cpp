@@ -2,13 +2,18 @@
 //
 
 #include <iostream>
+
 #include "Jugador.h"
 #include "Coordenada.h"
 #include "Soldado.h"
 #include "Casillero.h"
+
 #include "Tablero3D.h"
 #include "Definiciones.h"
-#include "GraficoCasillero.h"
+
+#include "MostrarCasillero.h"
+
+using namespace std;
 
 int main()
 {
@@ -30,6 +35,11 @@ int main()
 
     GraficoCasillero * graficocasillero;
     graficocasillero = new GraficoCasillero( tablero, casillero1 );
+    MostrarCasillero * mostrar;
+    mostrar = new MostrarCasillero( graficocasillero );
+    for (int i = 0; i < 3; i++ ) {
+        cout << mostrar->emitir(i) << "\n";
+    }
 
     delete soldado;                                                                                                             
     delete coordenada;
