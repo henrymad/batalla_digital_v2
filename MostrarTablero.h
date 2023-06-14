@@ -13,6 +13,6 @@ public:
 private:
 	Tablero3D * tablero;
 	string nombreArchivo;
-	Jugador jugador;
+	Jugador * jugador;
 };
 
