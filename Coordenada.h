@@ -10,6 +10,12 @@ private:
     int coordenadaZ;
 public:
     Coordenada();
+
+    Coordenada( int, int, int );
+    Coordenada( Coordenada const & );
+    ~Coordenada();
+
+
     int getCoordenadaX() const;
     int getCoordenadaY() const;
     int getCoordenadaZ() const;

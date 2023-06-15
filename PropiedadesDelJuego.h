@@ -1,15 +1,18 @@
 #ifndef PROPIEDADESDELJUEGO_H
 #define PROPIEDADESDELJUEGO_H
 
-static const int CANTIDAD_DE_CASILLERO_EJE_X = 10;
-static const int CANTIDAD_DE_CASILLERO_EJE_Y = 10;
-static const int CANTIDAD_DE_CASILLERO_EJE_Z = 2;
+const int FILAS_TABLERO = 200;
+const int COLUMNAS_TABLERO = 200;
+const int ALTURA_TABLERO = 20;
+const int NIVEL_SUPERFICIE = 5;
+const int INDICE_PIXELACION = 5;
+const int PROFUNDIDAD_BIT = 24;
 
-static const string TIERRA = "tierra";
-static const string AGUA = "agua";
+static const std::string TIERRA = "tierra";
+static const std::string AGUA = "agua";
 
 
-enum EstadoCelda { soldado, mina, casillavacia, casillainactiva, avion, barco, bombaquimica};
-enum TipoTerrenoCelda { tierra, agua, aire };
+enum EstadoCasillero { soldado, mina, casillerovacio, casilleroinactivo, avion, barco, bombaquimica };
+enum TipoTerrenoCasillero { tierra, agua, aire };
 
 #endif //PROPIEDADESDELJUEGO_H

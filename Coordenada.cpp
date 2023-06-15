@@ -28,3 +28,20 @@ void Coordenada::setCoordenadaZ(int coordenadaZ) {
     this->coordenadaZ = coordenadaZ;
 }
 
+Coordenada::Coordenada(int, int, int) {
+
+}
+
+Coordenada::Coordenada(const Coordenada & coordenada) {
+    if ( this != &coordenada ) {
+        this->coordenadaX = coordenada.coordenadaX;
+        this->coordenadaY = coordenada.coordenadaY;
+        this->coordenadaZ = coordenada.coordenadaZ;
+    }
+
+}
+
+Coordenada::~Coordenada() {
+
+}
+

@@ -4,9 +4,9 @@
 #include <string>
 #include "Lista.h"
 
-// #include "Tablero3D.h"
 #include "Soldado.h"
 #include "Mina.h"
+#include "Tablero3D.h"
 
 using namespace std;
 
@@ -28,10 +28,18 @@ public:
 	string getNombreJugador();
 	void reiniciarID();
     void setMinasActivas(Lista<Mina *> * minasActivas);
+    Lista<Mina *> * getMinasActivas();
     void setSoldados(Lista<Soldado *> * soldados);
+    Lista<Soldado *> * getSoldados();
+
+    void actualizarPosicionSoldado(Coordenada *coordenada, int idSoldado, Jugador *jugador);
+    void eliminarSoldado(int idSoldado);
+    void eliminarMina(Mina *mina);
+    Soldado * obtenerSoldadoPorId(int idSolado);
 	// Acciones
 	// void moverSoldado( Tablero3D *, Coordenada *, Soldado * ); 
-	// void moverSoldado( Tablero3D *, Coordenada *, int );
+	void moverSoldado(Tablero3D *tablero1, Coordenada *coordenadaDestino, int idSoldado, Lista<Jugador*> *jugadores);
+    void minarCasillero(Tablero3D *tablero, Coordenada *coordenadaDestino,Lista<Jugador*> *jugadores);
 };
 
 #endif  // _JUGADOR_H_

@@ -1,330 +1,232 @@
-//
-// Created by Tomas on 1/12/2021.
-//
+#ifndef __LISTA_H__
+#define __LISTA_H__
 
-#ifndef UNTITLED4_LISTA_H
-#define UNTITLED4_LISTA_H
+#include "nodo.h"
 
-#include <stddef.h>
+template<class T>
+class Lista{
+	private:
+		Nodo<T> *primero;
+		Nodo<T> *cursor;
+		int tamanio;
+		
+	public:
+		/*post: Lista vac�a*/	
+		Lista() {
+			this->primero = 0;      //Puntero a Nodo, inicializandolo al vacio
+			this->cursor = 0;       //Puntero a Nodo, inicializandolo al vacio
+			this->tamanio = 0;      //El tamanio de la lista inicializada en cero
+		}
 
-#include "Nodo.h"
+		/*post: Lista  identica a la Lista pasadapor argumento  */ 
+		Lista(Lista<T> &otraLista) {   //Vamos a crear otra lista
+			this->primero = 0;          //Inicializando los atributos.
+			this->cursor = 0;
+			this->tamanio = 0;
+	
+			this->agregar(otraLista);   //
+		}
 
-/*
- * Una Lista es una colección dinámica de elementos dispuestos en una secuencia.
- *
- * Define operaciones para agregar, remover, acceder y cambiar elementos
- * en cualquier posición.
- *
- * Tiene un cursor que permite recorrer todos los elementos secuencialmente.
- *
- */
-template<class T> class Lista {
+		/*post: indica si la Lista tiene algun elemento  */
+		bool estaVacia() {
+			return (this->tamanio == 0);    //Devuelve true o false, true si el tamanio es igual a cero
+		}
 
-private:
+		/*post: devuelve la cantidad de elementos que tiene la Lista*/
+		int contarElementos() {
+			return this->tamanio;        //Devuelve el tamanio de la lista
+		}
+		
+		/* post: agrega elemento al inicio de Lista, posici�n contarElementos() + 1  */
+		void agregar(T elemento){
+			Nodo<T> *aux = new Nodo<T>(elemento); 
+	
+			aux->setSig(primero); 
+	
+			primero = aux;
+	
+			tamanio++;
+	
+		}
 
-    Nodo<T>* primero;
+		/* post: este si agrega elemento al final de Lista, posici�n contarElementos() + 1  */
+		void agregarFinal( T elemento ) {
+			Nodo<T>* aux = new Nodo<T>(elemento);
+			if ( primero == NULL ) {
+				primero = aux;
+				tamanio = 1;
+			}
+			else {
+				Nodo<T>* sig = primero;
+				while ( sig->getSig() != NULL) {
+					sig = sig->getSig();
+				}
+				sig->setSig(aux);
+				tamanio++;
+			}
+		}
 
-    unsigned int tamanio;
+		/*
+		void Lista::agregar(int elemento){
+		this->agregar(elemento, this->tamanio + 1);   //Agregando Nodos en la lista llamando otro metodo
+		}*/
+		
+		//pre : posici�n pertenece al intervalo: [1, contarElementos() + 1]
+		//post: agrega el elemento en la posici�n indicada */
+		void agregar(T elemento, int posicion){
+			if ((posicion > 0) && (posicion < this->tamanio+1)){    //Si la posicion es entre 1 y la longitud de la lista + 1
+				Nodo<T> *nuevo = new Nodo<T>(elemento);                  //Creamos un nuevo Nodo, con un puntero que apunta a ese Nodo nuevo
+		
+				if (posicion == 1) {                 //Si queremos agregar un Nodo al principio de la lista
+					nuevo->setSig(this->primero);    //Voy al Nodo donde apunta nuevo y lo enganchamos al nodo donde apunta primero que es el 1er nodo
+					this->primero = nuevo;  //Ahora decimos al ptro primero de apuntar al Nodo recien creado, y ahora sera el primer nodo de la lista
+				}                           //CREO QUE PRIMERO O P, SIEMPRE APUNTA AL INICIO DE LA LISTA(PRIMER NODO) HASTA AHORA NO SE PORQUE
+				else {                                                  //Sino
+					Nodo<T> *anterior = this->obtenerNodo(posicion - 1);  //Defino un ptro anterior que apuntara al nodo anterior a la posicion deseada
+			
+					nuevo->setSig(anterior->getSig()); //Voy al nodo donde apunta nuevo y lo enganchamos al nodo que sigue el nodo que apunta anterior
+					anterior->setSig(nuevo);       //Ahora decimos al nodo que apunta anterior de apuntar al nodo que apunta nuevo que es 
+				}                                 //  el nodo recien creado(lo del new)
+		
+				this->tamanio++;            //Crecemos el tamanio ahora ya no va se cero
+		
+				this->iniciarCursor();      //Volvemos a ubicar el ptro cursor
+			}
+		}
 
-    Nodo<T>* cursor;
 
-public:
+		//-------------------------------Falta entender--------------------------------------------------------------------------------
+		/* post: agrega todos los elementos de otraLista  a partir de la posici�n contarElementos() + 1  */
+		void agregar(Lista &otraLista){
+			otraLista.iniciarCursor();           //Cursor de OtraLista  se inicializa en NULL
+	
+			while (otraLista.avanzarCursor()){                   //Mientras  exista un nodo apuntado por el cursor 
+				this->agregar(otraLista.obtenerContenidoCursor());  //Se agrega al final el dato del nodo apuntado por el cursor
+			}
+		}
+		//---------------------------------------_______________-----------------------------------------------------------------------
 
-    /*
-     * post: Lista vacía.
-     */
-    Lista();
+		// pre : posici�n pertenece al intervalo: [1, contarElementos()]
+		//post: devuelve el elemento en la posici�n indicada   */
+		T obtenerDato(int posicion){
+			T elemento;
+	
+			if ( posicion >= 0 && posicion < this->tamanio ) {
+				elemento = this->obtenerNodo(posicion)->getInfo();  //obtenerNodo(posici�n) retorna un puntero al nodo, con el 
+																	//  cual invocamos a obtenerDato()
+			}
+			else {
+				throw "posici�n fuera de rango";
+			}
+			return elemento;
+		}                                                          
+		
+		//pre :posici�n pertenece al intervalo: [1, contarElementos()]
+		//post: cambia elemento de posici�n indicada por elemento pasado.
+		void asignar(T elemento, int posicion){
+			if (posicion>0 && (posicion <= tamanio))
+				this->obtenerNodo(posicion)->setInfo(elemento);  //obtenerNodo(posici�n) retorna un puntero al nodo, con el cual 
+		}                                                       //  invocamos a  cambiarDato con elemento como argumento.
+		
+		//pre : posici�n pertenece al intervalo: [1, contarElementos()]
+      	//post: remueve de la Lista el elemento en la posici�n indicada
+		void remover(int posicion){
+			if (posicion>0 && (posicion <= tamanio)){
+				Nodo<T> *removido;
+		
+				if (posicion == 1) {
+					removido = this->primero;
+					this->primero = removido->getSig();
+				}
+				else {
+					Nodo<T> *anterior = this->obtenerNodo(posicion - 1);
+			
+					removido = anterior->getSig();     //Estaba en el Nodo anterior a la posicion deseada, ahora me muevo a la posicion deseada
+					anterior->setSig(removido->getSig()); //N.B: aca es como: Nodo *posterior = removido->getSig() tal que posterior es otro 
+				}                                         //     ptro a Nodo que apunta en una posicion posterior al Nodo donde apunta removido
+		
+				delete removido;
+		
+				this->tamanio--;
+		
+				//Cualquier recorrido actual quedara invalido
+				this->iniciarCursor();
+			}
+		}
+		
+		// post: deja cursor de Lista preparado para hacer nuevo recorrido.
+		void iniciarCursor(){  //si
+			this->cursor = 0;
+		}
+		
+		/*  
+			El metodo avanzar cursor permite el movimiento de un nodo al siguiente usando el cursor
+			
+			pre : se ha iniciado un recorrido (invocando el metodo iniciarCursor())
+				y desde entonces no se han agregado o  removido elementos de la Lista.
+			
+			post: mueve cursor; lo posiciona en siguiente elemento del recorrido
+				El valor de retorno indica si el cursor qued� posicionado sobre un  
+				elemento o no (en caso de que la Lista est� vac�a o no existan m�s elementos por recorrer.) 
+		*/
+		bool avanzarCursor(){
+			if (this->cursor == 0) {
+				this->cursor = this->primero;
+			}
+			else {
+				this->cursor = this->cursor->getSig();
+			}
+		
+			return (this->cursor != 0);   //Si el cursor apunta a un Nodo devuelve true
+		}
+		
+		//pre : el cursor est� posicionado sobre un elemento de la Lista (fue invocado el metodo
+		//		avanzarCursor() y devolvi� true)
+    	//post: devuelve el elemento en la posici�n del cursor.
+		T obtenerCursor(){   //si
+			T elemento;
+	
+			if ( this->cursor != 0 ) {
+				elemento = this->cursor->getInfo();
+			}
+			else {
+				throw "posici�n fuera de rango";
+			}
+		
+			return elemento;
+		}
 
-    /*
-     * post: Lista que tiene los mismos elementos que otraLista.
-     *       La instancia resulta en una copia de otraLista.
-     */
-    Lista(Lista<T>& otraLista);
+		/* post: libera los recursos asociados a la Lista. */
+		~Lista(){
+			while (this->primero){
+				Nodo<T> *aborrar = this->primero;
+		
+				this->primero = this->primero->getSig();
+				delete aborrar;
+			}
+		}
 
-    /*
-     * post: indica si la Lista tiene algún elemento.
-     */
-    bool estaVacia();
+		void borrarLista() {
+			while (this->primero) {
+				Nodo<T>* aborrar = this->primero;
 
-    /*
-     * post: devuelve la cantidad de elementos que tiene la Lista.
-     */
-    unsigned int contarElementos();
+				this->primero = this->primero->getSig();
+				delete aborrar;
+			}
+			this->primero = NULL;
+		}
 
-    /*
-     * post: agrega el elemento al final de la Lista, en la posición:
-     *       contarElementos() + 1.
-     */
-    void agregar(T elemento);
-
-    /**
-     * pre: elemento no es vacio
-     * post: devuelve verdadero si elemento esta en la lista
-     */
-    bool contiene(T elemento);
-
-    /*
-     * pre : posición pertenece al intervalo: [1, contarElementos() + 1]
-     * post: agrega el elemento en la posición indicada.
-     *
-     */
-    void agregar(T elemento, unsigned int opcion);
-
-    /*
-     * post: agrega todos los elementos de otraLista
-     *       a partir de la posición contarElementos() + 1.
-     */
-    void agregar(Lista<T> &otraLista);
-
-    /*
-     * pre : posición pertenece al intervalo: [1, contarElementos()]
-     * post: devuelve el elemento en la posición indicada.
-     */
-    T obtener(unsigned int posicion);
-
-    /*
-     * pre : posicion pertenece al intervalo: [1, contarElementos()]
-     * post: inserta el elemento en la posición indicada por el
-     *       elemento dado.
-     */
-    void asignar(T elemento, unsigned int posicion);
-
-    /*
-     * pre : posición pertenece al intervalo: [1, contarElementos()]
-     * post: remueve de la Lista el elemento en la posición indicada.
-     */
-    void remover(unsigned int posicion);
-
-    /*
-     * post: deja el cursor de la Lista preparado para hacer un nuevo
-     *       recorrido sobre sus elementos.
-     */
-    void iniciarCursor();
-
-    /*
-     * pre : se ha iniciado un recorrido (invocando el método
-     *       iniciarCursor()) y desde entonces no se han agregado o
-     *       removido elementos de la Lista.
-     * post: mueve el cursor y lo posiciona en el siguiente elemento
-     *       del recorrido.
-     *       El valor de retorno indica si el cursor quedó posicionado
-     *       sobre un elemento o no (en caso de que la Lista esté vacía o
-     *       no existan más elementos por recorrer.)
-     */
-    bool avanzarCursor();
-
-    /*
-     * pre : el cursor está posicionado sobre un elemento de la Lista,
-     *       (fue invocado el método avanzarCursor() y devolvió true)
-     * post: devuelve el elemento en la posición del cursor.
-     *
-     */
-    T obtenerCursor();
-
-    /* pre: -
-     * post: liga el ultimo elemento de la lista con el primero para crear una lista ligada circular simple
-     */
-    void ligarUltimoConPrimero();
-
-    /*
-     * post: libera los recursos asociados a la Lista.
-     */
-    ~Lista();
-
-private:
-
-    /*
-     * pre : posición pertenece al intervalo: [1, contarElementos()]
-     * post: devuelve el nodo en la posición indicada.
-     */
-    Nodo<T>* obtenerNodo(unsigned int posicion); // NOTA: primitiva PRIVADA
+		private:
+			//pre : posici�n pertenece al intervalo: [1, contarElementos()]
+			//post: devuelve el nodo en la posici�n indicada.
+			Nodo<T>* obtenerNodo(int posicion){
+				Nodo<T> *actual = this->primero;
+	
+				for (int i=0; i<posicion; i++)  //Si tengo que llegar al Nodo 5, al llegar a la posicion 4
+					actual = actual->getSig();  // Decimos a actual de apuntar al Nodo siguiente que es Nodo 5, Ya que i=5 No es < posicion=5 salgo
+		
+				return actual;
+			}
 };
 
-template<class T> Lista<T>::Lista() {
-
-    this->primero = NULL;
-    this->tamanio = 0;
-    this->cursor = NULL;
-}
-
-template<class T> Lista<T>::Lista(Lista<T>& otraLista) {
-
-    this->primero = NULL;
-    this->tamanio = 0;
-    this->cursor = NULL;
-
-    /* copia los elementos de otraLista */
-    this->agregar(otraLista);
-}
-
-template<class T> bool Lista<T>::estaVacia() {
-
-    return (this->tamanio == 0);
-}
-
-template<class T> unsigned int Lista<T>::contarElementos() {
-
-    return this->tamanio;
-}
-
-template<class T> void Lista<T>::agregar(T elemento) {
-
-    this->agregar(elemento, this->tamanio + 1);
-}
-
-template<class T> void Lista<T>::agregar(T elemento, unsigned int posicion) {
-
-    if ((posicion > 0) && (posicion <= this->tamanio + 1)) {
-
-        Nodo<T>* nuevo = new Nodo<T>(elemento);
-
-        if (posicion == 1) {
-
-            nuevo->cambiarSiguiente(this->primero);
-            this->primero = nuevo;
-
-        } else {
-
-            Nodo<T>* anterior = this->obtenerNodo(posicion - 1);
-            nuevo->cambiarSiguiente(anterior->obtenerSiguiente());
-            anterior->cambiarSiguiente(nuevo);
-        }
-
-        this->tamanio++;
-
-        /* cualquier recorrido actual queda invalidado */
-        this->iniciarCursor();
-    }
-
-}
-
-template<class T> void Lista<T>::agregar(Lista<T> &otraLista) {
-
-    otraLista.iniciarCursor();
-    while (otraLista.avanzarCursor()) {
-        this->agregar(otraLista.obtenerCursor());
-    }
-}
-
-template<class T> T Lista<T>::obtener(unsigned int posicion) {
-
-    T elemento;
-
-    if ((posicion > 0) && (posicion <= this->tamanio)) {
-
-        elemento = this->obtenerNodo(posicion)->obtenerDato();
-    }
-
-    return elemento;
-}
-
-template<class T> bool Lista<T>::contiene(T elemento) {
-	Nodo<T>* cursorAnterior = this->cursor;
-	iniciarCursor();
-	bool encontrado = false;
-	while (avanzarCursor() && !encontrado) {
-		T actual = obtenerCursor();
-		if (actual == elemento) {
-			encontrado = true;
-		}
-	}
-	this->cursor = cursorAnterior;
-	return encontrado;
-}
-
-template<class T> void Lista<T>::asignar(T elemento, unsigned int posicion) {
-
-    if ((posicion > 0) && (posicion <= this->tamanio)) {
-
-        this->obtenerNodo(posicion)->cambiarDato(elemento);
-    }
-}
-
-template<class T> void Lista<T>::remover(unsigned int posicion) {
-
-    if ((posicion > 0) && (posicion <= this->tamanio)) {
-
-        Nodo<T>* removido;
-
-        if (posicion == 1) {
-
-            removido = this->primero;
-            this->primero = removido->obtenerSiguiente();
-
-        } else {
-
-            Nodo<T>* anterior = this->obtenerNodo(posicion - 1);
-            removido = anterior->obtenerSiguiente();
-            anterior->cambiarSiguiente(removido->obtenerSiguiente());
-        }
-
-        delete removido;
-        this->tamanio--;
-
-        /* cualquier recorrido actual queda invalidado */
-        this->iniciarCursor();
-    }
-}
-
-template<class T> void Lista<T>::iniciarCursor() {
-
-    this->cursor = NULL;
-}
-
-template<class T> bool Lista<T>::avanzarCursor() {
-
-    if (this->cursor == NULL) {
-
-        this->cursor = this->primero;
-
-    } else {
-
-        this->cursor = this->cursor->obtenerSiguiente();
-    }
-
-    /* pudo avanzar si el cursor ahora apunta a un nodo */
-    return (this->cursor != NULL);
-}
-
-template<class T> T Lista<T>::obtenerCursor() {
-
-    T elemento; //int elemento
-
-    if (this->cursor != NULL) {
-
-        elemento = this->cursor->obtenerDato();
-    }
-
-    return elemento;
-}
-
-template<class T> Lista<T>::~Lista() {
-
-    while (this->primero != NULL) {
-
-        Nodo<T>* aBorrar = this->primero;
-        this->primero = this->primero->obtenerSiguiente();
-
-        delete aBorrar;
-    }
-}
-
-template<class T> Nodo<T>* Lista<T>::obtenerNodo(unsigned int posicion) {
-
-    Nodo<T>* actual = this->primero;
-    for (unsigned int i = 1; i < posicion; i++) {
-
-        actual = actual->obtenerSiguiente();
-    }
-
-    return actual;
-}
-
-template<class T> void Lista<T>::ligarUltimoConPrimero(){
-
-    this->obtenerNodo(this->tamanio)->cambiarSiguiente(this->primero);
-
-
-}
-
-#endif //UNTITLED4_LISTA_H
+#endif //__LISTA_H__

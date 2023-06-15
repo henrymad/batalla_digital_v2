@@ -30,8 +30,6 @@ void Juego::configurarPartida() {
         this->pantallaGraficos->imprimirEspaciosVertical(1);
 
         this->configurarJugadores();
-        this->configurarTablero(this->nivelPartida);
-
     }
 }
 
@@ -45,7 +43,7 @@ void Juego::configurarJugadores() {
             jugador->setNombreJugador(nombre);
             jugador->setMinasActivas(new Lista<Mina*>());
             jugador->setSoldados(soldados);
-            this->jugadores->agregar(jugador);
+            this->jugadores->agregarFinal(jugador);
         }
 }
 
@@ -54,38 +52,60 @@ Lista<Soldado *> *Juego::configurarSoldados(int cantidadDeSoldados, int idJugado
     srand(time(NULL));
     for(int i=0;i<cantidadDeSoldados;i++){
         Soldado *soldado = new Soldado();
-        soldado->getCoordenada()->setCoordenadaX(rand()%CANTIDAD_DE_CASILLERO_EJE_X);
-        soldado->getCoordenada()->setCoordenadaY(rand()%CANTIDAD_DE_CASILLERO_EJE_Y);
-        soldado->getCoordenada()->setCoordenadaZ(rand()%CANTIDAD_DE_CASILLERO_EJE_Z);
+        soldado->getCoordenada()->setCoordenadaX(rand()%FILAS_TABLERO);
+        soldado->getCoordenada()->setCoordenadaY(rand()%COLUMNAS_TABLERO);
+        soldado->getCoordenada()->setCoordenadaZ(rand()%NIVEL_SUPERFICIE);
         soldado->setJugador(idJugador);
-        resultado->agregar(soldado);
-        cout<<soldado->getCoordenada()->getCoordenadaX()<<","<<soldado->getCoordenada()->getCoordenadaY()<<","<<soldado->getCoordenada()->getCoordenadaZ()<<","<<endl;
+        resultado->agregarFinal(soldado);
     }
     return resultado;
 }
 
-void Juego::configurarTablero(int nivelPartida) {
-    this->tablero = new Tablero3D(nivelPartida);
-    this->tablero->getCasilleros()->iniciarCursor();
-    int countX=0;
-    int countY=0;
-    cout<<this->tablero->getCasilleros()->contarElementos()<<endl;
-    while(this->tablero->getCasilleros()->avanzarCursor()){
-        Lista<Lista<Casillero*>*> *subLista = this->tablero->getCasilleros()->obtenerCursor();
-        subLista->iniciarCursor();
-        while(subLista->avanzarCursor()){
-            Lista<Casillero*> *casilleros = subLista->obtenerCursor();
-            cout<<casilleros->contarElementos()<<endl;
-            if(casilleros->obtener(countY)->getTerreno() == TIERRA){
-                cout<<'T';
-            }else{
-                cout<<'A';
-            }
+void Juego::empezarPartida() {
+    this->tablero = new Tablero3D();
+    this->jugadores->iniciarCursor();
+    int count = 0;
+    while (this->jugadores->avanzarCursor()){
+        Jugador *jugador = this->jugadores->obtenerCursor();
+        this->pantallaGraficos->imprimirEspaciosVertical(5);
+        this->pantallaGraficos->imprimirLineaHorizontal(200);
+        this->pantallaGraficos->imprimirTituloCentrado("BATALLA DIGITAL",100);
+        this->pantallaGraficos->imprimirLineaHorizontal(200);
 
-            countY +=1;
+        cout<<"imprimir tablero"<<endl;
+
+        this->pantallaGraficos->imprimirMenuJugador(jugador);
+        this->pantallaGraficos->imprimirEspaciosVertical(1);
+        this->pantallaGraficos->imprimirTitulo("Mover soldado");
+
+        int idSoldado = this->pantallaGraficos->entradaUsuarioNumero("Ingresar id del soldado que desea mover: ");
+
+        Coordenada *nuevaCoordenada;
+        nuevaCoordenada = new Coordenada();
+        nuevaCoordenada->setCoordenadaX(this->pantallaGraficos->entradaUsuarioNumero("Ingresar nueva coordenda en X: "));
+        nuevaCoordenada->setCoordenadaY(this->pantallaGraficos->entradaUsuarioNumero("Ingresar nueva coordenda en Y: "));
+        nuevaCoordenada->setCoordenadaZ(this->pantallaGraficos->entradaUsuarioNumero("Ingresar nueva coordenda en Z: "));
+
+        this->jugadores->obtenerCursor()->actualizarPosicionSoldado(nuevaCoordenada, idSoldado, jugador);
+        this->jugadores->obtenerCursor()->moverSoldado(tablero,nuevaCoordenada,idSoldado,this->jugadores);
+
+        this->pantallaGraficos->imprimirEspaciosVertical(1);
+        this->pantallaGraficos->imprimirTitulo("Minar Casiilero");
+
+        Coordenada *coordenadaMina;
+        coordenadaMina = new Coordenada();
+        coordenadaMina->setCoordenadaX(this->pantallaGraficos->entradaUsuarioNumero("Coordenda en X: "));
+        coordenadaMina->setCoordenadaY(this->pantallaGraficos->entradaUsuarioNumero("Coordenda en Y: "));
+        coordenadaMina->setCoordenadaZ(this->pantallaGraficos->entradaUsuarioNumero("Coordenda en Z: "));
+
+        this->jugadores->obtenerCursor()->minarCasillero(tablero,coordenadaMina,this->jugadores);
+        if(count == 1){
+            this->jugadores->iniciarCursor();
+            count = 0;
+        }else{
+            count =+1;
         }
 
-        countX +=1;
-        cout<<"  "<<countX<<endl;
     }
+
 }

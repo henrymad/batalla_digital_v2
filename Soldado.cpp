@@ -10,8 +10,8 @@ Soldado::Soldado( int jugador ) {
 	if ( jugador > 0 ) {
 		this->jugador = jugador;
 	}
-	//this->coordenada = nullptr;
-	this->idSoldado = this->NuevoID( 0 );
+    this->coordenada = new Coordenada();
+    this->idSoldado = this->NuevoID(0);
 }
 
 Soldado::Soldado( int jugador, Coordenada * coordenada ) {

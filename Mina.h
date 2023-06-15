@@ -6,16 +6,20 @@
 class Mina {
 private:
 	int jugador;
+    int idMina;
 	Coordenada * coordenada;
 public:
 	Mina();
-	Mina( Coordenada *);
+    Mina(int jugador);
+    Mina( Coordenada *);
 	Mina( Coordenada *, int );
+    int NuevoID(int);
 	~Mina();
 	Coordenada * getCordenada();
 	void setCoordenada( Coordenada * );
 	void setJugador( int );
 	int getJugador();
+    int getIdMina();
 
 };
 

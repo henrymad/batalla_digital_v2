@@ -17,8 +17,8 @@ void PantallaGraficos::imprimirPantalla(std::string titulo,std::string opcion1,s
     cout<<">> "<<opcion3<<endl;
 }
 
-void PantallaGraficos::imprimirTitulo() {
-    cout<<this->titulo<<endl;
+void PantallaGraficos::imprimirTitulo(std::string titulo) {
+    cout<<titulo<<endl;
 }
 
 void PantallaGraficos::imprimirLineaHorizontal(int cantidadaLineas) {
@@ -60,6 +60,26 @@ int PantallaGraficos::entradaUsuarioNumero(std::string textoInput) {
     cout<<textoInput;
     cin>>input;
     return input;
+}
+
+void PantallaGraficos::imprimirMenuJugador(Jugador *jugador) {
+    this->imprimirLineaHorizontal(20);
+    cout<<" "<<endl;
+    cout<<"Menu Jugador"<<endl;
+    cout<<"Nombre: "<<jugador->getNombreJugador()<<endl;
+    cout<<"Cantidad de Soldados: "<<jugador->getCantidadSoldados()<<endl;
+    cout<<"Cartas: "<<"Barco - Bomba quimica"<<endl;
+    cout<<"Minas Activas: "<<jugador->getMinasActivas()->contarElementos()<<endl;
+    cout<<"Cartas Activas: "<<"Avion"<<endl;
+    cout<<" "<<endl;
+    this->imprimirLineaHorizontal(20);
+}
+
+void PantallaGraficos::imprimirTituloCentrado(std::string titulo, int margenDerecha) {
+    for(int i=0;i<margenDerecha;i++){
+        cout<<" ";
+    }
+    cout<<titulo<<endl;
 }
 
 

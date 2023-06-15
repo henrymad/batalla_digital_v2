@@ -4,9 +4,10 @@
 using namespace std;
 
 int main(){
-    Juego *juego = new Juego();
+    Juego *juego;
+    juego = new Juego();
     juego->configurarPartida();
-    cout<<"Hola mundo"<<endl;
+    juego->empezarPartida();
     delete juego;
  return 0;
 }
