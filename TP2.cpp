@@ -12,6 +12,7 @@
 #include "Definiciones.h"
 
 #include "MostrarCasillero.h"
+#include "MostrarTablero.h"
 
 using namespace std;
 
@@ -26,7 +27,7 @@ int main()
     Soldado * soldado;
     soldado = new Soldado( equipo1->getIdJugador() );
     Casillero * casillero1;
-    casillero1 = new Casillero(1, 1, NIVEL_SUPERFICIE);
+    casillero1 = new Casillero( 1, 1, NIVEL_SUPERFICIE );
     casillero1->setTipoTerreno( TipoTerrenoCasillero::tierra );
     casillero1->setSoldado(soldado);
     Tablero3D * tablero;
@@ -41,11 +42,16 @@ int main()
         cout << mostrar->emitir(i) << "\n";
     }
 
+    MostrarTablero * salidaTablero;
+    salidaTablero = new MostrarTablero( tablero, equipo1 );
+
     delete soldado;                                                                                                             
     delete coordenada;
     delete equipo1;
 
-    delete tablero;
+    delete graficocasillero;
     delete casillero1;
+    delete salidaTablero;
+    delete tablero;
 
 }

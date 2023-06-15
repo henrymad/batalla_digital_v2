@@ -1,3 +1,6 @@
+#ifndef _MOSTRAR_CASILLERO_
+#define _MOSTRAR_CASILLERO_
+
 #include <iostream>
 
 #include "GraficoCasillero.h"
@@ -16,3 +19,5 @@ private:
 	GraficoCasillero * graficoCasillero;
 	Jugador * jugador;
 };
+
+#endif

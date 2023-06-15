@@ -1,3 +1,6 @@
+#ifndef _GRAFICO_CASILLERO_
+#define _GRAFICO_CASILLERO_
+
 #include <new>
 #include <iostream>
 
@@ -24,3 +27,4 @@ private:
 	int sizeFilas = 3, sizeColumnas = 3;
 };
 
+#endif
