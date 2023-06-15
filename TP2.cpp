@@ -35,7 +35,8 @@ int main()
     tablero->setCasillero( casillero1, 1, 1, NIVEL_SUPERFICIE );
 
     GraficoCasillero * graficocasillero;
-    graficocasillero = new GraficoCasillero( tablero, casillero1 );
+    graficocasillero = new GraficoCasillero( tablero );
+    graficocasillero->setCasillero( casillero1 );
     MostrarCasillero * mostrar;
     mostrar = new MostrarCasillero( graficocasillero );
     for (int i = 0; i < 3; i++ ) {
@@ -44,6 +45,7 @@ int main()
 
     MostrarTablero * salidaTablero;
     salidaTablero = new MostrarTablero( tablero, equipo1 );
+    salidaTablero->imprimir( "prueba.txt" );
 
     delete soldado;                                                                                                             
     delete coordenada;

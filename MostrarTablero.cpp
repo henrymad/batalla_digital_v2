@@ -29,11 +29,13 @@ void MostrarTablero::imprimir( string archivo ) {
 		for (int i = 0; i < 3; i++ ) {
 			Linea[i] = "|";
 		}
+		Casillero * casillero;
+		GraficoCasillero * graficocasillero;
+		graficocasillero = new GraficoCasillero( this->tablero );
 		for ( int i = 1; i <= this->tablero->getSize_x(); i++ ) {
-			Casillero * casillero;
 			casillero = tablero->getCasillero( i, 1, NIVEL_SUPERFICIE);
-			GraficoCasillero graficocasillero;
-			graficocasillero = GraficoCasillero( this->tablero, casillero );
+			graficocasillero->setCasillero(  casillero );
+			//graficocasillero = GraficoCasillero( this->tablero, casillero );
 			for (int i = 0; i < 3; i++) {
 				Linea[i] += this->emitir( i, graficocasillero ) + "|";
 			}
@@ -41,6 +43,8 @@ void MostrarTablero::imprimir( string archivo ) {
 		for ( int i = 0; i < 3; i++ ) {
 			salida << Linea[i] << std::endl;
 		}
+		// Liberar recursos y memoria
+		delete graficocasillero;
 		salida.close();
 	}
 }
@@ -54,10 +58,10 @@ void MostrarTablero::setJugador( Jugador * jugador ) {
 	this->jugador = jugador;
 }
 
-string MostrarTablero::emitir( int linea, GraficoCasillero graficocasillero ) {
+string MostrarTablero::emitir( int linea, GraficoCasillero * graficocasillero ) {
 	string lineatexto = "";
 	char ** miniTablero;
-	miniTablero = graficocasillero.getMiniTablero();
+	miniTablero = graficocasillero->getMiniTablero();
 	switch ( linea ) {
 	case 0:
 		lineatexto = (miniTablero[linea][0] == (char)TipoTerrenoCasillero::tierra) ? "T" : "A";

@@ -18,7 +18,7 @@ private:
 	Tablero3D * tablero;
 	string nombreArchivo;
 	Jugador * jugador;
-	string emitir( int, GraficoCasillero );
+	string emitir( int, GraficoCasillero * );
 };
 
 #endif

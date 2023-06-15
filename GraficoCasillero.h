@@ -9,12 +9,11 @@
 class GraficoCasillero {
 public:
 	GraficoCasillero();
-	GraficoCasillero( Tablero3D *, Casillero * );
-	GraficoCasillero( TipoTerrenoCasillero );
-	GraficoCasillero( TipoTerrenoCasillero, EstadoCasillero );
+	GraficoCasillero( Tablero3D * );
 	~GraficoCasillero( );
 	// Setters
-	void setSoldado( Tablero3D * );
+	void setTablero( Tablero3D * );
+	void setCasillero( Casillero * );
 	void setSoldado( Soldado * );
 	void setMina( Mina * );
 	void setBombaQuimica( BombaQuimica * );
