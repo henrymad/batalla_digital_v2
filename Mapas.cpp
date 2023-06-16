@@ -48,10 +48,12 @@ void Mapas::imprimirMapa( string archivo, Jugador * jugador ) {
 	if (this->nombreArchivo != "") {
 		ofstream salida;
 		salida.open(this->nombreArchivo.c_str(), fstream::out);
-		for (int i = 1; i <= this->tablero->getSize_x(); i++ ) {
-			salida << '|' << this->Celda( tablero->getCasillero(i, 1, NIVEL_SUPERFICIE), jugador );
+		for ( int i = 1; i <= this->tablero->getSize_x(); i++ ) {
+			for ( int j = 1; j <= this->tablero->getSize_y(); j++ ) {
+				salida << '|' << this->Celda(tablero->getCasillero(i, j, NIVEL_SUPERFICIE), jugador);
+			}
+			salida << '|' << std::endl;
 		}
-		salida << '|' << std::endl;
 		// Liberar recursos y memoria
 		salida.close();
 	}
