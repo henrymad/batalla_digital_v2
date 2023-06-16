@@ -75,7 +75,7 @@ void Tablero3D::setCasillero( Casillero * casillero, int x, int y, int z ) {
 	Lista < Lista < Casillero * > * > * elemento;
 	Lista < Casillero * > * subelemento;
 
-	// Traslación de coordenadas
+	// Traslación de las coordenadas del usuario
 	x--; y--; z--;
 	casillero->getCoordenada()->setCoordenada_x( x );
 	casillero->getCoordenada()->setCoordenada_y( y );
@@ -92,7 +92,7 @@ Casillero * Tablero3D::getCasillero( int x, int y, int z ) {
 	Lista < Lista < Casillero * > * > * elemento;
 	Lista < Casillero * > * subelemento;
 
-	// Traslación de coordenadas
+	// Traslación de las coordenadas del usuario
 	x--; y--; z--;
 	elemento = this->tablero->obtenerDato( x );
 	subelemento = elemento->obtenerDato( y );

@@ -18,7 +18,7 @@ void Mapas::cargarMapaDefault() {
 					}
 					else {
 						casillero->setTipoTerreno( TipoTerrenoCasillero::tierra );
-						if ( i > 160  and j < 150 ) {
+						if ( i > 160 && j < 150 ) {
 							casillero->setTipoTerreno( TipoTerrenoCasillero::agua );
 						}
 						else if (  ( j > 70 && j < 140 ) && ( i >  110 && i <= 160 ) ) {
