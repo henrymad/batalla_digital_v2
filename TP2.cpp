@@ -13,6 +13,7 @@
 
 #include "MostrarCasillero.h"
 #include "MostrarTablero.h"
+#include "Mapas.h"
 
 using namespace std;
 
@@ -42,6 +43,10 @@ int main()
     for (int i = 0; i < 3; i++ ) {
         cout << mostrar->emitir(i) << "\n";
     }
+
+    Mapas * mapa;
+    mapa = new Mapas( tablero );
+    mapa->cargarMapaDefault();
 
     MostrarTablero * salidaTablero;
     salidaTablero = new MostrarTablero( tablero, equipo1 );
