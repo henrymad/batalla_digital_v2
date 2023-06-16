@@ -12,7 +12,8 @@ enum EstadoCasillero { soldado, mina, casillerovacio, casilleroinactivo, avion, 
 enum TipoTerrenoCasillero { tierra, agua, aire };
 
 const int MAXIMO_SOLDADOS = 4;
-const int TIEMPO_INHABILITADA = 5;
+const int TIEMPO_INHABILITADA_MINA = 3;
+const int TIEMPO_INHABILITADA_BOMBA = 5;
 const int LIMITE_BANDOS = 4;
 
 const bool SO_LINUX = false;

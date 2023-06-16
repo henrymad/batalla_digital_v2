@@ -1,31 +1,41 @@
+
 #include "BombaQuimica.h"
 
-BombaQuimica::BombaQuimica( int jugador ) {
-	if (jugador > 0) {
+BombaQuimica::BombaQuimica( int jugador ) 
+: coordenada(NULL), turnos(TIEMPO_INHABILITADA_BOMBA)
+{
+	if ( jugador > 0 ) {
 		this->jugador = jugador;
 	}
-	this->coordenada = nullptr;
-	this->turnos = 0;
+	this->turnos = TIEMPO_INHABILITADA_BOMBA;
 	this->cantidadCasilleros = 0;
 }
 
-BombaQuimica::BombaQuimica( int jugador, Coordenada * coordenada ) {
-	if (jugador > 0) {
+BombaQuimica::BombaQuimica( int jugador, Coordenada * coordenada )
+: coordenada(NULL), turnos(TIEMPO_INHABILITADA_BOMBA)
+{
+	if ( jugador > 0 ) {
 		this->jugador = jugador;
 	}
-	if (coordenada->getCoordenada_z() == NIVEL_SUPERFICIE) {
-		this->coordenada = coordenada;
+	if ( coordenada != NULL ) {
+		if ( coordenada->getCoordenada_z() == NIVEL_SUPERFICIE) {
+			this->coordenada = coordenada;
+		}
 	}
-	this->turnos = 0;
 	this->cantidadCasilleros = 0;
 }
 
-BombaQuimica::BombaQuimica( int jugador, Coordenada * coordenada, int turnos ) {
-	if (jugador > 0) {
+BombaQuimica::BombaQuimica( int jugador, Coordenada * coordenada, int turnos )
+: coordenada(NULL), turnos(TIEMPO_INHABILITADA_BOMBA)
+{
+	if ( jugador > 0 ) {
 		this->jugador = jugador;
 	}
-	if (coordenada->getCoordenada_z() == NIVEL_SUPERFICIE) {
-		this->coordenada = coordenada;
+	this->coordenada = NULL;
+	if ( coordenada != NULL ) {
+		if ( coordenada->getCoordenada_z() == NIVEL_SUPERFICIE ) {
+			this->coordenada = coordenada;
+		}
 	}
 	this->turnos = turnos;
 	this->cantidadCasilleros = 0;
@@ -35,7 +45,7 @@ BombaQuimica::~BombaQuimica() {
 	this->jugador = 0;
 	this->turnos = 0;
 	this->cantidadCasilleros = 0;
-	this->coordenada = nullptr;
+	this->coordenada = NULL;
 }
 
 // Getters
@@ -47,8 +57,10 @@ Coordenada * BombaQuimica::getCoordenadas() {
 // Setters
 
 void BombaQuimica::setCoordenadas( Coordenada * coordenada ) {
-	if (coordenada->getCoordenada_z() == NIVEL_SUPERFICIE) {
-		this->coordenada = coordenada;
+	if ( coordenada != NULL ) {
+		if ( coordenada->getCoordenada_z() == NIVEL_SUPERFICIE ) {
+			this->coordenada = coordenada;
+		}
 	}
 }
 
@@ -65,7 +77,7 @@ void BombaQuimica::setTurnos( int turnos ) {
 }
 
 void BombaQuimica::setCantidadCasilleros( int casilleros ) {
-	if ( casilleros > 0) {
+	if ( casilleros > 0 ) {
 		this->cantidadCasilleros = casilleros;
 	}
 }

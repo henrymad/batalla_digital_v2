@@ -1,21 +1,23 @@
 #ifndef _BOMBAQUIMICA_H_
 #define _BOMBAQUIMICA_H_
 
+#include <iostream>
+
 #include "Coordenada.h"
 #include "Definiciones.h"
 
 class BombaQuimica {
 private:
 	int jugador = 0;
-	int cantidadCasilleros;
-	int turnos;
-	Coordenada* coordenada;
+	int cantidadCasilleros = 0;
+	int turnos = 0;
+	Coordenada * coordenada;
 public:
 	BombaQuimica( int );
-	BombaQuimica( int, Coordenada* );
+	BombaQuimica( int, Coordenada * );
 	BombaQuimica( int, Coordenada *, int );
 	~BombaQuimica();
-	Coordenada* getCoordenadas();
+	Coordenada * getCoordenadas();
 	void setCoordenadas( Coordenada * );
 	void setJugador( int );
 	void setTurnos( int );
