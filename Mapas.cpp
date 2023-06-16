@@ -73,7 +73,18 @@ string Mapas::Celda( Casillero * casillero, Jugador * jugador ) {
 	if ( casillero == NULL ) {
 		return celda;
 	}
-	if ( casillero->getSoldado() != NULL ) {
+	if ( casillero->getEstadoCasillero() == EstadoCasillero::casilleroinactivo ) {
+		if ( casillero->getBomba() != NULL ) {
+			celda = "B";
+		}
+		else {
+			celda = "X";
+		}
+	}
+	else if ( casillero->getEstadoCasillero() == EstadoCasillero::casillerovacio ) {
+
+	}
+	else if ( casillero->getSoldado() != NULL ) {
 		if ( jugador == NULL ) {
 			celda = "S";
 		}
@@ -106,7 +117,7 @@ string Mapas::Celda( Casillero * casillero, Jugador * jugador ) {
 			celda = "C";
 		}
 	}
-	if ( celda == "" ) {
+	if ( celda == " " ) {
 		celda = this->hayAvion( casillero, jugador );
 		if (celda == "") { 
 			celda = " ";

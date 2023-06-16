@@ -24,6 +24,7 @@ private:
 	Lista< Mina *> * minas;
 	Barco * barco;
 	Avion * avion;
+	BombaQuimica * bomba;				// Se marca el casillero donde detonó.
 public:
 	Casillero();
 	Casillero( Coordenada * );
@@ -39,6 +40,7 @@ public:
 	void setSoldado( Soldado * );
 	void setBarco( Barco * );
 	void setAvion( Avion * );
+	void setBomba( BombaQuimica * );
 	void agregarMina( Mina * );
 	TipoTerrenoCasillero getTipoTerreno();
 	EstadoCasillero getEstadoCasillero();
@@ -48,6 +50,7 @@ public:
 	Mina * getMina( int );
 	Barco * getBarco();
 	Avion * getAvion();
+	BombaQuimica * getBomba();
 };
 
 #endif  // _CASILLERO_INCLUDED_
