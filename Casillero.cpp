@@ -8,7 +8,7 @@ Casillero::Casillero() {
 	this->coordenada = NULL;
 	this->soldado = NULL;
 	this->minas = NULL;
-	this->bomba = NULL;
+	// this->bomba = NULL;
 }
 
 Casillero::Casillero( int x, int y, int z ) {
@@ -19,7 +19,7 @@ Casillero::Casillero( int x, int y, int z ) {
 	this->coordenada = new Coordenada( x, y, z );
 	this->soldado = NULL;
 	this->minas = NULL;
-	this->bomba = NULL;
+	// this->bomba = NULL;
 }
 
 Casillero::Casillero( Coordenada * coordenada ) {
@@ -31,7 +31,7 @@ Casillero::Casillero( Coordenada * coordenada ) {
 	this->coordenada = coordenada;
 	this->soldado = NULL;
 	this->minas = NULL;
-	this->bomba = NULL;
+	// this->bomba = NULL;
 }
 
 Casillero::Casillero( Coordenada * coordenada, TipoTerrenoCasillero terreno ) {
@@ -42,7 +42,7 @@ Casillero::Casillero( Coordenada * coordenada, TipoTerrenoCasillero terreno ) {
 	this->turnosDeInactividad = 0;
 	this->soldado = NULL;
 	this->minas = NULL;
-	this->bomba = NULL;
+	// this->bomba = NULL;
 }
 
 Casillero::Casillero( Coordenada * coordenada, TipoTerrenoCasillero terreno, EstadoCasillero estado ) {
@@ -53,7 +53,7 @@ Casillero::Casillero( Coordenada * coordenada, TipoTerrenoCasillero terreno, Est
 	this->turnosDeInactividad = 0;
 	this->soldado = NULL;
 	this->minas = NULL;
-	this->bomba = NULL;
+	// this->bomba = NULL;
 }
 
 Casillero::~Casillero() {
@@ -62,7 +62,7 @@ Casillero::~Casillero() {
 	delete this->coordenada;
 	this->soldado = NULL;
 	this->minas = NULL;
-	this->bomba = NULL;
+	// this->bomba = NULL;
 }
 
 // Setters
@@ -92,12 +92,14 @@ void Casillero::setAvion( Avion * avion ) {
 	this->avion = avion;
 }
 
+/*
 void Casillero::setBomba( BombaQuimica * bomba ) {
 	this->bomba = bomba;
 	this->estadoInactivoCasillero = TIEMPO_INHABILITADA_BOMBA;
 	this->turnosDeInactividad = TIEMPO_INHABILITADA_BOMBA;
 	this->estado = EstadoCasillero::casilleroinactivo;
 }
+*/
 
 void Casillero::setTurnosDeInactividad( int turnos ) {
 	if ( turnos >= 0 ) {
@@ -172,9 +174,11 @@ Mina * Casillero::getMina( int jugador ) {
 	return mina;
 }
 
+/*
 BombaQuimica * Casillero::getBomba() {
 	return this->bomba;
 }
+*/
 
 int Casillero::getTurnosDeInactividad() {
 	return  this->turnosDeInactividad;

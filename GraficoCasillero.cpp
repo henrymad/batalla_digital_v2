@@ -144,12 +144,14 @@ void GraficoCasillero::setMina( Mina * mina ) {
 	}
 }
 
+/*
 void GraficoCasillero::setBombaQuimica( BombaQuimica * bomba ) {
 	if ( bomba != NULL ) {
 		this->miniTablero[0][1] = (char) bomba->getJugador();
 		this->miniTablero[1][1] = 'B';
 	}
 }
+*/
 
 void GraficoCasillero::setAvion( Avion * avion ) {
 	if ( avion != NULL ) {

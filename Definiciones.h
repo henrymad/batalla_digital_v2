@@ -1,5 +1,5 @@
-#ifndef _DEFINICIONES_INCLUDED 
-#define _DEFINICIONES_INCLUDED
+#ifndef _DEFINICIONES_INCLUDED_
+#define _DEFINICIONES_INCLUDED_
 
 const int FILAS_TABLERO = 200;
 const int COLUMNAS_TABLERO = 200;
@@ -21,4 +21,4 @@ const bool SO_LINUX = false;
 const int VERSION = 2;
 const int SUBVERSION = 0;
 
-#endif	// DEFINICIONES_INCLUDED
+#endif	// _DEFINICIONES_INCLUDED_

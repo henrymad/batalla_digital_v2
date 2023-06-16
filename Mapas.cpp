@@ -35,7 +35,13 @@ void Mapas::cargarMapaDefault() {
 }
 
 void Mapas::leerMapa( string archivo ) {
-	ofstream salida;
+	if ( archivo == "" ) { 
+		return;
+	}
+	ifstream entrada( archivo.c_str() );
+	if ( entrada.is_open() ) {
+
+	}
 }
 
 void Mapas::imprimirMapa( string archivo, Jugador * jugador ) {
@@ -74,12 +80,14 @@ string Mapas::Celda( Casillero * casillero, Jugador * jugador ) {
 		return celda;
 	}
 	if ( casillero->getEstadoCasillero() == EstadoCasillero::casilleroinactivo ) {
+		/*
 		if ( casillero->getBomba() != NULL ) {
 			celda = "B";
 		}
 		else {
 			celda = "X";
 		}
+		*/
 	}
 	else if ( casillero->getEstadoCasillero() == EstadoCasillero::casillerovacio ) {
 

@@ -1,5 +1,5 @@
-#ifndef _GRAFICO_CASILLERO_
-#define _GRAFICO_CASILLERO_
+#ifndef _GRAFICO_H_CASILLERO_
+#define _GRAFICO_H_CASILLERO_
 
 #include <new>
 #include <iostream>
@@ -16,7 +16,7 @@ public:
 	void setCasillero( Casillero * );
 	void setSoldado( Soldado * );
 	void setMina( Mina * );
-	void setBombaQuimica( BombaQuimica * );
+	// void setBombaQuimica( BombaQuimica * );
 	void setAvion( Avion * );
 	void setBarco( Barco * );
 	char ** getMiniTablero();

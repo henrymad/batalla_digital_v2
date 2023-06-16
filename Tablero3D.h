@@ -1,9 +1,9 @@
-#ifndef _TABLERO2_H_
-#define _TABLERO2_H_
+#ifndef _TABLERO3D_H_INCLUDED_
+#define _TABLERO3D_H_INCLUDED_
 
 #include <iostream>
 
-#include"Lista.h"
+#include "lista.h"
 #include "Casillero.h"
 
 using namespace std;
@@ -20,12 +20,11 @@ public:
 	virtual ~Tablero3D();
 	void setCasillero( Casillero *, int, int, int );
 	Casillero * getCasillero( int, int, int );
+	Casillero * getCasillero( Coordenada *a );
 	int getSize_x();
 	int getSize_y();
 	int getSize_z();
 
 };
 
-#endif	//  _TABLERO2_H_
-
-  
+#endif	//  _TABLERO3D_H_INCLUDED_

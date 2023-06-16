@@ -1,5 +1,5 @@
-#ifndef _AVION_H_
-#define _AVION_H_
+#ifndef _AVION_H_INCLUDED_
+#define _AVION_H_INCLUDED_
 
 #include <iostream>
 

@@ -3,13 +3,7 @@
 
 #include <iostream>
 
-#include "Jugador.h"
-#include "Coordenada.h"
-#include "Soldado.h"
-#include "Casillero.h"
-
 #include "Tablero3D.h"
-#include "Definiciones.h"
 
 #include "MostrarCasillero.h"
 #include "MostrarTablero.h"

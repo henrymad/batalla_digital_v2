@@ -1,5 +1,5 @@
-#ifndef _MINA_H_
-#define _MINA_H_
+#ifndef _MINA_H_INCLUDED_
+#define _MINA_H_INCLUDED_
 
 #include <iostream>
 
@@ -22,4 +22,4 @@ public:
 
 };
 
-#endif    // _MINA_H_
+#endif    // _MINA_H_INCLUDED_

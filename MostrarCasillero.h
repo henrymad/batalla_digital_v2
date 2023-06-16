@@ -1,5 +1,5 @@
-#ifndef _MOSTRAR_CASILLERO_
-#define _MOSTRAR_CASILLERO_
+#ifndef _MOSTRAR_H_CASILLERO_
+#define _MOSTRAR_H_CASILLERO_
 
 #include <iostream>
 

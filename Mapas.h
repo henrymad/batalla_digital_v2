@@ -1,7 +1,9 @@
+#ifndef _MAPAS_H_INCLUDED_
+#define _MAPAS_H_INCLUDED_
+
 #include <fstream>
 
 #include "Tablero3D.h"
-#include "Jugador.h"
 
 class Mapas
 {
@@ -21,3 +23,5 @@ private:
 	string Celda( Casillero *, Jugador * );
 	string hayAvion( Casillero *, Jugador * );
 };
+
+#endif

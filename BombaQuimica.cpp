@@ -1,4 +1,3 @@
-
 #include "BombaQuimica.h"
 
 BombaQuimica::BombaQuimica( int jugador ) 
@@ -85,3 +84,31 @@ void BombaQuimica::setCantidadCasilleros( int casilleros ) {
 int BombaQuimica::getJugador() {
 	return this->jugador;
 }
+
+/*
+void BombaQuimica::computoCasillerosAfectados( Coordenada * coordenada, int cantidadCasilleros ) {
+	if ( this->tablero == NULL ) {
+		return;
+	}
+	if ( cantidadCasilleros < 0 ) {
+		cantidadCasilleros = 0;
+	}
+	if ( coordenada != NULL ) {
+		Casillero * casillero = NULL;
+		casillero = this->tablero->getCasillero( coordenada );
+		// Cálculo del rango de la onda expansiva y el tiempo residual.
+		if ( cantidadCasilleros == 0 ) {
+			// Sólo el casillero.
+			casillero->setBomba( this );
+			casillero->setEstadoCasillero(EstadoCasillero::casilleroinactivo);
+			casillero->setTurnosDeInactividad( this->turnos );
+		}
+		else if ( cantidadCasilleros == 1 ) {
+			for ( int i = coordenada->getCoordenada_x(); i <= coordenada->getCoordenada_x() + 3; i++ ) {
+			}
+		}
+		else {
+		}
+	}
+}
+*/

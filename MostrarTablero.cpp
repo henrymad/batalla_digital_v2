@@ -77,7 +77,7 @@ string MostrarTablero::emitir( int linea, GraficoCasillero * graficocasillero ) 
 				lineatexto += "-" + std::string(1, miniTablero[linea][2]);
 			}
 			else {
-				lineatexto += "-0-0";	// No visible
+				lineatexto += " -0-0";	// No visible
 			}
 		}
 		break;
@@ -115,7 +115,7 @@ string MostrarTablero::emitir( int linea, GraficoCasillero * graficocasillero ) 
 				lineatexto += "-" + std::string(1, miniTablero[linea][2]);
 			}
 			else {
-				lineatexto += "-0-0";	// No visible
+				lineatexto += " -0-0";	// No visible
 			}
 		}
 		break;

@@ -85,6 +85,8 @@ void Tablero3D::setCasillero( Casillero * casillero, int x, int y, int z ) {
 	subelemento->asignar( casillero, z );
 }
 
+// Getters
+
 Casillero * Tablero3D::getCasillero( int x, int y, int z ) {
 	if ( ! this->checkCoordenadas( x, y, z ) ) {
 		return NULL;
@@ -101,6 +103,14 @@ Casillero * Tablero3D::getCasillero( int x, int y, int z ) {
 	return Casillero;
 }
 
+Casillero * Tablero3D::getCasillero( Coordenada * coordenada) {
+	Casillero * casillero = NULL;
+	if ( coordenada != NULL ) {
+		casillero = this->getCasillero( coordenada->getCoordenada_x(), coordenada->getCoordenada_y(), coordenada->getCoordenada_z() );
+	}
+	return casillero;
+}
+
 int Tablero3D::getSize_x() {
 	return this->size_x;
 }
@@ -112,6 +122,8 @@ int Tablero3D::getSize_y() {
 int Tablero3D::getSize_z() {
 	return this->size_z;
 }
+
+// Métodos auxiliares
 
 bool Tablero3D::checkCoordenadas( int x, int y, int z ) {
 	if ( x < 1 || x > this->size_x ) {

@@ -1,5 +1,5 @@
-#ifndef _COORDENADA_H_
-#define _COORDENADA_H_
+#ifndef _COORDENADA_H_INCLUDED_
+#define _COORDENADA_H_INCLUDED_
 
 // #include "Tablero3D.h"	/* Necesitaría tablero para validar rangos de las coordenadas */
 

@@ -1,5 +1,5 @@
-#ifndef _JUGADOR_H_
-#define _JUGADOR_H_
+#ifndef _JUGADOR_H_INCLUDED_
+#define _JUGADOR_H_INCLUDED_
 
 #include <string>
 #include "lista.h"
@@ -12,8 +12,8 @@ class Jugador {
 private:
 	int idJugador;
 	string nombre;
-	Lista<Soldado *> * soldados;
-	Lista<Mina *> * minasActivas;
+	Lista< Soldado * > * soldados;
+	Lista< Mina * > * minasActivas;
 	int NuevoID( int );
 public:
 	Jugador();
@@ -30,5 +30,5 @@ public:
 	// void moverSoldado( Tablero3D *, Coordenada *, int );
 };
 
-#endif  // _JUGADOR_H_
+#endif  // _JUGADOR_H_INCLUDED_
 
