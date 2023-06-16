@@ -1,5 +1,5 @@
-#ifndef _CASILLERO_INCLUDED_
-#define _CASILLERO_INCLUDED_
+#ifndef _CASILLERO_H_INCLUDED_
+#define _CASILLERO_H_INCLUDED_
 
 #include <string>
 #include "lista.h"

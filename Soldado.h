@@ -1,5 +1,5 @@
-#ifndef _SOLDADO_INCLUDED_
-#define _SOLDADO_INCLUDED_
+#ifndef _SOLDADO_H_INCLUDED_
+#define _SOLDADO_H_INCLUDED_
 
 #include <iostream>
 
@@ -25,4 +25,4 @@ public:
 	Coordenada * getCoordenada();
 };
 
-#endif	// _SOLDADO_INCLUDED_
+#endif	// _SOLDADO_H_INCLUDED_

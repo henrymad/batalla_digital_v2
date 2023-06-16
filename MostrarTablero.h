@@ -1,5 +1,5 @@
-#ifndef _MOSTRAR_TABLERO_
-#define _MOSTRAR_TABLERO_
+#ifndef _MOSTRAR_H_TABLERO_
+#define _MOSTRAR_H_TABLERO_
 
 #include <fstream>
 #include "Tablero3D.h"
