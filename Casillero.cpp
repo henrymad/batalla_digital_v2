@@ -142,12 +142,14 @@ Mina * Casillero::getMina( int jugador ) {
 	Mina * mina = nullptr;
 	bool encontrado = false;
 	Lista< Mina * > * listaminas = this->minas;
-	listaminas->iniciarCursor();
-	while (listaminas->avanzarCursor()) {
-		Mina* aux = listaminas->obtenerCursor();
-		if ( aux->getJugador() == jugador ) {
-			mina = aux;
-			break;
+	if ( this->minas != NULL ) {
+		listaminas->iniciarCursor();
+		while (listaminas->avanzarCursor()) {
+			Mina* aux = listaminas->obtenerCursor();
+			if (aux->getJugador() == jugador) {
+				mina = aux;
+				break;
+			}
 		}
 	}
 	return mina;

@@ -28,12 +28,13 @@ int main()
     Soldado * soldado;
     soldado = new Soldado( equipo1->getIdJugador() );
     Casillero * casillero1;
-    casillero1 = new Casillero( 1, 1, NIVEL_SUPERFICIE );
-    casillero1->setTipoTerreno( TipoTerrenoCasillero::tierra );
-    casillero1->setSoldado(soldado);
     Tablero3D * tablero;
     tablero = new Tablero3D;
-    tablero->setCasillero( casillero1, 1, 1, NIVEL_SUPERFICIE );
+    casillero1 = tablero->getCasillero( 1, 1, NIVEL_SUPERFICIE );
+    casillero1->setTipoTerreno(TipoTerrenoCasillero::tierra);
+    casillero1->setSoldado(soldado);
+
+    // tablero->setCasillero(casillero1, 1, 1, NIVEL_SUPERFICIE);
 
     GraficoCasillero * graficocasillero;
     graficocasillero = new GraficoCasillero( tablero );
@@ -47,10 +48,11 @@ int main()
     Mapas * mapa;
     mapa = new Mapas( tablero );
     mapa->cargarMapaDefault();
+    mapa->imprimirMapa("prueba1.txt", NULL );
 
     MostrarTablero * salidaTablero;
     salidaTablero = new MostrarTablero( tablero, equipo1 );
-    salidaTablero->imprimir( "prueba.txt" );
+    salidaTablero->imprimir( "prueba2.txt" );
 
     delete soldado;                                                                                                             
     delete coordenada;

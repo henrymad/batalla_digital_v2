@@ -1,9 +1,10 @@
 #include "Jugador.h"
 
 Jugador::Jugador() {
+	// Emulación de un autonumérico.
 	this->idJugador = this->NuevoID( 0 );
 	this->nombre = "";
-	this->soldados = new Lista<Soldado*>();
+	this->soldados = nullptr;
 	// this->minasActivas = nullptr;
 }
 
@@ -22,7 +23,7 @@ int Jugador::NuevoID( int numero = 0 ) {
 Jugador::Jugador( string nombre ) {
 	this->idJugador = this->NuevoID();
 	this->nombre = nombre;
-	this->soldados = NULL;
+	this->soldados = nullptr;
 	// this->minasActivas = nullptr;
 }
 
@@ -63,15 +64,15 @@ Jugador * Jugador::getJugador() {
 
 /*
 void Jugador::moverSoldado( Tablero3D * tablero, Coordenada * coordenadaDestino, Soldado * Soldado ) {
-	// 	Nota La validaciï¿½n del movimiento, Coordenadas Origen y Destino
-	//   deben ser realizadas por el mï¿½dulo de lï¿½gica del juego.
+	// 	Nota La validación del movimiento, Coordenadas Origen y Destino
+	//   deben ser realizadas por el módulo de lógica del juego.
 	//
 	
 }
 
 void Jugador::moverSoldado(Tablero3D* tablero, Coordenada coordenadaDestino, int idSoldado) {
-	// 	Nota La validaciï¿½n del movimiento, Coordenadas Origen y Destino
-	//   deben ser realizadas por el mï¿½dulo de lï¿½gica del juego.
+	// 	Nota La validación del movimiento, Coordenadas Origen y Destino
+	//   deben ser realizadas por el módulo de lógica del juego.
 
 }
 */
