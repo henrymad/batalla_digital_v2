@@ -8,8 +8,7 @@ Juego::Juego() {
     this->nivelPartida = 0;
     this->cantidadDeSoldados = 0;
     this->cantidadDeJugadores = 0;
-
-    //this->tablero = new Tablero3D();
+    this->cartas = new Lista<string*>();
     this->jugadores = new Lista<Jugador*>();
     this->pantallaGraficos = new PantallaGraficos();
 }
@@ -30,6 +29,8 @@ void Juego::configurarPartida() {
         this->pantallaGraficos->imprimirEspaciosVertical(1);
 
         this->configurarJugadores();
+        this->configurarCartas(nivelPartida);
+
     }
 }
 
@@ -42,6 +43,7 @@ void Juego::configurarJugadores() {
 
             jugador->setNombreJugador(nombre);
             jugador->setMinasActivas(new Lista<Mina*>());
+            jugador->setListaCartas(new Lista<string*>());
             jugador->setSoldados(soldados);
             this->jugadores->agregarFinal(jugador);
         }
@@ -76,8 +78,19 @@ void Juego::empezarPartida() {
 
         this->pantallaGraficos->imprimirMenuJugador(jugador);
         this->pantallaGraficos->imprimirEspaciosVertical(1);
-        this->pantallaGraficos->imprimirTitulo("Mover soldado");
+        this->pantallaGraficos->imprimirTitulo("Seleccionar Carta: ");
+        int posicionCarta;
 
+        if(this->nivelPartida >= 5){
+            posicionCarta = this->pantallaGraficos->entradaUsuarioNumero("Ingresar numero del (1-3), para seleccionar una carta: ");
+        }
+        else{
+            posicionCarta = this->pantallaGraficos->entradaUsuarioNumero("Ingresar numero del (1-2), para seleccionar una carta: ");
+        }
+        string carta = CARTAS[posicionCarta - 1];
+        this->jugadores->obtenerCursor()->getListaCartas()->agregarFinal(&carta);
+        this->pantallaGraficos->imprimirEspaciosVertical(1);
+        this->pantallaGraficos->imprimirTitulo("Mover soldado");
         int idSoldado = this->pantallaGraficos->entradaUsuarioNumero("Ingresar id del soldado que desea mover: ");
 
         Coordenada *nuevaCoordenada;
@@ -98,6 +111,12 @@ void Juego::empezarPartida() {
         coordenadaMina->setCoordenadaY(this->pantallaGraficos->entradaUsuarioNumero("Coordenda en Y: "));
         coordenadaMina->setCoordenadaZ(this->pantallaGraficos->entradaUsuarioNumero("Coordenda en Z: "));
 
+        string respuesta = this->pantallaGraficos->entradaUsuarioTexto("Desea jugar una carta: si/no: ");
+        if(respuesta == "si"){
+            respuesta = this->pantallaGraficos->entradaUsuarioTexto("Ingresar nombre de la carta: ");
+            this->jugadores->obtenerCursor()->jugarCarta(respuesta);
+        }
+
         this->jugadores->obtenerCursor()->minarCasillero(tablero,coordenadaMina,this->jugadores);
         if(count == 1){
             this->jugadores->iniciarCursor();
@@ -108,4 +127,19 @@ void Juego::empezarPartida() {
 
     }
 
+}
+
+void Juego::configurarCartas(int niverlJuego) {
+    if(this->nivelPartida < niverlJuego){
+        for(int i = 0; i<2;i++){
+            string carta = CARTAS[i];
+            this->cartas->agregarFinal(&carta);
+        }
+    }
+    else{
+        for(int i = 0; i<3;i++){
+            string carta = CARTAS[i];
+            this->cartas->agregarFinal(&carta);
+        }
+    }
 }

@@ -8,8 +8,7 @@ const int NIVEL_SUPERFICIE = 5;
 const int INDICE_PIXELACION = 5;
 const int PROFUNDIDAD_BIT = 24;
 
-static const std::string TIERRA = "tierra";
-static const std::string AGUA = "agua";
+static const std::string CARTAS[3]= {"bombaquimica", "barco", "avion"};
 
 
 enum EstadoCasillero { soldado, mina, casillerovacio, casilleroinactivo, avion, barco, bombaquimica };

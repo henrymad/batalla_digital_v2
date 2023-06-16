@@ -16,6 +16,8 @@ private:
 	string nombre;
 	Lista<Soldado *> * soldados;
 	Lista<Mina *> * minasActivas;
+    Lista<string *> *cartas;
+
 public:
 	Jugador();
 	Jugador( string );
@@ -31,6 +33,10 @@ public:
     Lista<Mina *> * getMinasActivas();
     void setSoldados(Lista<Soldado *> * soldados);
     Lista<Soldado *> * getSoldados();
+
+    void setListaCartas( Lista<string *> *cartas);
+    Lista<string *> *getListaCartas();
+    void jugarCarta(std::string carta);
 
     void actualizarPosicionSoldado(Coordenada *coordenada, int idSoldado, Jugador *jugador);
     void eliminarSoldado(int idSoldado);

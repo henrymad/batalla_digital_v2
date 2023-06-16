@@ -5,6 +5,7 @@ Jugador::Jugador() {
 	this->nombre = "";
 	this->soldados = NULL;
 	this->minasActivas = NULL;
+    this->cartas = NULL;
 }
 
 int Jugador::NuevoID( int numero = 0 ) {
@@ -205,5 +206,20 @@ void Jugador::minarCasillero(Tablero3D *tablero, Coordenada *coordenadaDestino, 
         casillero->setMina(minaActiva);
         casillero->setEstadoCasillero(mina);
         this->minasActivas->agregarFinal(minaActiva);
+    }
+}
+
+void Jugador::setListaCartas(Lista<string *> *cartas) {
+    this->cartas = cartas;
+}
+
+Lista<string *> *Jugador::getListaCartas() {
+    return this->cartas;
+}
+
+void Jugador::jugarCarta(std::string carta) {
+    if(carta == "barco" ){
+        Barco *barco = new Barco();
+        barco->getJugador();
     }
 }

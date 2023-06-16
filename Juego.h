@@ -12,12 +12,14 @@ private:
     int nivelPartida;
 
     Lista<Jugador*> *jugadores;
+    Lista<string *> *cartas;
     Tablero3D *tablero;
     PantallaGraficos *pantallaGraficos;
 
 
     void configurarJugadores();
     void configurarTablero(int nivelPartida);
+    void configurarCartas(int niverlJuego);
     Lista<Soldado*> *configurarSoldados(int cantidadDeSoldados,int idJugador);
 
 public:

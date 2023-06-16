@@ -68,7 +68,18 @@ void PantallaGraficos::imprimirMenuJugador(Jugador *jugador) {
     cout<<"Menu Jugador"<<endl;
     cout<<"Nombre: "<<jugador->getNombreJugador()<<endl;
     cout<<"Cantidad de Soldados: "<<jugador->getCantidadSoldados()<<endl;
-    cout<<"Cartas: "<<"Barco - Bomba quimica"<<endl;
+    if(jugador->getListaCartas()->estaVacia()){
+        cout<<"Cartas: "<<" "<<endl;
+    }
+    else{
+        jugador->getListaCartas()->iniciarCursor();
+        cout<<"Cartas: ";
+        while(jugador->getListaCartas()->avanzarCursor()){
+            cout<<jugador->getListaCartas()->obtenerCursor()<<",";
+        }
+        cout<<""<<endl;
+    }
+
     cout<<"Minas Activas: "<<jugador->getMinasActivas()->contarElementos()<<endl;
     cout<<"Cartas Activas: "<<"Avion"<<endl;
     cout<<" "<<endl;
