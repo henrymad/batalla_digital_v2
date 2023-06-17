@@ -16,7 +16,7 @@ public:
 	void setCasillero( Casillero * );
 	void setSoldado( Soldado * );
 	void setMina( Mina * );
-	// void setBombaQuimica( BombaQuimica * );
+	void setBombaQuimica( BombaQuimica * );
 	void setAvion( Avion * );
 	void setBarco( Barco * );
 	char ** getMiniTablero();
