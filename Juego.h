@@ -4,6 +4,7 @@
 #include "Jugador.h"
 #include "Tablero3D.h"
 #include "PantallaGraficos.h"
+#include "Carta.h"
 
 class Juego{
 private:
@@ -12,7 +13,7 @@ private:
     int nivelPartida;
 
     Lista<Jugador*> *jugadores;
-    Lista<string *> *cartas;
+    Lista<Carta *> *cartas;
     Tablero3D *tablero;
     PantallaGraficos *pantallaGraficos;
 
@@ -24,6 +25,7 @@ private:
 
 public:
     Juego();
+    ~Juego();
     void configurarPartida();
     void empezarPartida();
 

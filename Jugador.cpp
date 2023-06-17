@@ -209,11 +209,11 @@ void Jugador::minarCasillero(Tablero3D *tablero, Coordenada *coordenadaDestino, 
     }
 }
 
-void Jugador::setListaCartas(Lista<string *> *cartas) {
+void Jugador::setListaCartas(Lista<Carta *> *cartas) {
     this->cartas = cartas;
 }
 
-Lista<string *> *Jugador::getListaCartas() {
+Lista<Carta *> *Jugador::getListaCartas() {
     return this->cartas;
 }
 

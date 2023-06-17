@@ -75,13 +75,12 @@ void PantallaGraficos::imprimirMenuJugador(Jugador *jugador) {
         jugador->getListaCartas()->iniciarCursor();
         cout<<"Cartas: ";
         while(jugador->getListaCartas()->avanzarCursor()){
-            cout<<jugador->getListaCartas()->obtenerCursor()<<",";
+            cout<<jugador->getListaCartas()->obtenerCursor()->getNombre()<<",";
         }
         cout<<""<<endl;
     }
 
     cout<<"Minas Activas: "<<jugador->getMinasActivas()->contarElementos()<<endl;
-    cout<<"Cartas Activas: "<<"Avion"<<endl;
     cout<<" "<<endl;
     this->imprimirLineaHorizontal(20);
 }

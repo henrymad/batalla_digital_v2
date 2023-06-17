@@ -8,7 +8,7 @@ Juego::Juego() {
     this->nivelPartida = 0;
     this->cantidadDeSoldados = 0;
     this->cantidadDeJugadores = 0;
-    this->cartas = new Lista<string*>();
+    this->cartas = new Lista<Carta*>();
     this->jugadores = new Lista<Jugador*>();
     this->pantallaGraficos = new PantallaGraficos();
 }
@@ -43,7 +43,7 @@ void Juego::configurarJugadores() {
 
             jugador->setNombreJugador(nombre);
             jugador->setMinasActivas(new Lista<Mina*>());
-            jugador->setListaCartas(new Lista<string*>());
+            jugador->setListaCartas(new Lista<Carta*>());
             jugador->setSoldados(soldados);
             this->jugadores->agregarFinal(jugador);
         }
@@ -87,8 +87,10 @@ void Juego::empezarPartida() {
         else{
             posicionCarta = this->pantallaGraficos->entradaUsuarioNumero("Ingresar numero del (1-2), para seleccionar una carta: ");
         }
-        string carta = CARTAS[posicionCarta - 1];
-        this->jugadores->obtenerCursor()->getListaCartas()->agregarFinal(&carta);
+        Carta *carta = new Carta();
+        carta->setNombre(CARTAS[posicionCarta - 1]);
+        carta->setIdJugador(this->jugadores->obtenerCursor()->getIdJugador());
+        this->jugadores->obtenerCursor()->getListaCartas()->agregarFinal(carta);
         this->pantallaGraficos->imprimirEspaciosVertical(1);
         this->pantallaGraficos->imprimirTitulo("Mover soldado");
         int idSoldado = this->pantallaGraficos->entradaUsuarioNumero("Ingresar id del soldado que desea mover: ");
@@ -132,14 +134,24 @@ void Juego::empezarPartida() {
 void Juego::configurarCartas(int niverlJuego) {
     if(this->nivelPartida < niverlJuego){
         for(int i = 0; i<2;i++){
-            string carta = CARTAS[i];
-            this->cartas->agregarFinal(&carta);
+            Carta *carta = new Carta();
+            carta->setNombre(CARTAS[i]);
+            this->cartas->agregarFinal(carta);
         }
     }
     else{
         for(int i = 0; i<3;i++){
-            string carta = CARTAS[i];
-            this->cartas->agregarFinal(&carta);
+            Carta *carta = new Carta();
+            carta->setNombre(CARTAS[i]);
+            this->cartas->agregarFinal(carta);
         }
     }
 }
+
+Juego::~Juego() {
+    this->cartas->borrarLista();
+    this->jugadores->borrarLista();
+    this->pantallaGraficos = NULL;
+}
+
+
