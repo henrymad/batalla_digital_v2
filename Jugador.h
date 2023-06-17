@@ -12,8 +12,8 @@ class Jugador {
 private:
 	int idJugador;
 	string nombre;
-	Lista< Soldado * > * soldados;
-	Lista< Mina * > * minasActivas;
+	//Lista< Soldado * > * soldados;
+	//Lista< Mina * > * minasActivas;
 	int NuevoID( int );
 public:
 	Jugador();

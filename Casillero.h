@@ -6,12 +6,13 @@
 
 #include "Definiciones.h"
 #include "Coordenada.h"
-#include "Soldado.h"
-#include "Mina.h"
-#include "Avion.h"
-#include "Barco.h"
-#include "Jugador.h"
-//#include "BombaQuimica.h"
+#include "BombaQuimica.h"
+//#include "Soldado.h"
+//#include "Mina.h"
+
+//#include "Jugador.h"
+//#include "Barco.h"
+//#include "Avion.h"
 
 class Casillero {
 private:
@@ -20,10 +21,10 @@ private:
 	EstadoCasillero estado;
 	int estadoInactivoCasillero = 0;	// Lo imagino bool
 	int turnosDeInactividad = 0;		// valor >= 0 y cambia con cada turno
-	Soldado * soldado;
-	Lista< Mina *> * minas;
-	Barco * barco;
-	Avion * avion;
+	//Soldado * soldado;
+	//Lista< Mina *> * minas;
+	//Barco * barco;
+	//Avion * avion;
 	// BombaQuimica * bomba;				// Se marca el casillero donde detonó.
 public:
 	Casillero();
@@ -37,19 +38,19 @@ public:
 	void setTipoTerreno( TipoTerrenoCasillero );
 	void setEstadoCasillero( EstadoCasillero );
 	void setTurnosDeInactividad( int );
-	void setSoldado( Soldado * );
-	void setBarco( Barco * );
-	void setAvion( Avion * );
+	//void setSoldado( Soldado * );
+	//void setBarco( Barco * );
+	//void setAvion( Avion * );
 	// void setBomba( BombaQuimica * );
-	void agregarMina( Mina * );
+	//void agregarMina( Mina * );
 	TipoTerrenoCasillero getTipoTerreno();
 	EstadoCasillero getEstadoCasillero();
 	int getTurnosDeInactividad();
-	Soldado * getSoldado();
-	Lista<Mina *> * getListaMinas();
-	Mina * getMina( int );
-	Barco * getBarco();
-	Avion * getAvion();
+	//Soldado * getSoldado();
+	//Lista<Mina *> * getListaMinas();
+	//Mina * getMina( int );
+	//Barco * getBarco();
+	//Avion * getAvion();
 	// BombaQuimica * getBomba();
 };
 

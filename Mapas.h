@@ -4,6 +4,7 @@
 #include <fstream>
 
 #include "Tablero3D.h"
+#include "Jugador.h"
 
 class Mapas
 {

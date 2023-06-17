@@ -6,6 +6,7 @@
 #define BATALLA_DIGITAL_V2_INTERFACETABLERO_H
 
 #include "Tablero3D.h"
+#include "Jugador.h"
 
 class InterfazTablero {
 private:

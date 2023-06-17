@@ -1,7 +1,7 @@
 #ifndef _COORDENADA_H_INCLUDED_
 #define _COORDENADA_H_INCLUDED_
 
-// #include "Tablero3D.h"	/* Necesitaría tablero para validar rangos de las coordenadas */
+//#include "Tablero3D.h"	/* Necesitaría tablero para validar rangos de las coordenadas */
 
 /* Faltaria definir si la traslación de 0-size-1 a 1-size lo hacemos acá o en otra parte */
 

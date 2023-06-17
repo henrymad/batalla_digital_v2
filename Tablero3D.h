@@ -20,7 +20,7 @@ public:
 	virtual ~Tablero3D();
 	void setCasillero( Casillero *, int, int, int );
 	Casillero * getCasillero( int, int, int );
-	Casillero * getCasillero( Coordenada *a );
+	Casillero * getCasillero( Coordenada * );
 	int getSize_x();
 	int getSize_y();
 	int getSize_z();

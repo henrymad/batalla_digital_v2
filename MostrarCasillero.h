@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include "GraficoCasillero.h"
+#include "Jugador.h"
 
 class MostrarCasillero
 {

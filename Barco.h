@@ -1,5 +1,5 @@
-#ifndef _BARCO_H_
-#define _BARCO_H_
+#ifndef _BARCO_H_INCLUDED_
+#define _BARCO_H_INCLUDED_
 
 #include <iostream>
 
