@@ -47,6 +47,7 @@ void Graficas::graficarSuperficie( string archivo ) {
 
 void Graficas::dibujarPixel( int i, int j, Casillero * casillero, BMP & oBMP ) {
 	TipoTerrenoCasillero terreno = casillero->getTipoTerreno();
+	EstadoCasillero estado = casillero->getEstadoCasillero();
 	// Traslación de las coordenadas del usuario
 	i--; j--;
 	for ( int x = 0; x < INDICE_PIXELACION; x++ ) {

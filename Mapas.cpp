@@ -47,13 +47,14 @@ void Mapas::cargarMapa2D( string archivo ) {
 				break;
 			}
 			if ( linea.length() == this->tablero->getSize_y()) {
-				for (int j = 1; j <= this->tablero->getSize_y(); j++) {
-
+				for ( int j = 1; j <= this->tablero->getSize_y(); j++ ) {
+					Casillero * casillero = this->tablero->getCasillero(i, j, NIVEL_SUPERFICIE);
 					char caracter = linea[j];
 					if ( caracter == 'T' ) {
+						casillero->setTipoTerreno( TipoTerrenoCasillero::tierra );
 					}
 					else if ( caracter == 'A' ) {
-
+						casillero->setTipoTerreno( TipoTerrenoCasillero::agua );
 					}
 				}
 			}
