@@ -46,21 +46,22 @@ void Graficas::graficarSuperficie( string archivo ) {
 };
 
 void Graficas::dibujarPixel( int i, int j, Casillero * casillero, BMP & oBMP ) {
-	TipoTerrenoCasillero terreno;
-	terreno = casillero->getTipoTerreno();
-	for ( int i = 0; i < INDICE_PIXELACION; i++ ) {
-		for ( j = 0; j < INDICE_PIXELACION; j++ ) {
+	TipoTerrenoCasillero terreno = casillero->getTipoTerreno();
+	// Traslación de las coordenadas del usuario
+	i--; j--;
+	for ( int x = 0; x < INDICE_PIXELACION; x++ ) {
+		for ( int y = 0; y < INDICE_PIXELACION; y++ ) {
 			if (terreno == TipoTerrenoCasillero::agua ) {
-				oBMP( i, j )->Red = 0;
-				oBMP( i, j )->Green = 10;
-				oBMP( i, j )->Blue = 80;
-				oBMP( i, j )->Alpha = 0;
+				oBMP( i * INDICE_PIXELACION + x, j * INDICE_PIXELACION + y )->Red = 0;
+				oBMP( i * INDICE_PIXELACION + x, j * INDICE_PIXELACION  + y )->Green = 10;
+				oBMP( i * INDICE_PIXELACION + x, j * INDICE_PIXELACION + y )->Blue = 80;
+				oBMP( i * INDICE_PIXELACION + x, j * INDICE_PIXELACION + y )->Alpha = 0;
 			}
 			else if (terreno == TipoTerrenoCasillero::tierra ) {
-				oBMP( i, j )->Red = 90;
-				oBMP( i, j )->Green = 50;
-				oBMP( i, j )->Blue = 0;
-				oBMP( i, j )->Alpha = 0;
+				oBMP( i * INDICE_PIXELACION + x, j * INDICE_PIXELACION + y )->Red = 90;
+				oBMP( i * INDICE_PIXELACION + x, j * INDICE_PIXELACION + y )->Green = 50;
+				oBMP( i * INDICE_PIXELACION + x, j * INDICE_PIXELACION + y )->Blue = 0;
+				oBMP( i * INDICE_PIXELACION + x, j * INDICE_PIXELACION + y )->Alpha = 0;
 			}
 			else {
 				// Piff ...
