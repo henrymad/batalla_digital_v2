@@ -6,8 +6,8 @@ Casillero::Casillero() {
 	this->estadoInactivoCasillero = 0;
 	this->turnosDeInactividad = 0;
 	this->coordenada = NULL;
-	//this->soldado = NULL;
-	//this->minas = NULL;
+	this->soldado = NULL;
+	this->minas = NULL;
 	// this->bomba = NULL;
 }
 
@@ -17,8 +17,8 @@ Casillero::Casillero( int x, int y, int z ) {
 	this->estadoInactivoCasillero = 0;
 	this->turnosDeInactividad = 0;
 	this->coordenada = new Coordenada( x, y, z );
-	//this->soldado = NULL;
-	//this->minas = NULL;
+	this->soldado = NULL;
+	this->minas = NULL;
 	// this->bomba = NULL;
 }
 
@@ -29,8 +29,8 @@ Casillero::Casillero( Coordenada * coordenada ) {
 	this->turnosDeInactividad = 0;
 	// Lo puedo hacer porque sobrecargue el '='
 	this->coordenada = coordenada;
-	//this->soldado = NULL;
-	//this->minas = NULL;
+	this->soldado = NULL;
+	this->minas = NULL;
 	// this->bomba = NULL;
 }
 
@@ -40,8 +40,8 @@ Casillero::Casillero( Coordenada * coordenada, TipoTerrenoCasillero terreno ) {
 	this->estado = EstadoCasillero::casillerovacio;
 	this->estadoInactivoCasillero = 0;
 	this->turnosDeInactividad = 0;
-	//this->soldado = NULL;
-	//this->minas = NULL;
+	this->soldado = NULL;
+	this->minas = NULL;
 	// this->bomba = NULL;
 }
 
@@ -51,8 +51,8 @@ Casillero::Casillero( Coordenada * coordenada, TipoTerrenoCasillero terreno, Est
 	this->estado = EstadoCasillero::casillerovacio;
 	this->estadoInactivoCasillero = 0;
 	this->turnosDeInactividad = 0;
-	//this->soldado = NULL;
-	//this->minas = NULL;
+	this->soldado = NULL;
+	this->minas = NULL;
 	// this->bomba = NULL;
 }
 
@@ -60,8 +60,8 @@ Casillero::~Casillero() {
 	this->estadoInactivoCasillero = 0;
 	this->turnosDeInactividad = 0;
 	delete this->coordenada;
-	//this->soldado = NULL;
-	//this->minas = NULL;
+	this->soldado = NULL;
+	this->minas = NULL;
 	// this->bomba = NULL;
 }
 
@@ -80,7 +80,6 @@ void Casillero::setEstadoCasillero( EstadoCasillero estado ) {
 	this->estado = estado;
 }
 
-/*
 void Casillero::setSoldado( Soldado * soldado) {
 	this->soldado = soldado;
 }
@@ -93,16 +92,12 @@ void Casillero::setAvion( Avion * avion ) {
 	this->avion = avion;
 }
 
-*/
-
-/*
 void Casillero::setBomba( BombaQuimica * bomba ) {
 	this->bomba = bomba;
 	this->estadoInactivoCasillero = TIEMPO_INHABILITADA_BOMBA;
 	this->turnosDeInactividad = TIEMPO_INHABILITADA_BOMBA;
 	this->estado = EstadoCasillero::casilleroinactivo;
 }
-*/
 
 void Casillero::setTurnosDeInactividad( int turnos ) {
 	if ( turnos >= 0 ) {
@@ -110,7 +105,6 @@ void Casillero::setTurnosDeInactividad( int turnos ) {
 	}
 }
 
-/*
 void Casillero::agregarMina( Mina * mina ) {
 	if ( mina != nullptr ) {
 		if ( mina->getJugador() > 0 ) {
@@ -130,7 +124,6 @@ void Casillero::agregarMina( Mina * mina ) {
 		}
 	}
 }
-*/
 
 // Getters
 
@@ -139,6 +132,9 @@ Coordenada* Casillero::getCoordenada() {
 }
 
 TipoTerrenoCasillero Casillero::getTipoTerreno() {
+	if ( this == NULL ) {
+		return TipoTerrenoCasillero::tierra;
+	}
 	return this->terreno;
 }
 
@@ -146,7 +142,6 @@ EstadoCasillero Casillero::getEstadoCasillero() {
 	return this->estado;
 }
 
-/*
 Soldado * Casillero::getSoldado() {
 	return this->soldado;
 }
@@ -183,8 +178,7 @@ Mina * Casillero::getMina( int jugador ) {
 BombaQuimica * Casillero::getBomba() {
 	return this->bomba;
 }
-*/
 
 int Casillero::getTurnosDeInactividad() {
-	return  this->turnosDeInactividad;
+	return this->turnosDeInactividad;
 }

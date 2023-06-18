@@ -8,6 +8,7 @@
 #include "MostrarCasillero.h"
 #include "MostrarTablero.h"
 #include "Mapas.h"
+#include "Graficas.h"
 
 using namespace std;
 
@@ -47,7 +48,11 @@ int main()
     MostrarTablero * salidaTablero;
     salidaTablero = new MostrarTablero( tablero, equipo1 );
     salidaTablero->imprimir( "prueba2.txt" );
+    Graficas * bmpMapa;
+    bmpMapa = new Graficas( tablero );
+    bmpMapa->graficarSuperficie( "grafico.bmp" );
 
+    delete bmpMapa;
     delete soldado;                                                                                                             
     delete coordenada;
     delete equipo1;

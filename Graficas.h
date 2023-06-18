@@ -2,21 +2,20 @@
 #define GRAFICAS_H_INCLUDED_
 
 #include "Tablero3D.h"
-#include "Casillero.h"
 #include "EasyBMP.h"
 
 using namespace std;
 
 class Graficas {
 private:
-	Tablero3D * partida;
+	Tablero3D * tablero;
 	int iHeight;
 	int iWidth;
 	int iPixelSize;
-	void dibujarPixel( int, int, Casillero* , BMP );
+	void dibujarPixel( int, int, Casillero * , BMP );
 public:
 	Graficas();
-	Graficas( Tablero3D * oTablero);
+	Graficas( Tablero3D * );
 	~Graficas();
 	void graficarSuperficie( string );
 };
