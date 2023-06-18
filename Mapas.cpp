@@ -2,6 +2,7 @@
 
 Mapas::Mapas( Tablero3D * tablero ) {
 	this->tablero = tablero;
+	this->jugador = NULL;
 }
 
 //  Setters
@@ -34,11 +35,37 @@ void Mapas::cargarMapaDefault() {
 	}
 }
 
-void Mapas::leerMapa( string archivo ) {
+void Mapas::cargarMapa2D( string archivo ) {
 	if ( archivo == "" ) { 
 		return;
 	}
 	ifstream entrada( archivo.c_str() );
+	if ( entrada.is_open() ) {
+		string linea;
+		for ( int i = 1; i <= this->tablero->getSize_x(); i++ ) {
+			if ( std::getline(entrada, linea) ) {
+				break;
+			}
+			if ( linea.length() == this->tablero->getSize_y()) {
+				for (int j = 1; j <= this->tablero->getSize_y(); j++) {
+
+					char caracter = linea[j];
+					if ( caracter == 'T' ) {
+					}
+					else if ( caracter == 'A' ) {
+
+					}
+				}
+			}
+		}
+	}
+}
+
+void Mapas::cargarMapa3D( string archivo ) {
+	if (archivo == "") {
+		return;
+	}
+	ifstream entrada(archivo.c_str());
 	if ( entrada.is_open() ) {
 
 	}
