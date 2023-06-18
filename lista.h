@@ -222,8 +222,10 @@ class Lista{
 			Nodo<T>* obtenerNodo(int posicion){
 				Nodo<T> *actual = this->primero;
 	
-				for (int i=0; i<posicion; i++)  //Si tengo que llegar al Nodo 5, al llegar a la posicion 4
+				for ( int i = 0; i < posicion; i++ ) {
+												//Si tengo que llegar al Nodo 5, al llegar a la posicion 4
 					actual = actual->getSig();  // Decimos a actual de apuntar al Nodo siguiente que es Nodo 5, Ya que i=5 No es < posicion=5 salgo
+				}
 		
 				return actual;
 			}
