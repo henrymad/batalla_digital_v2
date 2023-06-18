@@ -34,11 +34,8 @@ void Graficas::graficarSuperficie( string archivo ) {
 			if ( casillero != NULL ) {
 				this->dibujarPixel( i, j, casillero, Output);
 			}
-			else {
-				// Piff
-				std::cout << i;
-			}
 		}
+		std::cout << i << endl;
 	}
 	int length = archivo.length();
 	char * sarchivo = new char[ length + 1 ];
@@ -48,20 +45,22 @@ void Graficas::graficarSuperficie( string archivo ) {
 	delete[] sarchivo;
 };
 
-void Graficas::dibujarPixel( int i, int j, Casillero * casillero, BMP oBMP ) {
+void Graficas::dibujarPixel( int i, int j, Casillero * casillero, BMP & oBMP ) {
+	TipoTerrenoCasillero terreno;
+	terreno = casillero->getTipoTerreno();
 	for ( int i = 0; i < INDICE_PIXELACION; i++ ) {
 		for ( j = 0; j < INDICE_PIXELACION; j++ ) {
-			if ( casillero->getTipoTerreno() == TipoTerrenoCasillero::agua ) {
+			if (terreno == TipoTerrenoCasillero::agua ) {
 				oBMP( i, j )->Red = 0;
 				oBMP( i, j )->Green = 10;
 				oBMP( i, j )->Blue = 80;
-				oBMP(i, j)->Alpha = 0;
+				oBMP( i, j )->Alpha = 0;
 			}
-			else if ( casillero->getTipoTerreno() == TipoTerrenoCasillero::tierra ) {
+			else if (terreno == TipoTerrenoCasillero::tierra ) {
 				oBMP( i, j )->Red = 90;
 				oBMP( i, j )->Green = 50;
 				oBMP( i, j )->Blue = 0;
-				oBMP(i, j)->Alpha = 0;
+				oBMP( i, j )->Alpha = 0;
 			}
 			else {
 				// Piff ...

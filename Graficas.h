@@ -12,7 +12,7 @@ private:
 	int iHeight;
 	int iWidth;
 	int iPixelSize;
-	void dibujarPixel( int, int, Casillero * , BMP );
+	void dibujarPixel( int, int, Casillero * ,  BMP &);
 public:
 	Graficas();
 	Graficas( Tablero3D * );

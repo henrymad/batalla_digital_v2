@@ -5,7 +5,7 @@ const int FILAS_TABLERO = 200;
 const int COLUMNAS_TABLERO = 200;
 const int ALTURA_TABLERO = 20;
 const int NIVEL_SUPERFICIE = 5;
-const int INDICE_PIXELACION = 5;
+const int INDICE_PIXELACION = 3;
 const int PROFUNDIDAD_BIT = 16;
 
 enum EstadoCasillero { soldado, mina, casillerovacio, casilleroinactivo, avion, barco, bombaquimica };
