@@ -78,9 +78,9 @@ void Mapas::grabarMapa2D( string archivo ) {
 	}
 	ofstream salida;
 	salida.open( archivo.c_str(), fstream::out );
-	for (int i = 1; i <= this->tablero->getSize_x(); i++) {
-		for (int j = 1; j <= this->tablero->getSize_y(); j++) {
-			TipoTerrenoCasillero terreno = tablero->getCasillero(i, j, NIVEL_SUPERFICIE)->getTipoTerreno();
+	for (int j = 1; j <= this->tablero->getSize_y(); j++) {
+		for (int i = 1; i <= this->tablero->getSize_x(); i++) {
+			TipoTerrenoCasillero terreno = tablero->getCasillero( i, j, NIVEL_SUPERFICIE )->getTipoTerreno();
 			salida << terreno;
 		}
 		salida << std::endl;
@@ -98,7 +98,7 @@ void Mapas::grabarMapa3D( string archivo ) {
 	for ( int z = 1; z < this->tablero->getSize_z(); z++ ) {
 		for (int i = 1; i <= this->tablero->getSize_x(); i++) {
 			for (int j = 1; j <= this->tablero->getSize_y(); j++) {
-				TipoTerrenoCasillero terreno = tablero->getCasillero(i, j, k)->getTipoTerreno();
+				TipoTerrenoCasillero terreno = tablero->getCasillero( i, j, z )->getTipoTerreno();
 				salida << terreno;
 			}
 			salida << std::endl;
