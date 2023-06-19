@@ -4,8 +4,8 @@
 #include <iostream>
 #include <fstream>
 
-#include "Tablero3D.h"
 #include "Jugador.h"
+#include "Graficas.h"
 
 using namespace std;
 
@@ -15,7 +15,9 @@ public:
 	Mapas( Tablero3D * );
 	void cargarMapaDefault();
 	void cargarMapa2D( string );
-	void cargarMapa3D(string);
+	void cargarMapa3D( string );
+	void grabarMapa2D( string );
+	void grabarMapa3D( string );
 	void imprimirMapa( string, Jugador * );
 	void imprimirGraficoSuperficie( string );
 	void verMapa();

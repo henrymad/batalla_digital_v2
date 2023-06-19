@@ -72,6 +72,23 @@ void Mapas::cargarMapa3D( string archivo ) {
 	}
 }
 
+void Mapas::grabarMapa2D( string archivo ) {
+	if (archivo == "") {
+		return;
+	}
+	ofstream salida;
+	salida.open( archivo.c_str(), fstream::out );
+	for (int i = 1; i <= this->tablero->getSize_x(); i++) {
+		for (int j = 1; j <= this->tablero->getSize_y(); j++) {
+			TipoTerrenoCasillero terreno = tablero->getCasillero(i, j, NIVEL_SUPERFICIE)->getTipoTerreno();
+			salida << terreno;
+		}
+		salida << std::endl;
+	}
+	// Liberar recursos y memoria
+	salida.close();
+}
+
 void Mapas::imprimirMapa( string archivo, Jugador * jugador ) {
 	if (this->tablero == NULL) {
 		return;
@@ -91,6 +108,17 @@ void Mapas::imprimirMapa( string archivo, Jugador * jugador ) {
 		// Liberar recursos y memoria
 		salida.close();
 	}
+}
+
+void Mapas::imprimirGraficoSuperficie( string archivo ) {
+	if (archivo == "") {
+		archivo = "GraficoSuperfice.bmp";
+	}
+	Graficas * grafico;
+	grafico = new Graficas( this->tablero );
+	grafico->graficarSuperficie( archivo );
+	// Liberar recursos
+	delete grafico;
 }
 
 void Mapas::setNombreArchivo(string archivo) {
