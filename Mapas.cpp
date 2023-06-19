@@ -89,6 +89,26 @@ void Mapas::grabarMapa2D( string archivo ) {
 	salida.close();
 }
 
+void Mapas::grabarMapa3D( string archivo ) {
+	if (archivo == "") {
+		return;
+	}
+	ofstream salida;
+	salida.open(archivo.c_str(), fstream::out);
+	for ( int z = 1; z < this->tablero->getSize_z(); z++ ) {
+		for (int i = 1; i <= this->tablero->getSize_x(); i++) {
+			for (int j = 1; j <= this->tablero->getSize_y(); j++) {
+				TipoTerrenoCasillero terreno = tablero->getCasillero(i, j, k)->getTipoTerreno();
+				salida << terreno;
+			}
+			salida << std::endl;
+		}
+		salida << std::endl;
+	}
+	// Liberar recursos y memoria
+	salida.close();
+}
+
 void Mapas::imprimirMapa( string archivo, Jugador * jugador ) {
 	if (this->tablero == NULL) {
 		return;
