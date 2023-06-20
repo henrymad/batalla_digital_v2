@@ -15,7 +15,7 @@ public:
 	Mapas( Tablero3D * );
 	void cargarMapaDefault();
 	void cargarMapa2D( string );
-	void cargarMapa3D( string );
+	void cargarMapa3D( string, bool );
 	void grabarMapa2D( string );
 	void grabarMapa3D( string );
 	void imprimirMapa( string, Jugador * );
