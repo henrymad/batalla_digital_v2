@@ -29,6 +29,15 @@ int main()
     casillero1->setTipoTerreno(TipoTerrenoCasillero::tierra);
     casillero1->setSoldado(soldado);
 
+    Mapas* mapa;
+    mapa = new Mapas(tablero);
+    mapa->cargarMapaDefault();                  // Esta funcion carga el Mapa en 3D.
+    mapa->cargarMapa2D( "mapadefault.txt" );    // Sólo carga la superficie.
+    mapa->imprimirMapa( "prueba1.txt", NULL );
+    //mapa->grabarMapa2D( "mapadefault.txt" );
+    // mapa->cargarMapa2D( "mapadefault.txt" );
+    //mapa->grabarMapa2D( "mapadefault.txt" );
+
     // tablero->setCasillero(casillero1, 1, 1, NIVEL_SUPERFICIE);
 
     GraficoCasillero * graficocasillero;
@@ -39,11 +48,6 @@ int main()
     for (int i = 0; i < 3; i++ ) {
         cout << mostrar->emitir(i) << "\n";
     }
-
-    Mapas * mapa;
-    mapa = new Mapas( tablero );
-    mapa->cargarMapaDefault();
-    mapa->imprimirMapa("prueba1.txt", NULL );
 
     MostrarTablero * salidaTablero;
     salidaTablero = new MostrarTablero( tablero, equipo1 );

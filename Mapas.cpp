@@ -10,9 +10,12 @@ Mapas::Mapas( Tablero3D * tablero ) {
 void Mapas::cargarMapaDefault() {
 	Casillero * casillero;
 	if ( this->tablero != NULL ) {
-		for ( int i = 1; i <= this->tablero->getSize_x(); i++ ) {
-			for ( int j = 1; j <= this->tablero->getSize_y(); j++ ) {
-				for (int k = 1; k <= this->tablero->getSize_z(); k++ ) {
+		int size_x = this->tablero->getSize_x();
+		int size_y = this->tablero->getSize_y();
+		int size_z = this->tablero->getSize_z();
+		for ( int i = 1; i <= size_x; i++ ) {
+			for ( int j = 1; j <= size_y; j++ ) {
+				for (int k = 1; k <= size_z; k++ ) {
 					casillero = tablero->getCasillero( i, j, k );
 					if ( k > NIVEL_SUPERFICIE ) {
 						casillero->setTipoTerreno( TipoTerrenoCasillero::aire );
@@ -42,18 +45,20 @@ void Mapas::cargarMapa2D( string archivo ) {
 	ifstream entrada( archivo.c_str() );
 	if ( entrada.is_open() ) {
 		string linea;
-		for ( int i = 1; i <= this->tablero->getSize_x(); i++ ) {
-			if ( std::getline(entrada, linea) ) {
+		int size_x = this->tablero->getSize_x();
+		int size_y = this->tablero->getSize_y();
+		for ( int j = 1; j <= size_y; j++ ) {
+			if ( ! std::getline(entrada, linea) ) {
 				break;
 			}
-			if ( linea.length() == this->tablero->getSize_y()) {
-				for ( int j = 1; j <= this->tablero->getSize_y(); j++ ) {
+			if ( linea.length() == size_y ) {
+				for ( int i = 1; i <= size_x; i++ ) {
 					Casillero * casillero = this->tablero->getCasillero(i, j, NIVEL_SUPERFICIE);
-					char caracter = linea[j];
-					if ( caracter == '1' ) {
+					char caracter = linea[i];
+					if ( caracter == '0' ) {
 						casillero->setTipoTerreno( TipoTerrenoCasillero::tierra );
 					}
-					else if ( caracter == '0' ) {
+					else if ( caracter == '1' ) {
 						casillero->setTipoTerreno( TipoTerrenoCasillero::agua );
 					}
 				}
