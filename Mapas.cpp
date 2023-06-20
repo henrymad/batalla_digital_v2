@@ -50,10 +50,10 @@ void Mapas::cargarMapa2D( string archivo ) {
 				for ( int j = 1; j <= this->tablero->getSize_y(); j++ ) {
 					Casillero * casillero = this->tablero->getCasillero(i, j, NIVEL_SUPERFICIE);
 					char caracter = linea[j];
-					if ( caracter == 'T' ) {
+					if ( caracter == '1' ) {
 						casillero->setTipoTerreno( TipoTerrenoCasillero::tierra );
 					}
-					else if ( caracter == 'A' ) {
+					else if ( caracter == '0' ) {
 						casillero->setTipoTerreno( TipoTerrenoCasillero::agua );
 					}
 				}
