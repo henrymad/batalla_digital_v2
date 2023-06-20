@@ -31,8 +31,9 @@ int main()
 
     Mapas* mapa;
     mapa = new Mapas(tablero);
-    mapa->cargarMapaDefault();                  // Esta funcion carga el Mapa en 3D.
-    mapa->cargarMapa2D( "mapadefault.txt" );    // Sólo carga la superficie.
+    // mapa->cargarMapaDefault();                  // Esta funcion carga el Mapa en 3D.
+    // mapa->cargarMapa2D( "mapadefault.txt" );    // Sólo carga la superficie.
+    mapa->cargarMapa3D( "mapadefault.txt" );
     mapa->imprimirMapa( "prueba1.txt", NULL );
     //mapa->grabarMapa2D( "mapadefault.txt" );
     // mapa->cargarMapa2D( "mapadefault.txt" );

@@ -42,6 +42,9 @@ void Mapas::cargarMapa2D( string archivo ) {
 	if ( archivo == "" ) { 
 		return;
 	}
+	if ( this->tablero == NULL ) {
+		return;
+	}
 	ifstream entrada( archivo.c_str() );
 	if ( entrada.is_open() ) {
 		string linea;
@@ -67,13 +70,43 @@ void Mapas::cargarMapa2D( string archivo ) {
 	}
 }
 
-void Mapas::cargarMapa3D( string archivo ) {
+void Mapas::cargarMapa3D( string archivo, bool superficie = true ) {
 	if (archivo == "") {
+		return;
+	}
+	if (this->tablero == NULL) {
 		return;
 	}
 	ifstream entrada(archivo.c_str());
 	if ( entrada.is_open() ) {
-
+		string linea;
+		int size_x = this->tablero->getSize_x();
+		int size_y = this->tablero->getSize_y();
+		int size_z = this->tablero->getSize_z();
+		for (int j = 1; j <= size_y; j++) {
+			if ( !std::getline( entrada, linea ) ) {
+				break;
+			}
+			if ( linea.length() == size_y ) {
+				for ( int i = 1; i <= size_x; i++ ) {
+					char caracter = linea[i];
+					for ( int k = 1; k <= size_z; k++ ) {
+						Casillero * casillero = this->tablero->getCasillero( i, j, k );
+						if ( k <= NIVEL_SUPERFICIE ) {
+							if (caracter == '0') {
+								casillero->setTipoTerreno( TipoTerrenoCasillero::tierra );
+							}
+							else if (caracter == '1') {
+								casillero->setTipoTerreno( TipoTerrenoCasillero::agua );
+							}
+						}
+						else {
+							casillero->setTipoTerreno( TipoTerrenoCasillero::aire );
+						}
+					}
+				}
+			}
+		}
 	}
 }
 
