@@ -1,5 +1,5 @@
-#ifndef GRAFICAS_H_INCLUDED_
-#define GRAFICAS_H_INCLUDED_
+#ifndef _GRAFICAS_H_INCLUDED_
+#define _GRAFICAS_H_INCLUDED_
 
 #include "Tablero3D.h"
 #include "EasyBMP.h"
@@ -20,4 +20,4 @@ public:
 	void graficarSuperficie( string );
 };
 
-#endif	// GRAFICAS_INCLUDED
+#endif	// _GRAFICAS_INCLUDED

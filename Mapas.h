@@ -31,4 +31,4 @@ private:
 	string hayAvion( Casillero *, Jugador * );
 };
 
-#endif
+#endif   // _MAPAS_H_INCLUDED_
