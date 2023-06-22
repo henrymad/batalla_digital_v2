@@ -1,31 +1,35 @@
 #include "BombaQuimica.h"
 
 BombaQuimica::BombaQuimica( int jugador ) 
+//: coordenada(NULL), turnos(TIEMPO_INHABILITADA_BOMBA)
 {
 	if ( jugador > 0 ) {
 		this->jugador = jugador;
 	}
+	this->coordenada = NULL;
+	this->turnos = TIEMPO_INHABILITADA_BOMBA;
 	this->turnos = TIEMPO_INHABILITADA_BOMBA;
 	this->cantidadCasilleros = 0;
-	this->coordenada = NULL;
 }
 
 BombaQuimica::BombaQuimica( int jugador, Coordenada * coordenada )
+//: coordenada(NULL), turnos(TIEMPO_INHABILITADA_BOMBA)
 {
 	if ( jugador > 0 ) {
 		this->jugador = jugador;
 	}
+	this->coordenada = NULL;
+	this->turnos = TIEMPO_INHABILITADA_BOMBA;
 	if ( coordenada != NULL ) {
 		if ( coordenada->getCoordenada_z() == NIVEL_SUPERFICIE) {
 			this->coordenada = coordenada;
 		}
 	}
 	this->cantidadCasilleros = 0;
-	this->turnos = TIEMPO_INHABILITADA_BOMBA;
-	this->coordenada = NULL;
 }
 
 BombaQuimica::BombaQuimica( int jugador, Coordenada * coordenada, int turnos )
+//: coordenada(NULL), turnos(TIEMPO_INHABILITADA_BOMBA)
 {
 	if ( jugador > 0 ) {
 		this->jugador = jugador;
@@ -38,8 +42,6 @@ BombaQuimica::BombaQuimica( int jugador, Coordenada * coordenada, int turnos )
 	}
 	this->turnos = turnos;
 	this->cantidadCasilleros = 0;
-	this->turnos = TIEMPO_INHABILITADA_BOMBA;
-	this->coordenada = NULL;
 }
 
 BombaQuimica::~BombaQuimica() {

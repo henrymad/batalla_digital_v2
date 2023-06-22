@@ -132,9 +132,6 @@ Coordenada* Casillero::getCoordenada() {
 }
 
 TipoTerrenoCasillero Casillero::getTipoTerreno() {
-	if ( this == NULL ) {
-		return TipoTerrenoCasillero::tierra;
-	}
 	return this->terreno;
 }
 
@@ -160,7 +157,6 @@ Lista< Mina * > * Casillero::getListaMinas() {
 
 Mina * Casillero::getMina( int jugador ) {
 	Mina * mina = nullptr;
-	bool encontrado = false;
 	Lista< Mina * > * listaminas = this->minas;
 	if ( this->minas != NULL ) {
 		listaminas->iniciarCursor();

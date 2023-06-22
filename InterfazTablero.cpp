@@ -28,13 +28,15 @@ void InterfazTablero::mostrarTablero(int nivel) {
 	if (nivel <= 0 || nivel > ALTURA_TABLERO) {
 		nivel = NIVEL_SUPERFICIE;
 	}
-	Casillero * elemento;
+
 	// Lista < Casillero * > * subelemento;
 	for ( int x = 1; x < this->tablero->getSize_x(); x++ ) {
 		for ( int y = 1; y < this->tablero->getSize_y(); y++) {
 			for ( int z = 1; x < this->tablero->getSize_z(); z++) {
-				elemento = this->tablero->getCasillero( x, y, z);
-
+				Casillero * elemento = this->tablero->getCasillero( x, y, z);
+				if ( elemento->getAvion() != NULL ) {
+					// Mostrar Avion
+				}
 			}
 		}
 	}
@@ -79,4 +81,4 @@ char InterfazTablero::getLetraCasilla( Casillero * casillero, Jugador * jugador)
 		}
 	}
 	return valor;
-};
+}

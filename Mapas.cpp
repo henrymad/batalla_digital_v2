@@ -3,6 +3,7 @@
 Mapas::Mapas( Tablero3D * tablero ) {
 	this->tablero = tablero;
 	this->jugador = NULL;
+	this->nombreArchivo = "";
 }
 
 //  Setters
@@ -54,7 +55,7 @@ void Mapas::cargarMapa2D( string archivo ) {
 			if ( ! std::getline(entrada, linea) ) {
 				break;
 			}
-			if ( linea.length() == size_y ) {
+			if ( linea.length() == ( long long unsigned int) size_y ) {
 				for ( int i = 1; i <= size_x; i++ ) {
 					Casillero * casillero = this->tablero->getCasillero(i, j, NIVEL_SUPERFICIE);
 					char caracter = linea[i];
@@ -87,7 +88,7 @@ void Mapas::cargarMapa3D( string archivo, bool superficie = true ) {
 			if ( !std::getline( entrada, linea ) ) {
 				break;
 			}
-			if ( linea.length() == size_y ) {
+			if ( linea.length() == (long long unsigned int) size_y ) {
 				for ( int i = 1; i <= size_x; i++ ) {
 					char caracter = linea[i];
 					for ( int k = 1; k <= size_z; k++ ) {
@@ -273,4 +274,8 @@ string Mapas::hayAvion( Casillero * casillero, Jugador * jugador ) {
 		}
 	}
 	return sValor;
+}
+
+void Mapas::verMapa() {
+	// ToDo
 }
