@@ -218,7 +218,7 @@ string Mapas::Celda( Casillero * casillero, Jugador * jugador ) {
 			celda = " ";
 		}
 	}
-	else if ( casillero->getMina(0) != NULL ) {
+	else if ( casillero->getMina() != NULL ) {
 		if ( jugador == NULL ) {
 			celda = "M";
 		}

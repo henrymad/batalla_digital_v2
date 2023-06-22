@@ -83,7 +83,7 @@ void GraficoCasillero::setCasillero( Casillero * casillero ) {
 	}
 	else if (casillero->getEstadoCasillero() == mina) {
 		this->miniTablero[1][0] = 'M';
-		this->miniTablero[1][1] = (char)casillero->getMina(0)->getJugador();		// Asumo una sola mina en la lista.
+		this->miniTablero[1][1] = (char)casillero->getMina()->getJugador();		// Asumo una sola mina en la lista.
 	}
 	else if (casillero->getEstadoCasillero() == casilleroinactivo) {
 		this->miniTablero[1][1] = 'X';

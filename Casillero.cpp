@@ -7,7 +7,7 @@ Casillero::Casillero() {
 	this->turnosDeInactividad = 0;
 	this->coordenada = NULL;
 	this->soldado = NULL;
-	this->minas = NULL;
+	this->mina = NULL;
 	// this->bomba = NULL;
 }
 
@@ -18,7 +18,7 @@ Casillero::Casillero( int x, int y, int z ) {
 	this->turnosDeInactividad = 0;
 	this->coordenada = new Coordenada( x, y, z );
 	this->soldado = NULL;
-	this->minas = NULL;
+	this->mina = NULL;
 	// this->bomba = NULL;
 }
 
@@ -30,7 +30,7 @@ Casillero::Casillero( Coordenada * coordenada ) {
 	// Lo puedo hacer porque sobrecargue el '='
 	this->coordenada = coordenada;
 	this->soldado = NULL;
-	this->minas = NULL;
+	this->mina = NULL;
 	// this->bomba = NULL;
 }
 
@@ -41,7 +41,7 @@ Casillero::Casillero( Coordenada * coordenada, TipoTerrenoCasillero terreno ) {
 	this->estadoInactivoCasillero = 0;
 	this->turnosDeInactividad = 0;
 	this->soldado = NULL;
-	this->minas = NULL;
+	this->mina = NULL;
 	// this->bomba = NULL;
 }
 
@@ -52,7 +52,7 @@ Casillero::Casillero( Coordenada * coordenada, TipoTerrenoCasillero terreno, Est
 	this->estadoInactivoCasillero = 0;
 	this->turnosDeInactividad = 0;
 	this->soldado = NULL;
-	this->minas = NULL;
+	this->mina = NULL;
 	// this->bomba = NULL;
 }
 
@@ -61,7 +61,7 @@ Casillero::~Casillero() {
 	this->turnosDeInactividad = 0;
 	delete this->coordenada;
 	this->soldado = NULL;
-	this->minas = NULL;
+	this->mina = NULL;
 	// this->bomba = NULL;
 }
 
@@ -105,6 +105,14 @@ void Casillero::setTurnosDeInactividad( int turnos ) {
 	}
 }
 
+void Casillero::setMina( Mina * mina ) {
+	this->mina = mina;
+	this->estadoInactivoCasillero = TIEMPO_INHABILITADA_MINA;
+	this->turnosDeInactividad = TIEMPO_INHABILITADA_MINA;
+	this->estado = casilleroinactivo;
+}
+
+/*
 void Casillero::agregarMina( Mina * mina ) {
 	if ( mina != NULL ) {
 		if ( mina->getJugador() > 0 ) {
@@ -124,6 +132,7 @@ void Casillero::agregarMina( Mina * mina ) {
 		}
 	}
 }
+*/
 
 // Getters
 
@@ -151,6 +160,7 @@ Avion*  Casillero::getAvion() {
 	return this->avion;
 }
 
+/*
 Lista< Mina * > * Casillero::getListaMinas() {
 	return this->minas;
 }
@@ -169,6 +179,11 @@ Mina * Casillero::getMina( int jugador ) {
 		}
 	}
 	return mina;
+}
+*/
+
+Mina * Casillero::getMina() {
+	return this->mina;
 }
 
 BombaQuimica * Casillero::getBomba() {

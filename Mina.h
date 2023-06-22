@@ -12,8 +12,9 @@ private:
 	Coordenada * coordenada;
 public:
 	Mina();
-	Mina( Coordenada *);
-	Mina( Coordenada *, int );
+	Mina( Coordenada * );
+	Mina( int );
+	Mina( int, Coordenada * );
 	~Mina();
 	Coordenada * getCordenada();
 	void setCoordenada( Coordenada * );

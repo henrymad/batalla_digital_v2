@@ -23,7 +23,7 @@ private:
 	int estadoInactivoCasillero;	// Lo imagino bool
 	int turnosDeInactividad;		// valor >= 0 y cambia con cada turno
 	Soldado * soldado;
-	Lista< Mina *> * minas;
+	Mina * mina;
 	Barco * barco;
 	Avion * avion;
 	BombaQuimica * bomba;				// Se marca el casillero donde detonó.
@@ -43,13 +43,15 @@ public:
 	void setBarco( Barco * );
 	void setAvion( Avion * );
 	void setBomba( BombaQuimica * );
-	void agregarMina( Mina * );
+	void setMina( Mina * );
+	//void agregarMina(Mina*);
 	TipoTerrenoCasillero getTipoTerreno();
 	EstadoCasillero getEstadoCasillero();
 	int getTurnosDeInactividad();
 	Soldado * getSoldado();
-	Lista<Mina *> * getListaMinas();
-	Mina * getMina( int );
+	//Lista<Mina *> * getListaMinas();
+	//Mina * getMina( int );
+	Mina * getMina();
 	Barco * getBarco();
 	Avion * getAvion();
 	BombaQuimica * getBomba();
