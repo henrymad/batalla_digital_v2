@@ -8,7 +8,7 @@ Coordenada::Coordenada( int Coordenada_x, int Coordenada_y, int Coordenada_z )
 {
 }
 
-Coordenada::Coordenada( const Coordenada &coordenada) {
+Coordenada::Coordenada( const Coordenada & coordenada ) {
 	if ( this != &coordenada ) {
 		this->coordenada_x = coordenada.coordenada_x;
 		this->coordenada_y = coordenada.coordenada_y;

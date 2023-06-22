@@ -213,7 +213,7 @@ class Lista{
 				this->primero = this->primero->getSig();
 				delete aborrar;
 			}
-			this->primero = nullptr;
+			this->primero = NULL;
 		}
 
 		private:

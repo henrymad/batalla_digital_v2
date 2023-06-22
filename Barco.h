@@ -8,7 +8,7 @@
 
 class Barco {
 private:
-	int jugador = 0;
+	int jugador;
 	Coordenada * coordenada;
 public:
 	Barco();

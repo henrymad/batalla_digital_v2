@@ -1,8 +1,8 @@
 #include "Casillero.h"
 
 Casillero::Casillero() {
-	this->terreno = TipoTerrenoCasillero::tierra;
-	this->estado = EstadoCasillero::casillerovacio;
+	this->terreno = tierra;
+	this->estado = casillerovacio;
 	this->estadoInactivoCasillero = 0;
 	this->turnosDeInactividad = 0;
 	this->coordenada = NULL;
@@ -12,8 +12,8 @@ Casillero::Casillero() {
 }
 
 Casillero::Casillero( int x, int y, int z ) {
-	this->terreno = TipoTerrenoCasillero::tierra;
-	this->estado = EstadoCasillero::casillerovacio;
+	this->terreno = tierra;
+	this->estado = casillerovacio;
 	this->estadoInactivoCasillero = 0;
 	this->turnosDeInactividad = 0;
 	this->coordenada = new Coordenada( x, y, z );
@@ -23,8 +23,8 @@ Casillero::Casillero( int x, int y, int z ) {
 }
 
 Casillero::Casillero( Coordenada * coordenada ) {
-	this->terreno = TipoTerrenoCasillero::tierra;
-	this->estado = EstadoCasillero::casillerovacio;
+	this->terreno = tierra;
+	this->estado = casillerovacio;
 	this->estadoInactivoCasillero = 0;
 	this->turnosDeInactividad = 0;
 	// Lo puedo hacer porque sobrecargue el '='
@@ -37,7 +37,7 @@ Casillero::Casillero( Coordenada * coordenada ) {
 Casillero::Casillero( Coordenada * coordenada, TipoTerrenoCasillero terreno ) {
 	this->coordenada = coordenada;
 	this->terreno = terreno;
-	this->estado = EstadoCasillero::casillerovacio;
+	this->estado = casillerovacio;
 	this->estadoInactivoCasillero = 0;
 	this->turnosDeInactividad = 0;
 	this->soldado = NULL;
@@ -48,7 +48,7 @@ Casillero::Casillero( Coordenada * coordenada, TipoTerrenoCasillero terreno ) {
 Casillero::Casillero( Coordenada * coordenada, TipoTerrenoCasillero terreno, EstadoCasillero estado ) {
 	this->coordenada = coordenada;
 	this->terreno = terreno;
-	this->estado = EstadoCasillero::casillerovacio;
+	this->estado = casillerovacio;
 	this->estadoInactivoCasillero = 0;
 	this->turnosDeInactividad = 0;
 	this->soldado = NULL;
@@ -96,7 +96,7 @@ void Casillero::setBomba( BombaQuimica * bomba ) {
 	this->bomba = bomba;
 	this->estadoInactivoCasillero = TIEMPO_INHABILITADA_BOMBA;
 	this->turnosDeInactividad = TIEMPO_INHABILITADA_BOMBA;
-	this->estado = EstadoCasillero::casilleroinactivo;
+	this->estado = casilleroinactivo;
 }
 
 void Casillero::setTurnosDeInactividad( int turnos ) {
@@ -106,7 +106,7 @@ void Casillero::setTurnosDeInactividad( int turnos ) {
 }
 
 void Casillero::agregarMina( Mina * mina ) {
-	if ( mina != nullptr ) {
+	if ( mina != NULL ) {
 		if ( mina->getJugador() > 0 ) {
 			bool encontrado = false;
 			Lista< Mina * > * listaminas = this->minas;
@@ -156,7 +156,7 @@ Lista< Mina * > * Casillero::getListaMinas() {
 }
 
 Mina * Casillero::getMina( int jugador ) {
-	Mina * mina = nullptr;
+	Mina * mina = NULL;
 	Lista< Mina * > * listaminas = this->minas;
 	if ( this->minas != NULL ) {
 		listaminas->iniciarCursor();

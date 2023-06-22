@@ -10,11 +10,11 @@
 
 class BombaQuimica {
 private:
-	int jugador = 0;
-	int cantidadCasilleros = 0;
-	int turnos = 0;
+	int jugador;
+	int cantidadCasilleros;
+	int turnos;
 	Coordenada * coordenada;
-	//Tablero3D * tablero;
+	// Tablero3D * tablero;
 	// void computoCasillerosAfectados( Coordenada *, int );
 public:
 	BombaQuimica( int );
@@ -22,7 +22,7 @@ public:
 	BombaQuimica( int, Coordenada *, int );
 	~BombaQuimica();
 	Coordenada * getCoordenadas();
-	//void setTablero3D( Tablero3D * );		// Para calcular casillas adyascentes necesito acceder al Tablero
+	// void setTablero3D( Tablero3D * );		// Para calcular casillas adyascentes necesito acceder al Tablero
 	void setCoordenadas( Coordenada * );
 	void setJugador( int );
 	void setTurnos( int );

@@ -64,7 +64,7 @@ string MostrarTablero::emitir( int linea, GraficoCasillero * graficocasillero ) 
 	miniTablero = graficocasillero->getMiniTablero();
 	switch ( linea ) {
 	case 0:
-		lineatexto = (miniTablero[linea][0] == (char)TipoTerrenoCasillero::tierra) ? "T" : "A";
+		lineatexto = (miniTablero[linea][0] == (char) tierra) ? "T" : "A";
 		if (this->jugador == NULL) {
 			// Vista Global Observador
 			lineatexto += "-" + std::string(1, miniTablero[linea][1]);	// Están vacíos

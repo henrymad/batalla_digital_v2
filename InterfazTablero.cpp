@@ -70,7 +70,7 @@ char InterfazTablero::getLetraCasilla( Casillero * casillero, Jugador * jugador)
 	char valor = 0;
 	if ( casillero != NULL ) {
 		if ( jugador == NULL) {
-			if ( casillero->getTipoTerreno() == TipoTerrenoCasillero::tierra ) {
+			if ( casillero->getTipoTerreno() == tierra ) {
 			}
 			else {
 				// A nivel del mar sólo es tierra o agua

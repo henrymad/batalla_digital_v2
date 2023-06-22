@@ -8,8 +8,8 @@
 
 class Avion {
 private:
-	int idAvion = 0;		// Autonumerico [1-n].
-	int jugador = 0;
+	int idAvion;		// Autonumerico [1-n].
+	int jugador;
 	Coordenada * coordenada;
 	int NuevoID( int );
 public:

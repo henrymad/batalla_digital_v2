@@ -4,7 +4,7 @@ Jugador::Jugador() {
 	// Emulación de un autonumérico.
 	this->idJugador = this->NuevoID( 0 );
 	this->nombre = "";
-	//this->soldados = nullptr;
+	this->soldados = NULL;
 	// this->minasActivas = nullptr;
 }
 
@@ -23,7 +23,7 @@ int Jugador::NuevoID( int numero = 0 ) {
 Jugador::Jugador( string nombre ) {
 	this->idJugador = this->NuevoID();
 	this->nombre = nombre;
-	//this->soldados = nullptr;
+	this->soldados = NULL;
 	// this->minasActivas = nullptr;
 }
 
@@ -44,11 +44,9 @@ void Jugador::reiniciarID() {
 
 // Getters
 
-/*
 int Jugador::getCantidadSoldados() {
 	return this->soldados->contarElementos();
 }
-*/
 
 string Jugador::getNombreJugador() {
 	return this->nombre;

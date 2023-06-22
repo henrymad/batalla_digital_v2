@@ -23,7 +23,7 @@ public:
 private:
 	Tablero3D * tablero;
 	char ** miniTablero = NULL;
-	int sizeFilas = 3, sizeColumnas = 3;
+	int sizeFilas, sizeColumnas;
 };
 
 #endif

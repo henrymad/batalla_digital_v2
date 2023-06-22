@@ -76,20 +76,20 @@ void GraficoCasillero::setCasillero( Casillero * casillero ) {
 	// Escribo miniTablero
 	this->miniTablero[0][0] = (char)casillero->getTipoTerreno();
 	this->miniTablero[1][0] = ' '; // -> vacío (char)casillero->getEstadoCasillero();
-	if (casillero->getEstadoCasillero() == EstadoCasillero::soldado) {
+	if (casillero->getEstadoCasillero() == soldado) {
 		this->miniTablero[1][0] = 'S';
 		this->miniTablero[1][1] = (char)casillero->getSoldado()->getJugador();
 		this->miniTablero[1][2] = (char)casillero->getSoldado()->getIDSoldado();
 	}
-	else if (casillero->getEstadoCasillero() == EstadoCasillero::mina) {
+	else if (casillero->getEstadoCasillero() == mina) {
 		this->miniTablero[1][0] = 'M';
 		this->miniTablero[1][1] = (char)casillero->getMina(0)->getJugador();		// Asumo una sola mina en la lista.
 	}
-	else if (casillero->getEstadoCasillero() == EstadoCasillero::casilleroinactivo) {
+	else if (casillero->getEstadoCasillero() == casilleroinactivo) {
 		this->miniTablero[1][1] = 'X';
 		this->miniTablero[1][0] = (char)casillero->getTurnosDeInactividad();
 	}
-	else if (casillero->getEstadoCasillero() == EstadoCasillero::barco) {
+	else if (casillero->getEstadoCasillero() == barco) {
 		this->miniTablero[1][0] = 'B';
 		this->miniTablero[1][1] = (char)casillero->getBarco()->getJugador();
 	}
@@ -115,7 +115,7 @@ void GraficoCasillero::setCasillero( Casillero * casillero ) {
 				if (aux == NULL) {
 					break;
 				}
-				else if (aux->getTipoTerreno() != TipoTerrenoCasillero::aire)
+				else if (aux->getTipoTerreno() != aire)
 				{
 					if (aux->getAvion() != NULL) {
 						this->miniTablero[2][0] = 'A';

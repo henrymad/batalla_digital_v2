@@ -8,8 +8,8 @@
 
 class Soldado {
 private:
-	int idSoldado = 0;		// Autonumerico [1-n].
-	int jugador = 0;
+	int idSoldado;		// Autonumerico [1-n].
+	int jugador;
 	Coordenada * coordenada;
 	int NuevoID( int );
 

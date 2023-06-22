@@ -5,7 +5,7 @@ Graficas::Graficas() {
 	this->iHeight = FILAS_TABLERO * INDICE_PIXELACION;
 	this->iWidth = COLUMNAS_TABLERO * INDICE_PIXELACION;
 	this->iPixelSize = INDICE_PIXELACION;
-	this->tablero = nullptr;
+	this->tablero = NULL;
 }
 
 Graficas::Graficas( Tablero3D* tablero) {
@@ -50,13 +50,13 @@ void Graficas::dibujarPixel( int i, int j, Casillero * casillero, BMP & oBMP ) {
 	i--; j--;
 	for ( int x = 0; x < INDICE_PIXELACION; x++ ) {
 		for ( int y = 0; y < INDICE_PIXELACION; y++ ) {
-			if (terreno == TipoTerrenoCasillero::agua ) {
+			if (terreno == agua ) {
 				oBMP( i * INDICE_PIXELACION + x, j * INDICE_PIXELACION + y )->Red = 102;		//0
 				oBMP( i * INDICE_PIXELACION + x, j * INDICE_PIXELACION  + y )->Green = 255;	//10
 				oBMP( i * INDICE_PIXELACION + x, j * INDICE_PIXELACION + y )->Blue = 255;	//80
 				oBMP( i * INDICE_PIXELACION + x, j * INDICE_PIXELACION + y )->Alpha = 0;
 			}
-			else if (terreno == TipoTerrenoCasillero::tierra ) {
+			else if (terreno == tierra ) {
 				oBMP( i * INDICE_PIXELACION + x, j * INDICE_PIXELACION + y )->Red = 153;		// 90
 				oBMP( i * INDICE_PIXELACION + x, j * INDICE_PIXELACION + y )->Green = 73;	// 50
 				oBMP( i * INDICE_PIXELACION + x, j * INDICE_PIXELACION + y )->Blue = 0;		// 0
