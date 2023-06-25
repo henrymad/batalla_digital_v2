@@ -38,6 +38,17 @@ int main()
     casillero1->setMina( mina2 );
     casillero1 = tablero->getCasillero( 20, 70, NIVEL_SUPERFICIE );
     casillero1->setMina( mina3 );
+    Barco * barco;
+    barco = new Barco( equipo1->getIdJugador() );
+    casillero1 = tablero->getCasillero( 85, 140, NIVEL_SUPERFICIE );
+    casillero1->setBarco( barco );
+    Avion * avion1, * avion2;
+    avion1 = new Avion( equipo1->getIdJugador() );
+    avion2 = new Avion( equipo1->getIdJugador() );
+    casillero1 = tablero->getCasillero( 125, 90, NIVEL_SUPERFICIE + 10 );
+    casillero1->setAvion( avion1 );
+    casillero1 = tablero->getCasillero( 80, 60, NIVEL_SUPERFICIE + 8 );
+    casillero1->setAvion( avion2 );
 
     Mapas* mapa;
     mapa = new Mapas(tablero);
@@ -73,6 +84,9 @@ int main()
     delete mina1;
     delete mina2;
     delete mina3;
+    delete barco;
+    delete avion1;
+    delete avion2;
     delete coordenada;
     delete equipo1;
 

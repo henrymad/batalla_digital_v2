@@ -170,7 +170,7 @@ Barco * Casillero::getBarco() {
 	return this->barcoGuerra;
 }
 
-Avion*  Casillero::getAvion() {
+Avion *  Casillero::getAvion() {
 	return this->aeronave;
 }
 

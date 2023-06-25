@@ -17,11 +17,12 @@ private:
 	// void dibujarPixel( int, int, Casillero * ,  BMP & );
 	void dibujarPixel( Casillero *, BMP & );
 	//void dibujarPixel( int, int, Casillero *, Jugador *,  BMP & );
-	void dibujarPixel( Casillero*, Jugador *, BMP & );
+	void dibujarPixel( Casillero *, Jugador *, BMP & );
 	void dibujarSoldado( Casillero *, Jugador *, BMP &, ColorJugador * );
 	void dibujarMina( Casillero *, Jugador *, BMP &, ColorJugador * );
 	void dibujarAvion( Casillero *, Jugador *, BMP &, ColorJugador * );
 	void dibujarBarco( Casillero *, Jugador *, BMP &, ColorJugador * );
+	Casillero* detectarAvion( Casillero *, Jugador * );
 public:
 	Graficas();
 	Graficas( Tablero3D * );
