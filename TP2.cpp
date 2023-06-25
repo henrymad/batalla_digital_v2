@@ -25,8 +25,19 @@ int main()
     Casillero * casillero1;
     Tablero3D * tablero;
     tablero = new Tablero3D;
+
+    Mapas* mapa;
+    mapa = new Mapas(tablero);
+    // mapa->cargarMapaDefault();                  // Esta funcion carga el Mapa en 3D.
+    // mapa->cargarMapa2D( "mapadefault.txt" );    // Sólo carga la superficie.
+    mapa->cargarMapa3D("mapadefault.txt", false);
+    mapa->imprimirMapa("prueba1.txt", NULL);
+    //mapa->grabarMapa2D( "mapadefault.txt" );
+    // mapa->cargarMapa2D( "mapadefault.txt" );
+    //mapa->grabarMapa2D( "mapadefault.txt" );
+
     casillero1 = tablero->getCasillero( 10, 10, NIVEL_SUPERFICIE );
-    casillero1->setTipoTerreno( tierra );
+    // casillero1->setTipoTerreno( tierra );
     casillero1->setSoldado( soldado );
     Mina * mina1, * mina2, * mina3;
     mina1 = new Mina( equipo1->getIdJugador() );
@@ -40,25 +51,16 @@ int main()
     casillero1->setMina( mina3 );
     Barco * barco;
     barco = new Barco( equipo1->getIdJugador() );
-    casillero1 = tablero->getCasillero( 85, 140, NIVEL_SUPERFICIE );
+    casillero1 = tablero->getCasillero( 85, 180, NIVEL_SUPERFICIE );
     casillero1->setBarco( barco );
     Avion * avion1, * avion2;
     avion1 = new Avion( equipo1->getIdJugador() );
     avion2 = new Avion( equipo1->getIdJugador() );
     casillero1 = tablero->getCasillero( 125, 90, NIVEL_SUPERFICIE + 10 );
     casillero1->setAvion( avion1 );
-    casillero1 = tablero->getCasillero( 80, 60, NIVEL_SUPERFICIE + 8 );
+    casillero1 = tablero->getCasillero( 80, 160, NIVEL_SUPERFICIE + 8 );
     casillero1->setAvion( avion2 );
 
-    Mapas* mapa;
-    mapa = new Mapas(tablero);
-    // mapa->cargarMapaDefault();                  // Esta funcion carga el Mapa en 3D.
-    // mapa->cargarMapa2D( "mapadefault.txt" );    // Sólo carga la superficie.
-    mapa->cargarMapa3D( "mapadefault.txt", false );
-    mapa->imprimirMapa( "prueba1.txt", NULL );
-    //mapa->grabarMapa2D( "mapadefault.txt" );
-    // mapa->cargarMapa2D( "mapadefault.txt" );
-    //mapa->grabarMapa2D( "mapadefault.txt" );
 
     // tablero->setCasillero(casillero1, 1, 1, NIVEL_SUPERFICIE);
 
