@@ -58,7 +58,7 @@ void Mapas::cargarMapa2D( string archivo ) {
 			if ( linea.length() == ( long unsigned int) size_y ) {
 				for ( int i = 1; i <= size_x; i++ ) {
 					Casillero * casillero = this->tablero->getCasillero(i, j, NIVEL_SUPERFICIE);
-					char caracter = linea[i];
+					char caracter = linea[ i - 1 ];
 					if ( caracter == '0' ) {
 						casillero->setTipoTerreno( tierra );
 					}
@@ -84,13 +84,13 @@ void Mapas::cargarMapa3D( string archivo, bool superficie = true ) {
 		int size_x = this->tablero->getSize_x();
 		int size_y = this->tablero->getSize_y();
 		int size_z = this->tablero->getSize_z();
-		for (int j = 1; j <= size_y; j++) {
+		for ( int j = 1; j <= size_y; j++ ) {
 			if ( !std::getline( entrada, linea ) ) {
 				break;
 			}
 			if ( linea.length() == (long unsigned int) size_y ) {
 				for ( int i = 1; i <= size_x; i++ ) {
-					char caracter = linea[i];
+					char caracter = linea[ i - 1 ];
 					for ( int k = 1; k <= size_z; k++ ) {
 						Casillero * casillero = this->tablero->getCasillero( i, j, k );
 						if ( k <= NIVEL_SUPERFICIE ) {

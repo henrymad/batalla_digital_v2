@@ -9,9 +9,15 @@ Graficas::Graficas() {
 	this->tablero = NULL;
 }
 
-Graficas::Graficas( Tablero3D* tablero) {
-	this->iHeight = FILAS_TABLERO * INDICE_PIXELACION;
-	this->iWidth = COLUMNAS_TABLERO * INDICE_PIXELACION;
+Graficas::Graficas( Tablero3D* tablero ) {
+	if ( tablero != NULL ) {
+		this->iHeight = tablero->getSize_x() * INDICE_PIXELACION;
+		this->iWidth = tablero->getSize_y() * INDICE_PIXELACION;
+	}
+	else {
+		this->iHeight = FILAS_TABLERO * INDICE_PIXELACION;
+		this->iWidth = COLUMNAS_TABLERO * INDICE_PIXELACION;
+	}
 	this->iPixelSize = INDICE_PIXELACION;
 	this->tablero = tablero;
 }
@@ -25,13 +31,15 @@ void Graficas::graficarSuperficie( string archivo ) {
 	}
 	Casillero * casillero;
 	BMP Output;
-	Output.SetSize( FILAS_TABLERO * INDICE_PIXELACION , COLUMNAS_TABLERO * INDICE_PIXELACION );
+	Output.SetSize( this->iHeight, this->iWidth );
 	Output.SetBitDepth( PROFUNDIDAD_BIT );
-	for ( int i = 1; i <= FILAS_TABLERO; i++ ) {
-		for ( int j = 1; j <= COLUMNAS_TABLERO; j++ ) {
+	int size_x = tablero->getSize_x();
+	int size_y = tablero->getSize_y();
+	for ( int i = 1; i <= size_x; i++ ) {
+		for ( int j = 1; j <= size_y; j++ ) {
 			casillero = this->tablero->getCasillero( i, j, NIVEL_SUPERFICIE );
 			if ( casillero != NULL ) {
-				this->dibujarPixel( i, j, casillero, Output);
+				this->dibujarPixel( i, j, casillero, Output );
 			}
 		}
 		std::cout << i << endl;
@@ -53,13 +61,16 @@ void Graficas::graficarSuperficie( string archivo, Jugador * jugador) {
 	}
 	Casillero* casillero;
 	BMP Output;
-	Output.SetSize(FILAS_TABLERO * INDICE_PIXELACION, COLUMNAS_TABLERO * INDICE_PIXELACION);
-	Output.SetBitDepth(PROFUNDIDAD_BIT);
-	for (int i = 1; i <= FILAS_TABLERO; i++) {
-		for (int j = 1; j <= COLUMNAS_TABLERO; j++) {
+	Output.SetSize( this->iHeight, this->iWidth );
+	Output.SetBitDepth( PROFUNDIDAD_BIT );
+	int size_x = tablero->getSize_x();
+	int size_y = tablero->getSize_y();
+	for (int i = 1; i <= size_x; i++) {
+		for (int j = 1; j <= size_y; j++) {
 			casillero = this->tablero->getCasillero(i, j, NIVEL_SUPERFICIE);
 			if ( casillero != NULL ) {
-				this->dibujarPixel( i, j, casillero, Output );
+				this->dibujarPixel( casillero, Output );
+				//this->dibujarPixel(i, j, casillero, Output);
 			}
 		}
 		std::cout << i << endl;
@@ -70,8 +81,6 @@ void Graficas::graficarSuperficie( string archivo, Jugador * jugador) {
 void Graficas::dibujarPixel( int i, int j, Casillero * casillero, BMP & oBMP ) {
 	TipoTerrenoCasillero terreno = casillero->getTipoTerreno();
 	// EstadoCasillero estado = casillero->getEstadoCasillero();
-	// Traslación de las coordenadas del usuario
-	i--; j--;
 	for ( int x = 0; x < INDICE_PIXELACION; x++ ) {
 		for ( int y = 0; y < INDICE_PIXELACION; y++ ) {
 			if (terreno == agua ) {
@@ -93,12 +102,10 @@ void Graficas::dibujarPixel( int i, int j, Casillero * casillero, BMP & oBMP ) {
 	}
 }
 
-void Graficas::dibujarPixel( Casillero * casillero, BMP& oBMP ) {
+void Graficas::dibujarPixel( Casillero * casillero, BMP & oBMP ) {
 	TipoTerrenoCasillero terreno = casillero->getTipoTerreno();
 	int i = casillero->getCoordenada()->getCoordenada_x();
 	int j = casillero->getCoordenada()->getCoordenada_y();
-	// Traslación de las coordenadas del usuario
-	i--; j--;
 	for (int x = 0; x < INDICE_PIXELACION; x++) {
 		for (int y = 0; y < INDICE_PIXELACION; y++) {
 			if (terreno == agua) {

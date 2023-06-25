@@ -27,7 +27,17 @@ int main()
     tablero = new Tablero3D;
     casillero1 = tablero->getCasillero( 1, 1, NIVEL_SUPERFICIE );
     casillero1->setTipoTerreno( tierra );
-    casillero1->setSoldado(soldado);
+    casillero1->setSoldado( soldado );
+    Mina * mina1, * mina2, * mina3;
+    mina1 = new Mina( equipo1->getIdJugador() );
+    mina2 = new Mina( equipo1->getIdJugador() );
+    mina3 = new Mina( equipo1->getIdJugador() );
+    casillero1 = tablero->getCasillero( 100, 100, NIVEL_SUPERFICIE );
+    casillero1->setMina( mina1 );
+    casillero1 = tablero->getCasillero( 100, 110, NIVEL_SUPERFICIE );
+    casillero1->setMina( mina2 );
+    casillero1 = tablero->getCasillero( 100, 120, NIVEL_SUPERFICIE );
+    casillero1->setMina( mina3 );
 
     Mapas* mapa;
     mapa = new Mapas(tablero);
@@ -55,10 +65,14 @@ int main()
     salidaTablero->imprimir( "prueba2.txt" );
     Graficas * bmpMapa;
     bmpMapa = new Graficas( tablero );
-    bmpMapa->graficarSuperficie( "grafico.bmp" );
+    bmpMapa->graficarSuperficie( "grafico.bmp", equipo1 );
+    //bmpMapa->graficarSuperficie( "grafico.bmp" );
 
     delete bmpMapa;
-    delete soldado;                                                                                                             
+    delete soldado;
+    delete mina1;
+    delete mina2;
+    delete mina3;
     delete coordenada;
     delete equipo1;
 
