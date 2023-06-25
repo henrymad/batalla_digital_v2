@@ -20,6 +20,7 @@ public:
 	void grabarMapa3D( string );
 	void imprimirMapa( string, Jugador * );
 	void imprimirGraficoSuperficie( string );
+	void imprimirGraficoSuperficie( string, Jugador * );
 	void verMapa();
 	void setJugador( Jugador * );
 	void setNombreArchivo( string );

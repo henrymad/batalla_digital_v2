@@ -180,6 +180,21 @@ void Mapas::imprimirGraficoSuperficie( string archivo ) {
 	delete grafico;
 }
 
+
+void Mapas::imprimirGraficoSuperficie( string archivo, Jugador * jugador ) {
+	if ( archivo == "" ) {
+		archivo = "GraficoSuperfice.bmp";
+	}
+	if ( jugador == NULL ) {
+		return;
+	}
+	Graficas * grafico;
+	grafico = new Graficas(this->tablero);
+	grafico->graficarSuperficie( archivo, jugador );
+	// Liberar recursos
+	delete grafico;
+}
+
 void Mapas::setNombreArchivo(string archivo) {
 	this->nombreArchivo = archivo;
 
