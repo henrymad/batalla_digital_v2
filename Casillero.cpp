@@ -94,16 +94,27 @@ void Casillero::setEstadoCasillero( EstadoCasillero estado ) {
 void Casillero::setSoldado( Soldado * soldadoInfanteria) {
 	this->soldadoInfanteria = soldadoInfanteria;
 	this->estado = soldado;
+	this->soldadoInfanteria->setCoordenada(  this->getCoordenada() );
 }
 
 void Casillero::setBarco( Barco * nave ) {
 	this->barcoGuerra = nave;
 	this->estado = barco;
+	this->barcoGuerra->setCoordenada( this->getCoordenada() );
 }
 
 void Casillero::setAvion( Avion * aeronave ) {
 	this->aeronave = aeronave;
 	this->estado = avion;
+	this->aeronave->setCoordenada( this->getCoordenada() );
+}
+
+void Casillero::setMina(Mina* minacomun) {
+	this->minacomun = minacomun;
+	this->estadoInactivoCasillero = TIEMPO_INHABILITADA_MINA;
+	this->turnosDeInactividad = TIEMPO_INHABILITADA_MINA;
+	this->estado = mina;
+	this->minacomun->setCoordenada( this->getCoordenada() );
 }
 
 void Casillero::setBomba( BombaQuimica * bomba ) {
@@ -117,13 +128,6 @@ void Casillero::setTurnosDeInactividad( int turnos ) {
 	if ( turnos >= 0 ) {
 		this->turnosDeInactividad = turnos;
 	}
-}
-
-void Casillero::setMina( Mina * minacomun ) {
-	this->minacomun = minacomun;
-	this->estadoInactivoCasillero = TIEMPO_INHABILITADA_MINA;
-	this->turnosDeInactividad = TIEMPO_INHABILITADA_MINA;
-	this->estado = mina;
 }
 
 /*

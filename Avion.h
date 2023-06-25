@@ -16,8 +16,8 @@ public:
 	Avion( int );
 	Avion( int, Coordenada * );
 	~Avion();
-	Coordenada * getCoordenadas();
-	void setCoordenadas( Coordenada * );
+	Coordenada * getCoordenada();
+	void setCoordenada( Coordenada * );
 	void setJugador( int );
 	int getJugador();
 	int getIDAvion();

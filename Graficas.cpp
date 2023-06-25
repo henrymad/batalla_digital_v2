@@ -66,7 +66,13 @@ void Graficas::graficarSuperficie( string archivo, Jugador * jugador) {
 	int size_y = tablero->getSize_y();
 	for (int i = 1; i <= size_x; i++) {
 		for (int j = 1; j <= size_y; j++) {
-			casillero = this->tablero->getCasillero(i, j, NIVEL_SUPERFICIE);
+			casillero = this->tablero->getCasillero( i, j, NIVEL_SUPERFICIE );
+			if ( i == 84 && j == 139 ) {
+				casillero->getEstadoCasillero();
+			}
+			else if (i == 85 && j == 140 ) {
+				casillero->getEstadoCasillero();
+			}
 			if ( casillero != NULL ) {
 				this->dibujarPixel( casillero, Output );
 				//this->dibujarPixel(i, j, casillero, Output);
@@ -128,10 +134,11 @@ void Graficas::dibujarPixel( Casillero * casillero, Jugador * jugador, BMP & oBM
 	}
 	ColorJugador * color;
 	color = new ColorJugador;
+
 	if ( casillero->getEstadoCasillero() == casillerovacio ) {
 		// Ya está dibujado el terreno.
 		// Ver si hay un avión encima
-		Casillero * aux = detectarAvion(casillero, jugador);
+		Casillero * aux = detectarAvion( casillero, jugador );
 		if ( aux != NULL ) {
 			dibujarAvion( aux, jugador, oBMP, color );
 		}
@@ -186,13 +193,13 @@ void Graficas::dibujarPixel( Casillero * casillero, BMP & oBMP ) {
 	int j = casillero->getCoordenada()->getCoordenada_y();
 	for (int x = 0; x < INDICE_PIXELACION; x++) {
 		for (int y = 0; y < INDICE_PIXELACION; y++) {
-			if (terreno == agua) {
+			if ( terreno == agua ) {
 				oBMP( i * INDICE_PIXELACION + x, j * INDICE_PIXELACION + y )->Red = 102;		//0
 				oBMP( i * INDICE_PIXELACION + x, j * INDICE_PIXELACION + y )->Green = 255;		//10
 				oBMP( i * INDICE_PIXELACION + x, j * INDICE_PIXELACION + y )->Blue = 255;		//80
 				oBMP( i * INDICE_PIXELACION + x, j * INDICE_PIXELACION + y )->Alpha = 0;
 			}
-			else if (terreno == tierra) {
+			else if ( terreno == tierra ) {
 				oBMP( i * INDICE_PIXELACION + x, j * INDICE_PIXELACION + y )->Red = 153;		//90
 				oBMP( i * INDICE_PIXELACION + x, j * INDICE_PIXELACION + y )->Green = 73;		//50
 				oBMP( i * INDICE_PIXELACION + x, j * INDICE_PIXELACION + y )->Blue = 0;			//0
@@ -590,7 +597,7 @@ Casillero * Graficas::detectarAvion( Casillero * casillero, Jugador * jugador ) 
 	if ( casillero != NULL && this->tablero != NULL ) {
 		int x = casillero->getCoordenada()->getCoordenada_x();
 		int y = casillero->getCoordenada()->getCoordenada_y();
-		for (int z = NIVEL_SUPERFICIE + 1; z <= this->tablero->getSize_z(); z++) {
+		for ( int z = NIVEL_SUPERFICIE + 1; z <= this->tablero->getSize_z(); z++ ) {
 			Casillero * aux = this->tablero->getCasillero( x + 1, y + 1, z + 1 );
 			if ( aux == NULL ) {
 				

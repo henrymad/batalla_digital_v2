@@ -14,7 +14,7 @@ public:
 	Barco();
 	Barco( int );
 	Barco( int, Coordenada * );
-	void setCoordenadas( Coordenada * );
+	void setCoordenada( Coordenada * );
 	void setJugador( int );
 	int getJugador();
 };

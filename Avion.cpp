@@ -36,7 +36,7 @@ int Avion::NuevoID(int numero = 0) {
 	return numeroInicial++;
 }
 
-Coordenada * Avion::getCoordenadas() {
+Coordenada * Avion::getCoordenada() {
 	return this->coordenada;
 }
 
@@ -49,7 +49,7 @@ void Avion::setJugador( int jugador ) {
 	}
 }
 
-void Avion::setCoordenadas( Coordenada * coordenada ) {
+void Avion::setCoordenada( Coordenada * coordenada ) {
 	/* Importante es que el aeroplano este en el aire */
 	if ( coordenada->getCoordenada_z() > NIVEL_SUPERFICIE ) {
 		this->coordenada = coordenada;

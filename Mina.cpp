@@ -49,8 +49,8 @@ int Mina::getJugador() {
 
 // Setters
 
-void Mina::setCoordenada(Coordenada * coodenada) {
-	this->coordenada = NULL;
+void Mina::setCoordenada( Coordenada * coordenada ) {
+	//this->coordenada = NULL;
 	if ( coordenada->getCoordenada_z() <= NIVEL_SUPERFICIE ) {
 		this->coordenada = coordenada;
 	}
