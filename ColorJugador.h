@@ -7,6 +7,7 @@ public:
 	ColorJugador();
 	ColorJugador( int );
 	~ColorJugador();
+	void setJugador( int );
 	int getColorVerde();
 	int getColorRojo();
 	int getColorAzul();
