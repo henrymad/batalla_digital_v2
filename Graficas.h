@@ -13,9 +13,10 @@ private:
 	int iHeight;
 	int iWidth;
 	int iPixelSize;
-	void dibujarPixel( int, int, Casillero * ,  BMP & );
+	// void dibujarPixel( int, int, Casillero * ,  BMP & );
 	void dibujarPixel( Casillero *, BMP & );
-	void dibujarPixel( int, int, Casillero *, Jugador *,  BMP& );
+	void dibujarPixel( int, int, Casillero *, Jugador *,  BMP & );
+	void dibujarPixel( Casillero*, Jugador *, BMP & );
 public:
 	Graficas();
 	Graficas( Tablero3D * );

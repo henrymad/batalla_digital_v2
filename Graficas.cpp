@@ -39,7 +39,8 @@ void Graficas::graficarSuperficie( string archivo ) {
 		for ( int j = 1; j <= size_y; j++ ) {
 			casillero = this->tablero->getCasillero( i, j, NIVEL_SUPERFICIE );
 			if ( casillero != NULL ) {
-				this->dibujarPixel( i, j, casillero, Output );
+				//this->dibujarPixel( i, j, casillero, Output );
+				this->dibujarPixel( casillero, Output );
 			}
 		}
 		std::cout << i << endl;
@@ -78,6 +79,7 @@ void Graficas::graficarSuperficie( string archivo, Jugador * jugador) {
 	Output.WriteToFile(archivo.c_str());
 }
 
+/*
 void Graficas::dibujarPixel( int i, int j, Casillero * casillero, BMP & oBMP ) {
 	TipoTerrenoCasillero terreno = casillero->getTipoTerreno();
 	// EstadoCasillero estado = casillero->getEstadoCasillero();
@@ -100,6 +102,10 @@ void Graficas::dibujarPixel( int i, int j, Casillero * casillero, BMP & oBMP ) {
 			}
 		}
 	}
+}
+*/
+
+void Graficas::dibujarPixel( Casillero * casillero, Jugador * jugador, BMP & oBMP ) {
 }
 
 void Graficas::dibujarPixel( Casillero * casillero, BMP & oBMP ) {

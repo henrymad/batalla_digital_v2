@@ -25,18 +25,18 @@ int main()
     Casillero * casillero1;
     Tablero3D * tablero;
     tablero = new Tablero3D;
-    casillero1 = tablero->getCasillero( 1, 1, NIVEL_SUPERFICIE );
+    casillero1 = tablero->getCasillero( 10, 10, NIVEL_SUPERFICIE );
     casillero1->setTipoTerreno( tierra );
     casillero1->setSoldado( soldado );
     Mina * mina1, * mina2, * mina3;
     mina1 = new Mina( equipo1->getIdJugador() );
     mina2 = new Mina( equipo1->getIdJugador() );
     mina3 = new Mina( equipo1->getIdJugador() );
-    casillero1 = tablero->getCasillero( 100, 100, NIVEL_SUPERFICIE );
+    casillero1 = tablero->getCasillero( 20, 50, NIVEL_SUPERFICIE );
     casillero1->setMina( mina1 );
-    casillero1 = tablero->getCasillero( 100, 110, NIVEL_SUPERFICIE );
+    casillero1 = tablero->getCasillero( 20, 60, NIVEL_SUPERFICIE );
     casillero1->setMina( mina2 );
-    casillero1 = tablero->getCasillero( 100, 120, NIVEL_SUPERFICIE );
+    casillero1 = tablero->getCasillero( 20, 70, NIVEL_SUPERFICIE );
     casillero1->setMina( mina3 );
 
     Mapas* mapa;
