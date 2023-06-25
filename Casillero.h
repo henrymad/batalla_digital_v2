@@ -7,8 +7,8 @@
 #include "Definiciones.h"
 #include "Coordenada.h"
 
-#include "Barco.h"
 #include "Avion.h"
+#include "Barco.h"
 #include "BombaQuimica.h"
 #include "Mina.h"
 #include "Soldado.h"
@@ -22,10 +22,10 @@ private:
 	EstadoCasillero estado;
 	int estadoInactivoCasillero;	// Lo imagino bool
 	int turnosDeInactividad;		// valor >= 0 y cambia con cada turno
-	Soldado * soldado;
-	Mina * mina;
-	Barco * barco;
-	Avion * avion;
+	Soldado * soldadoInfanteria;
+	Mina * minacomun;
+	Barco * barcoGuerra;
+	Avion * aeronave;
 	BombaQuimica * bomba;				// Se marca el casillero donde detonó.
 public:
 	Casillero();

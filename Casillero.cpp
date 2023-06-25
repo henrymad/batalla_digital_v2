@@ -6,9 +6,11 @@ Casillero::Casillero() {
 	this->estadoInactivoCasillero = 0;
 	this->turnosDeInactividad = 0;
 	this->coordenada = NULL;
-	this->soldado = NULL;
-	this->mina = NULL;
-	// this->bomba = NULL;
+	this->soldadoInfanteria = NULL;
+	this->minacomun = NULL;
+	this->aeronave = NULL;
+	this->barcoGuerra = NULL;
+	this->bomba = NULL;
 }
 
 Casillero::Casillero( int x, int y, int z ) {
@@ -17,9 +19,11 @@ Casillero::Casillero( int x, int y, int z ) {
 	this->estadoInactivoCasillero = 0;
 	this->turnosDeInactividad = 0;
 	this->coordenada = new Coordenada( x, y, z );
-	this->soldado = NULL;
-	this->mina = NULL;
-	// this->bomba = NULL;
+	this->soldadoInfanteria = NULL;
+	this->minacomun = NULL;
+	this->aeronave = NULL;
+	this->barcoGuerra = NULL;
+	this->bomba = NULL;
 }
 
 Casillero::Casillero( Coordenada * coordenada ) {
@@ -29,9 +33,11 @@ Casillero::Casillero( Coordenada * coordenada ) {
 	this->turnosDeInactividad = 0;
 	// Lo puedo hacer porque sobrecargue el '='
 	this->coordenada = coordenada;
-	this->soldado = NULL;
-	this->mina = NULL;
-	// this->bomba = NULL;
+	this->soldadoInfanteria = NULL;
+	this->minacomun = NULL;
+	this->aeronave = NULL;
+	this->barcoGuerra = NULL;
+	this->bomba = NULL;
 }
 
 Casillero::Casillero( Coordenada * coordenada, TipoTerrenoCasillero terreno ) {
@@ -40,9 +46,11 @@ Casillero::Casillero( Coordenada * coordenada, TipoTerrenoCasillero terreno ) {
 	this->estado = casillerovacio;
 	this->estadoInactivoCasillero = 0;
 	this->turnosDeInactividad = 0;
-	this->soldado = NULL;
-	this->mina = NULL;
-	// this->bomba = NULL;
+	this->soldadoInfanteria = NULL;
+	this->minacomun = NULL;
+	this->aeronave = NULL;
+	this->barcoGuerra = NULL;
+	this->bomba = NULL;
 }
 
 Casillero::Casillero( Coordenada * coordenada, TipoTerrenoCasillero terreno, EstadoCasillero estado ) {
@@ -51,18 +59,21 @@ Casillero::Casillero( Coordenada * coordenada, TipoTerrenoCasillero terreno, Est
 	this->estado = casillerovacio;
 	this->estadoInactivoCasillero = 0;
 	this->turnosDeInactividad = 0;
-	this->soldado = NULL;
-	this->mina = NULL;
-	// this->bomba = NULL;
+	this->soldadoInfanteria = NULL;
+	this->minacomun = NULL;
+	this->barcoGuerra = NULL;
+	this->aeronave = NULL;
+	this->bomba = NULL;
 }
 
 Casillero::~Casillero() {
 	this->estadoInactivoCasillero = 0;
 	this->turnosDeInactividad = 0;
 	delete this->coordenada;
-	this->soldado = NULL;
-	this->mina = NULL;
-	// this->bomba = NULL;
+	this->soldadoInfanteria = NULL;
+	this->minacomun = NULL;
+	this->aeronave = NULL;
+	this->bomba = NULL;
 }
 
 // Setters
@@ -80,16 +91,19 @@ void Casillero::setEstadoCasillero( EstadoCasillero estado ) {
 	this->estado = estado;
 }
 
-void Casillero::setSoldado( Soldado * soldado) {
-	this->soldado = soldado;
+void Casillero::setSoldado( Soldado * soldadoInfanteria) {
+	this->soldadoInfanteria = soldadoInfanteria;
+	this->estado = soldado;
 }
 
-void Casillero::setBarco( Barco * barco ) {
-	this->barco = barco;
+void Casillero::setBarco( Barco * nave ) {
+	this->barcoGuerra = nave;
+	this->estado = barco;
 }
 
-void Casillero::setAvion( Avion * avion ) {
-	this->avion = avion;
+void Casillero::setAvion( Avion * aeronave ) {
+	this->aeronave = aeronave;
+	this->estado = avion;
 }
 
 void Casillero::setBomba( BombaQuimica * bomba ) {
@@ -105,11 +119,11 @@ void Casillero::setTurnosDeInactividad( int turnos ) {
 	}
 }
 
-void Casillero::setMina( Mina * mina ) {
-	this->mina = mina;
+void Casillero::setMina( Mina * minacomun ) {
+	this->minacomun = minacomun;
 	this->estadoInactivoCasillero = TIEMPO_INHABILITADA_MINA;
 	this->turnosDeInactividad = TIEMPO_INHABILITADA_MINA;
-	this->estado = casilleroinactivo;
+	this->estado = mina;
 }
 
 /*
@@ -149,15 +163,15 @@ EstadoCasillero Casillero::getEstadoCasillero() {
 }
 
 Soldado * Casillero::getSoldado() {
-	return this->soldado;
+	return this->soldadoInfanteria;
 }
 
 Barco * Casillero::getBarco() {
-	return this->barco;
+	return this->barcoGuerra;
 }
 
 Avion*  Casillero::getAvion() {
-	return this->avion;
+	return this->aeronave;
 }
 
 /*
@@ -183,7 +197,7 @@ Mina * Casillero::getMina( int jugador ) {
 */
 
 Mina * Casillero::getMina() {
-	return this->mina;
+	return this->minacomun;
 }
 
 BombaQuimica * Casillero::getBomba() {
