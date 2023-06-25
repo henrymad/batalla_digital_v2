@@ -29,12 +29,21 @@ int ColorJugador::getColorAzul() {
 }
 
 int ColorJugador::getColorVerde( int jugador ) {
+	this->jugador = jugador;
+	this->setColores();
+	return this->colorVerde;
 }
 
 int ColorJugador::getColorRojo( int  jugador ) {
+	this->jugador = jugador;
+	this->setColores();
+	return this->colorRojo;
 }
 
 int ColorJugador::getColorAzul( int  jugador ) {
+	this->jugador = jugador;
+	this->setColores();
+	return this->colorAzul;
 }
 
 void ColorJugador::setJugador( int jugador ) {
