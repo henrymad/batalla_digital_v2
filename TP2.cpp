@@ -31,7 +31,6 @@ int main()
     // mapa->cargarMapaDefault();                  // Esta funcion carga el Mapa en 3D.
     // mapa->cargarMapa2D( "mapadefault.txt" );    // Sólo carga la superficie.
     mapa->cargarMapa3D( "mapadefault.txt", false );
-    mapa->imprimirMapa( "prueba1.txt", NULL );
     mapa->grabarMapa2D( "prueba3.txt" );
     // ->grabarMapa2D( "mapadefault.txt" );
     // mapa->cargarMapa2D( "mapadefault.txt" );
@@ -62,7 +61,6 @@ int main()
     casillero1 = tablero->getCasillero( 80, 160, NIVEL_SUPERFICIE + 8 );
     casillero1->setAvion( avion2 );
 
-
     // tablero->setCasillero(casillero1, 1, 1, NIVEL_SUPERFICIE);
 
     GraficoCasillero * graficocasillero;
@@ -81,6 +79,7 @@ int main()
     bmpMapa = new Graficas( tablero );
     bmpMapa->graficarSuperficie( "grafico.bmp", equipo1 );
     //bmpMapa->graficarSuperficie( "grafico.bmp" );
+    mapa->imprimirMapa("prueba1.txt", NULL);
 
     delete bmpMapa;
     delete soldado;
