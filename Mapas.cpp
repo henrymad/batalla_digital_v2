@@ -193,6 +193,9 @@ void Mapas::imprimirMapa( string archivo, Jugador * jugador ) {
 		salida.open( this->nombreArchivo.c_str(), fstream::out );
 		for ( int i = 1; i <= this->tablero->getSize_x(); i++ ) {
 			for ( int j = 1; j <= this->tablero->getSize_y(); j++ ) {
+				if ( i == 60 && j == 160 ) {
+					this->Celda( tablero->getCasillero(i, j, NIVEL_SUPERFICIE), jugador );
+				}
 				salida << '|' << this->Celda( tablero->getCasillero( i, j, NIVEL_SUPERFICIE), jugador );
 			}
 			salida << '|' << std::endl;
@@ -300,10 +303,11 @@ string Mapas::Celda( Casillero * casillero, Jugador * jugador ) {
 string Mapas::hayAvion( Casillero * casillero, Jugador * jugador ) {
 	string sValor = "";
 	if ( this->tablero != NULL ) {
+		int size_z = tablero->getSize_z();
 		Casillero * casilleroactual;
-		for ( int i = 1; i <= tablero->getSize_z(); i++ ) {
-			casilleroactual = this->tablero->getCasillero( casillero->getCoordenada()->getCoordenada_x(), casillero->getCoordenada()->getCoordenada_y(), i);
-			if ( casillero->getTipoTerreno() == aire ) {
+		for ( int i = NIVEL_SUPERFICIE + 1; i <= size_z; i++ ) {
+			casilleroactual = this->tablero->getCasillero( casillero->getCoordenada()->getCoordenada_x() + 1, casillero->getCoordenada()->getCoordenada_y() + 1, i);
+			if ( casilleroactual->getTipoTerreno() == aire ) {
 				if ( casilleroactual->getAvion() != NULL ) {
 					if ( jugador == NULL ) {
 						sValor = "A";
