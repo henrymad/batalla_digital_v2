@@ -84,6 +84,32 @@ void Mapas::cargarMapa3D( string archivo, bool superficie = true ) {
 		int size_x = this->tablero->getSize_x();
 		int size_y = this->tablero->getSize_y();
 		int size_z = this->tablero->getSize_z();
+		for ( int i = 1; i <= size_x; i++ ) {
+			if ( ! std::getline( entrada, linea ) ) {
+				break;
+			}
+			if ( linea.length() == (long unsigned int) size_y ) {
+				for ( int j = 1; j <= size_y; j++ ) {
+					char caracter = linea[ j - 1 ];
+					for ( int k = 1; k <= size_z; k++ ) {
+						Casillero * casillero = this->tablero->getCasillero( i, j, k );
+						if ( k <= NIVEL_SUPERFICIE ) {
+							if ( caracter == '0' ) {
+								casillero->setTipoTerreno( tierra );
+							}
+							else if ( caracter == '1' ) {
+								casillero->setTipoTerreno( agua );
+							}
+						}
+						else {
+							casillero->setTipoTerreno( aire );
+						}
+						casillero->setEstadoCasillero( casillerovacio );
+					}
+				}
+			}
+		}
+		/*
 		for ( int j = 1; j <= size_y; j++ ) {
 			if ( !std::getline( entrada, linea ) ) {
 				break;
@@ -93,11 +119,17 @@ void Mapas::cargarMapa3D( string archivo, bool superficie = true ) {
 					char caracter = linea[ i - 1 ];
 					for ( int k = 1; k <= size_z; k++ ) {
 						Casillero * casillero = this->tablero->getCasillero( i, j, k );
+						if (  i == 85 && j == 180 ) {
+							Casillero* casillero = this->tablero->getCasillero( i, j, k );
+						}
+						else if ( i == 180 && j == 85 ) {
+							Casillero * casillero = this->tablero->getCasillero( i, j, k );
+						}
 						if ( k <= NIVEL_SUPERFICIE ) {
-							if (caracter == '0') {
+							if ( caracter == '0' ) {
 								casillero->setTipoTerreno( tierra );
 							}
-							else if (caracter == '1') {
+							else if ( caracter == '1' ) {
 								casillero->setTipoTerreno( agua );
 							}
 						}
@@ -108,6 +140,7 @@ void Mapas::cargarMapa3D( string archivo, bool superficie = true ) {
 				}
 			}
 		}
+		*/
 	}
 }
 
@@ -117,8 +150,8 @@ void Mapas::grabarMapa2D( string archivo ) {
 	}
 	ofstream salida;
 	salida.open( archivo.c_str(), fstream::out );
-	for (int j = 1; j <= this->tablero->getSize_y(); j++) {
-		for (int i = 1; i <= this->tablero->getSize_x(); i++) {
+	for (int i = 1; i <= this->tablero->getSize_x(); i++) {
+		for (int j = 1; j <= this->tablero->getSize_y(); j++) {
 			TipoTerrenoCasillero terreno = tablero->getCasillero( i, j, NIVEL_SUPERFICIE )->getTipoTerreno();
 			salida << terreno;
 		}

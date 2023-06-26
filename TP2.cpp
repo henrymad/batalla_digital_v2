@@ -30,9 +30,10 @@ int main()
     mapa = new Mapas(tablero);
     // mapa->cargarMapaDefault();                  // Esta funcion carga el Mapa en 3D.
     // mapa->cargarMapa2D( "mapadefault.txt" );    // Sólo carga la superficie.
-    mapa->cargarMapa3D("mapadefault.txt", false);
-    mapa->imprimirMapa("prueba1.txt", NULL);
-    //mapa->grabarMapa2D( "mapadefault.txt" );
+    mapa->cargarMapa3D( "mapadefault.txt", false );
+    mapa->imprimirMapa( "prueba1.txt", NULL );
+    mapa->grabarMapa2D( "prueba3.txt" );
+    // ->grabarMapa2D( "mapadefault.txt" );
     // mapa->cargarMapa2D( "mapadefault.txt" );
     //mapa->grabarMapa2D( "mapadefault.txt" );
 
@@ -51,7 +52,7 @@ int main()
     casillero1->setMina( mina3 );
     Barco * barco;
     barco = new Barco( equipo1->getIdJugador() );
-    casillero1 = tablero->getCasillero( 85, 180, NIVEL_SUPERFICIE );
+    casillero1 = tablero->getCasillero( 180, 85, NIVEL_SUPERFICIE );
     casillero1->setBarco( barco );
     Avion * avion1, * avion2;
     avion1 = new Avion( equipo1->getIdJugador() );
