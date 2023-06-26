@@ -52,7 +52,7 @@ int main()
     casillero1->setMina( mina3 );
     Barco * barco;
     barco = new Barco( equipo1->getIdJugador() );
-    casillero1 = tablero->getCasillero( 180, 85, NIVEL_SUPERFICIE );
+    casillero1 = tablero->getCasillero( 110, 110, NIVEL_SUPERFICIE );
     casillero1->setBarco( barco );
     Avion * avion1, * avion2;
     avion1 = new Avion( equipo1->getIdJugador() );

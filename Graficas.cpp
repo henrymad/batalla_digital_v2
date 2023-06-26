@@ -76,32 +76,6 @@ void Graficas::graficarSuperficie( string archivo, Jugador * jugador) {
 	Output.WriteToFile(archivo.c_str());
 }
 
-/*
-void Graficas::dibujarPixel( int i, int j, Casillero * casillero, BMP & oBMP ) {
-	TipoTerrenoCasillero terreno = casillero->getTipoTerreno();
-	// EstadoCasillero estado = casillero->getEstadoCasillero();
-	for ( int x = 0; x < INDICE_PIXELACION; x++ ) {
-		for ( int y = 0; y < INDICE_PIXELACION; y++ ) {
-			if (terreno == agua ) {
-				oBMP( i * INDICE_PIXELACION + x, j * INDICE_PIXELACION + y )->Red = 102;		//0
-				oBMP( i * INDICE_PIXELACION + x, j * INDICE_PIXELACION  + y )->Green = 255;		//10
-				oBMP( i * INDICE_PIXELACION + x, j * INDICE_PIXELACION + y )->Blue = 255;		//80
-				oBMP( i * INDICE_PIXELACION + x, j * INDICE_PIXELACION + y )->Alpha = 0;
-			}
-			else if (terreno == tierra ) {
-				oBMP( i * INDICE_PIXELACION + x, j * INDICE_PIXELACION + y )->Red = 153;		//90
-				oBMP( i * INDICE_PIXELACION + x, j * INDICE_PIXELACION + y )->Green = 73;		//50
-				oBMP( i * INDICE_PIXELACION + x, j * INDICE_PIXELACION + y )->Blue = 0;			//0
-				oBMP( i * INDICE_PIXELACION + x, j * INDICE_PIXELACION + y )->Alpha = 0;
-			}
-			else {
-				// Piff ...
-			}
-		}
-	}
-}
-*/
-
 void Graficas::dibujarPixel( Casillero * casillero, Jugador * jugador, BMP & oBMP ) {
 	TipoTerrenoCasillero terreno = casillero->getTipoTerreno();
 	int i = casillero->getCoordenada()->getCoordenada_x();
@@ -187,9 +161,9 @@ void Graficas::dibujarPixel( Casillero * casillero, BMP & oBMP ) {
 	for (int x = 0; x < INDICE_PIXELACION; x++) {
 		for (int y = 0; y < INDICE_PIXELACION; y++) {
 			if ( terreno == agua ) {
-				oBMP( j * INDICE_PIXELACION + x, i * INDICE_PIXELACION + y )->Red = 102;		//0
-				oBMP( j * INDICE_PIXELACION + x, i * INDICE_PIXELACION + y )->Green = 255;		//10
-				oBMP( j * INDICE_PIXELACION + x, i * INDICE_PIXELACION + y )->Blue = 255;		//80
+				oBMP( j * INDICE_PIXELACION + x, i * INDICE_PIXELACION + y )->Red = 150;		//0 -> 102
+				oBMP( j * INDICE_PIXELACION + x, i * INDICE_PIXELACION + y )->Green = 255;		//10 -> 255
+				oBMP( j * INDICE_PIXELACION + x, i * INDICE_PIXELACION + y )->Blue = 255;		//80 -> 255
 				oBMP( j * INDICE_PIXELACION + x, i * INDICE_PIXELACION + y )->Alpha = 0;
 			}
 			else if ( terreno == tierra ) {
@@ -209,7 +183,7 @@ void Graficas::dibujarPixel( Casillero * casillero, BMP & oBMP ) {
 		// Ver si hay un avión encima
 		Casillero * aux = detectarAvion(casillero, NULL );
 		if (aux != NULL) {
-			dibujarAvion(aux, NULL, oBMP, color);
+			dibujarAvion( aux, NULL, oBMP, color );
 		}
 	}
 	else if ( casillero->getEstadoCasillero() == casilleroinactivo ) {
@@ -227,89 +201,20 @@ void Graficas::dibujarPixel( Casillero * casillero, BMP & oBMP ) {
 		oBMP( 2 + j * INDICE_PIXELACION, 0 + i * INDICE_PIXELACION )->Blue = 255;
 	}
 	else if ( casillero->getSoldado() != NULL ) {
-		// if ( casillero->getSoldado()->getJugador() == jugador->getIdJugador() ) {
-		// Fila 1
-		color->setJugador( casillero->getSoldado()->getJugador() );
-		oBMP( 0 + j * INDICE_PIXELACION, 1 + i * INDICE_PIXELACION )->Red = color->getColorRojo();
-		oBMP( 0 + j * INDICE_PIXELACION, 1 + i * INDICE_PIXELACION )->Green = color->getColorVerde();
-		oBMP( 0 + j * INDICE_PIXELACION, 1 + i * INDICE_PIXELACION )->Blue = color->getColorAzul();
-		// Fila 2
-		oBMP( 1 + j * INDICE_PIXELACION, 0 + i * INDICE_PIXELACION )->Red = color->getColorRojo();
-		oBMP( 1 + j * INDICE_PIXELACION, 0 + i * INDICE_PIXELACION )->Green = color->getColorVerde();
-		oBMP( 1 + j * INDICE_PIXELACION, 0 + i * INDICE_PIXELACION )->Blue = color->getColorAzul();
-		oBMP( 1 + j * INDICE_PIXELACION, 2 + i * INDICE_PIXELACION )->Red = color->getColorRojo();
-		oBMP( 1 + j * INDICE_PIXELACION, 2 + i * INDICE_PIXELACION )->Green = color->getColorVerde();
-		oBMP( 1 + j * INDICE_PIXELACION, 2 + i * INDICE_PIXELACION )->Blue = color->getColorAzul();
-		// Fila 3
-		oBMP( 2 + j * INDICE_PIXELACION, 1 + i * INDICE_PIXELACION )->Red = color->getColorRojo();
-		oBMP( 2 + j * INDICE_PIXELACION, 1 + i * INDICE_PIXELACION )->Green = color->getColorVerde();
-		oBMP( 2 + j * INDICE_PIXELACION, 1 + i * INDICE_PIXELACION )->Blue = color->getColorAzul();
+		this->dibujarSoldado( casillero, NULL, oBMP, color );
 	}
 	else if (casillero->getMina() != NULL) {
-		// if (casillero->getSoldado()->getJugador() == jugador->getIdJugador()) {
-		// Fila 1
-		color->setJugador( casillero->getMina()->getJugador() );
-		oBMP( 0 + j * INDICE_PIXELACION, 0 + i * INDICE_PIXELACION )->Red = color->getColorRojo();
-		oBMP( 0 + j * INDICE_PIXELACION, 0 + i * INDICE_PIXELACION )->Green = color->getColorVerde();
-		oBMP( 0 + j * INDICE_PIXELACION, 0 + i * INDICE_PIXELACION )->Blue = color->getColorAzul();
-		oBMP( 0 + j * INDICE_PIXELACION, 2 + i * INDICE_PIXELACION )->Red = color->getColorRojo();
-		oBMP( 0 + j * INDICE_PIXELACION, 2 + i * INDICE_PIXELACION )->Green = color->getColorVerde();
-		oBMP( 0 + j * INDICE_PIXELACION, 2 + i * INDICE_PIXELACION )->Blue = color->getColorAzul();
-		// Fila 2
-		oBMP( 1 + j * INDICE_PIXELACION, 1 + i * INDICE_PIXELACION )->Red = color->getColorRojo();
-		oBMP( 1 + j * INDICE_PIXELACION, 1 + i * INDICE_PIXELACION )->Green = color->getColorVerde();
-		oBMP( 1 + j * INDICE_PIXELACION, 1 + i * INDICE_PIXELACION )->Blue = color->getColorAzul();
-		// Fila 3
-		oBMP( 2 + j * INDICE_PIXELACION, 0 + i * INDICE_PIXELACION )->Red = color->getColorRojo();
-		oBMP( 2 + j * INDICE_PIXELACION, 0 + i * INDICE_PIXELACION )->Green = color->getColorVerde();
-		oBMP( 2 + j * INDICE_PIXELACION, 0 + i * INDICE_PIXELACION )->Blue = color->getColorAzul();
-		oBMP( 2 + j * INDICE_PIXELACION, 2 + i * INDICE_PIXELACION )->Red = color->getColorRojo();
-		oBMP( 2 + j * INDICE_PIXELACION, 2 + i * INDICE_PIXELACION )->Green = color->getColorVerde();
-		oBMP( 2 + j * INDICE_PIXELACION, 2 + i * INDICE_PIXELACION )->Blue = color->getColorAzul();
+		this->dibujarMina( casillero, NULL, oBMP, color );
 	}
 	else if (casillero->getBarco() != NULL) {
-		//if (casillero->getBarco()->getJugador() == jugador->getIdJugador()) {
-		color->setJugador( casillero->getBarco()->getJugador() );
-		// Fila 1
-		oBMP( 0 + j * INDICE_PIXELACION, 1 + i * INDICE_PIXELACION )->Red = color->getColorRojo();
-		oBMP( 0 + j * INDICE_PIXELACION, 1 + i * INDICE_PIXELACION )->Green = color->getColorVerde();
-		oBMP( 0 + j * INDICE_PIXELACION, 1 + i * INDICE_PIXELACION )->Blue = color->getColorAzul();
-		// Fila 2
-		oBMP( 1 + j * INDICE_PIXELACION, 0 + i * INDICE_PIXELACION )->Red = color->getColorRojo();
-		oBMP( 1 + j * INDICE_PIXELACION, 0 + i * INDICE_PIXELACION )->Green = color->getColorVerde();
-		oBMP( 1 + j * INDICE_PIXELACION, 0 + i * INDICE_PIXELACION )->Blue = color->getColorAzul();
-		oBMP( 1 + j * INDICE_PIXELACION, 1 + i * INDICE_PIXELACION )->Red = color->getColorRojo();
-		oBMP( 1 + j * INDICE_PIXELACION, 1 + i * INDICE_PIXELACION )->Green = color->getColorVerde();
-		oBMP( 1 + j * INDICE_PIXELACION, 1 + i * INDICE_PIXELACION )->Blue = color->getColorAzul();
-		oBMP( 1 + j * INDICE_PIXELACION, 2 + i * INDICE_PIXELACION )->Red = color->getColorRojo();
-		oBMP( 1 + j * INDICE_PIXELACION, 2 + i * INDICE_PIXELACION )->Green = color->getColorVerde();
-		oBMP( 1 + j * INDICE_PIXELACION, 2 + i * INDICE_PIXELACION )->Blue = color->getColorAzul();
-		// Fila 3
+		this->dibujarBarco( casillero, NULL, oBMP, color );
 	}
 	else {
 		// Revisar Avion
 		for ( int k = NIVEL_SUPERFICIE + 1; k < this->tablero->getSize_z(); k++ ) {
-			Casillero * aux = this->tablero->getCasillero (i, j, k );
+			Casillero * aux = this->tablero->getCasillero( i, j, k );
 			if ( aux->getAvion() != NULL ) {
-				color->setJugador( casillero->getAvion()->getJugador() );
-				// Fila 1
-				oBMP( 0 + j * INDICE_PIXELACION, 1 + i * INDICE_PIXELACION )->Red = color->getColorRojo();
-				oBMP( 0 + j * INDICE_PIXELACION, 1 + i * INDICE_PIXELACION )->Green = color->getColorVerde();
-				oBMP( 0 + j * INDICE_PIXELACION, 1 + i * INDICE_PIXELACION )->Blue = color->getColorAzul();
-				// Fila 2
-				oBMP( 1 + j * INDICE_PIXELACION, 1 + i * INDICE_PIXELACION )->Red = color->getColorRojo();
-				oBMP( 1 + j * INDICE_PIXELACION, 1 + i * INDICE_PIXELACION )->Green = color->getColorVerde();
-				oBMP( 1 + j * INDICE_PIXELACION, 1 + i * INDICE_PIXELACION )->Blue = color->getColorAzul();
-				// Fila 3
-				oBMP( 2 + j * INDICE_PIXELACION, 0 + i * INDICE_PIXELACION )->Red = color->getColorRojo();
-				oBMP( 2 + j * INDICE_PIXELACION, 0 + i * INDICE_PIXELACION )->Green = color->getColorVerde();
-				oBMP( 2 + j * INDICE_PIXELACION, 0 + i * INDICE_PIXELACION )->Blue = color->getColorAzul();
-				oBMP( 2 + j * INDICE_PIXELACION, 1 + i * INDICE_PIXELACION )->Red = color->getColorRojo();
-				oBMP( 2 + j * INDICE_PIXELACION, 1 + i * INDICE_PIXELACION )->Green = color->getColorVerde();
-				oBMP( 2 + j * INDICE_PIXELACION, 1 + i * INDICE_PIXELACION )->Blue = color->getColorAzul();
-				oBMP( 2 + j * INDICE_PIXELACION, 2 + i * INDICE_PIXELACION )->Red = color->getColorRojo();
-				oBMP( 2 + j * INDICE_PIXELACION, 2 + i * INDICE_PIXELACION )->Green = color->getColorVerde();
-				oBMP( 2 + j * INDICE_PIXELACION, 2 + i * INDICE_PIXELACION )->Blue = color->getColorAzul();
+				this->dibujarAvion( casillero, NULL, oBMP, color );
 				break;
 			}
 		}
@@ -317,148 +222,12 @@ void Graficas::dibujarPixel( Casillero * casillero, BMP & oBMP ) {
 	delete color;
 }
 
-/*
-* void Graficas::dibujarPixel( int i, int j, Casillero * casillero, Jugador * jugador, BMP & oBMP ) {
-	if ( casillero == NULL || jugador == NULL ) {
-		return;
-	}
-	TipoTerrenoCasillero terreno = casillero->getTipoTerreno();
-	//EstadoCasillero estado = casillero->getEstadoCasillero();
-	// Traslación de las coordenadas del usuario
-	i--; j--;
-	for (int x = 0; x < INDICE_PIXELACION; x++) {
-		for (int y = 0; y < INDICE_PIXELACION; y++) {
-			if (terreno == agua) {
-				oBMP( i * INDICE_PIXELACION + x, j * INDICE_PIXELACION + y )->Red = 102;		//0
-				oBMP( i * INDICE_PIXELACION + x, j * INDICE_PIXELACION + y )->Green = 255;	//10
-				oBMP( i * INDICE_PIXELACION + x, j * INDICE_PIXELACION + y )->Blue = 255;	//80
-				oBMP( i * INDICE_PIXELACION + x, j * INDICE_PIXELACION + y )->Alpha = 0;
-			}
-			else if (terreno == tierra) {
-				oBMP( i * INDICE_PIXELACION + x, j * INDICE_PIXELACION + y )->Red = 153;		// 90
-				oBMP( i * INDICE_PIXELACION + x, j * INDICE_PIXELACION + y )->Green = 73;	// 50
-				oBMP( i * INDICE_PIXELACION + x, j * INDICE_PIXELACION + y )->Blue = 0;		// 0
-				oBMP( i * INDICE_PIXELACION + x, j * INDICE_PIXELACION + y )->Alpha = 0;
-			}
-			else {
-				// Piff ...
-			}
-		}
-	}
-	if ( casillero->getEstadoCasillero() == casillerovacio ) {
-		// Nada haremos, nada haremos
-	}
-	else if ( casillero->getEstadoCasillero() == casilleroinactivo ) {
-		// Fila 1
-		oBMP( 0 + i * INDICE_PIXELACION, 2 + j * INDICE_PIXELACION )->Red = 255;
-		oBMP( 0 + i * INDICE_PIXELACION, 2 + j * INDICE_PIXELACION )->Green = 255;
-		oBMP( 0 + i * INDICE_PIXELACION, 2 + j * INDICE_PIXELACION )->Blue = 255;
-		// Fila 2
-		oBMP( 1 + i * INDICE_PIXELACION, 1 + j * INDICE_PIXELACION )->Red = 255;
-		oBMP( 1 + i * INDICE_PIXELACION, 1 + j * INDICE_PIXELACION )->Green = 255;
-		oBMP( 1 + i * INDICE_PIXELACION, 1 + j * INDICE_PIXELACION )->Blue = 255;
-		// Fila 3
-		oBMP( 2 + i * INDICE_PIXELACION, 0 + j * INDICE_PIXELACION )->Red = 255;
-		oBMP( 2 + i * INDICE_PIXELACION, 0 + j * INDICE_PIXELACION )->Green = 255;
-		oBMP( 2 + i * INDICE_PIXELACION, 0 + j * INDICE_PIXELACION )->Blue = 255;
-	}
-	else if ( casillero->getSoldado() != NULL ) {
-		if ( casillero->getSoldado()->getJugador() == jugador->getIdJugador() ) {
-			// Fila 1
-			oBMP( 0 + i * INDICE_PIXELACION, 1 + j * INDICE_PIXELACION )->Red = 255;
-			oBMP( 0 + i * INDICE_PIXELACION, 1 + j * INDICE_PIXELACION )->Green = 255;
-			oBMP( 0 + i * INDICE_PIXELACION, 1 + j * INDICE_PIXELACION )->Blue = 255;
-			// Fila 2
-			oBMP( 1 + i * INDICE_PIXELACION, 0 + j * INDICE_PIXELACION )->Red = 255;
-			oBMP( 1 + i * INDICE_PIXELACION, 0 + j * INDICE_PIXELACION )->Green = 255;
-			oBMP( 1 + i * INDICE_PIXELACION, 0 + j * INDICE_PIXELACION )->Blue = 255;
-			oBMP( 1 + i * INDICE_PIXELACION, 2 + j * INDICE_PIXELACION )->Red = 255;
-			oBMP( 1 + i * INDICE_PIXELACION, 2 + j * INDICE_PIXELACION )->Green = 255;
-			oBMP( 1 + i * INDICE_PIXELACION, 2 + j * INDICE_PIXELACION )->Blue = 255;
-			// Fila 3
-			oBMP( 2 + i * INDICE_PIXELACION, 1 + j * INDICE_PIXELACION )->Red = 255;
-			oBMP( 2 + i * INDICE_PIXELACION, 1 + j * INDICE_PIXELACION )->Green = 255;
-			oBMP( 2 + i * INDICE_PIXELACION, 1 + j * INDICE_PIXELACION )->Blue = 255;
-		}
-	}
-	else if ( casillero->getMina() != NULL ) {
-		if (casillero->getMina()->getJugador() == jugador->getIdJugador()) {
-			// Fila 1
-			oBMP( 0 + i * INDICE_PIXELACION, 0 + j * INDICE_PIXELACION )->Red = 255;
-			oBMP( 0 + i * INDICE_PIXELACION, 0 + j * INDICE_PIXELACION )->Green = 255;
-			oBMP( 0 + i * INDICE_PIXELACION, 0 + j * INDICE_PIXELACION )->Blue = 255;
-			oBMP( 0 + i * INDICE_PIXELACION, 2 + j * INDICE_PIXELACION )->Red = 255;
-			oBMP( 0 + i * INDICE_PIXELACION, 2 + j * INDICE_PIXELACION )->Green = 255;
-			oBMP( 0 + i * INDICE_PIXELACION, 2 + j * INDICE_PIXELACION )->Blue = 255;
-			// Fila 2
-			oBMP( 1 + i * INDICE_PIXELACION, 1 + j * INDICE_PIXELACION )->Red = 255;
-			oBMP( 1 + i * INDICE_PIXELACION, 1 + j * INDICE_PIXELACION )->Green = 255;
-			oBMP( 1 + i * INDICE_PIXELACION, 1 + j * INDICE_PIXELACION )->Blue = 255;
-			// Fila 3
-			oBMP( 2 + i * INDICE_PIXELACION, 0 + j * INDICE_PIXELACION )->Red = 255;
-			oBMP( 2 + i * INDICE_PIXELACION, 0 + j * INDICE_PIXELACION )->Green = 255;
-			oBMP( 2 + i * INDICE_PIXELACION, 0 + j * INDICE_PIXELACION )->Blue = 255;
-			oBMP( 2 + i * INDICE_PIXELACION, 2 + j * INDICE_PIXELACION )->Red = 255;
-			oBMP( 2 + i * INDICE_PIXELACION, 2 + j * INDICE_PIXELACION )->Green = 255;
-			oBMP( 2 + i * INDICE_PIXELACION, 2 + j * INDICE_PIXELACION )->Blue = 255;
-		}
-	}
-	else if ( casillero->getBarco() != NULL) {
-		if ( casillero->getBarco()->getJugador() == jugador->getIdJugador() ) {
-			// Fila 1
-			oBMP( 0 + i * INDICE_PIXELACION, 1 + j * INDICE_PIXELACION )->Red = 255;
-			oBMP( 0 + i * INDICE_PIXELACION, 1 + j * INDICE_PIXELACION )->Green = 255;
-			oBMP( 0 + i * INDICE_PIXELACION, 1 + j * INDICE_PIXELACION )->Blue = 255;
-			// Fila 2
-			oBMP( 1 + i * INDICE_PIXELACION, 0 + j * INDICE_PIXELACION )->Red = 255;
-			oBMP( 1 + i * INDICE_PIXELACION, 0 + j * INDICE_PIXELACION )->Green = 255;
-			oBMP( 1 + i * INDICE_PIXELACION, 0 + j * INDICE_PIXELACION )->Blue = 255;
-			oBMP( 1 + i * INDICE_PIXELACION, 1 + j * INDICE_PIXELACION )->Red = 255;
-			oBMP( 1 + i * INDICE_PIXELACION, 1 + j * INDICE_PIXELACION )->Green = 255;
-			oBMP( 1 + i * INDICE_PIXELACION, 1 + j * INDICE_PIXELACION )->Blue = 255;
-			oBMP( 1 + i * INDICE_PIXELACION, 2 + j * INDICE_PIXELACION )->Red = 255;
-			oBMP( 1 + i * INDICE_PIXELACION, 2 + j * INDICE_PIXELACION )->Green = 255;
-			oBMP( 1 + i * INDICE_PIXELACION, 2 + j * INDICE_PIXELACION )->Blue = 255;
-			// Fila 3
-		}
-	}
-	else {
-		// Revisar Avion
-		for ( int k = NIVEL_SUPERFICIE + 1; k < this->tablero->getSize_z(); k++ ) {
-			Casillero * aux = this->tablero->getCasillero( i, j, k );
-			if ( aux->getAvion() != NULL ) {
-				if ( aux->getAvion()->getJugador() == jugador->getIdJugador() ) {
-					// Fila 1
-					oBMP( 0 + i * INDICE_PIXELACION, 1 + j * INDICE_PIXELACION )->Red = 255;
-					oBMP( 0 + i * INDICE_PIXELACION, 1 + j * INDICE_PIXELACION )->Green = 255;
-					oBMP( 0 + i * INDICE_PIXELACION, 1 + j * INDICE_PIXELACION )->Blue = 255;
-					// Fila 2
-					oBMP( 1 + i * INDICE_PIXELACION, 1 + j * INDICE_PIXELACION )->Red = 255;
-					oBMP( 1 + i * INDICE_PIXELACION, 1 + j * INDICE_PIXELACION )->Green = 255;
-					oBMP( 1 + i * INDICE_PIXELACION, 1 + j * INDICE_PIXELACION )->Blue = 255;
-					// Fila 3
-					oBMP( 2 + i * INDICE_PIXELACION, 0 + j * INDICE_PIXELACION )->Red = 255;
-					oBMP( 2 + i * INDICE_PIXELACION, 0 + j * INDICE_PIXELACION )->Green = 255;
-					oBMP( 2 + i * INDICE_PIXELACION, 0 + j * INDICE_PIXELACION )->Blue = 255;
-					oBMP( 2 + i * INDICE_PIXELACION, 1 + j * INDICE_PIXELACION )->Red = 255;
-					oBMP( 2 + i * INDICE_PIXELACION, 1 + j * INDICE_PIXELACION )->Green = 255;
-					oBMP( 2 + i * INDICE_PIXELACION, 1 + j * INDICE_PIXELACION )->Blue = 255;
-					oBMP( 2 + i * INDICE_PIXELACION, 2 + j * INDICE_PIXELACION )->Red = 255;
-					oBMP( 2 + i * INDICE_PIXELACION, 2 + j * INDICE_PIXELACION )->Green = 255;
-					oBMP( 2 + i * INDICE_PIXELACION, 2 + j * INDICE_PIXELACION )->Blue = 255;
-					break;
-				}
-			}
-		}
-	}
-}
-*/
-
 void Graficas::dibujarSoldado( Casillero * casillero, Jugador * jugador, BMP & oBMP, ColorJugador * color ) {
 	int i = casillero->getCoordenada()->getCoordenada_x();
 	int j = casillero->getCoordenada()->getCoordenada_y();
 	if ( jugador == NULL ) { // Vista tablero general
-		color->setJugador( 0 );
+		//color->setJugador( 0 );
+		color->setJugador( casillero->getSoldado()->getJugador() );
 	}
 	else {
 		if (  casillero->getSoldado() != NULL ) {
@@ -488,8 +257,9 @@ void Graficas::dibujarSoldado( Casillero * casillero, Jugador * jugador, BMP & o
 void Graficas::dibujarMina( Casillero * casillero, Jugador * jugador, BMP & oBMP, ColorJugador * color ) {
 	int i = casillero->getCoordenada()->getCoordenada_x();
 	int j = casillero->getCoordenada()->getCoordenada_y();
-	if (jugador == NULL) { // Vista tablero general
-		color->setJugador( 0 );
+	if ( jugador == NULL ) { // Vista tablero general
+		//color->setJugador( 0 );
+		color->setJugador( casillero->getMina()->getJugador() );
 	}
 	else {
 		if ( casillero->getMina() != NULL ) {
@@ -500,30 +270,31 @@ void Graficas::dibujarMina( Casillero * casillero, Jugador * jugador, BMP & oBMP
 		}
 	}
 	// Fila 1
-	oBMP( 0 + i * INDICE_PIXELACION, 0 + i * INDICE_PIXELACION )->Red = color->getColorRojo();
-	oBMP( 0 + i * INDICE_PIXELACION, 0 + i * INDICE_PIXELACION )->Green = color->getColorVerde();
-	oBMP( 0 + i * INDICE_PIXELACION, 0 + i * INDICE_PIXELACION )->Blue = color->getColorAzul();
-	oBMP( 0 + i * INDICE_PIXELACION, 2 + i * INDICE_PIXELACION )->Red = color->getColorRojo();
-	oBMP( 0 + i * INDICE_PIXELACION, 2 + i * INDICE_PIXELACION )->Green = color->getColorVerde();
-	oBMP( 0 + i * INDICE_PIXELACION, 2 + i * INDICE_PIXELACION )->Blue = color->getColorAzul();
+	oBMP( 0 + j * INDICE_PIXELACION, 0 + i * INDICE_PIXELACION )->Red = color->getColorRojo();
+	oBMP( 0 + j * INDICE_PIXELACION, 0 + i * INDICE_PIXELACION )->Green = color->getColorVerde();
+	oBMP( 0 + j * INDICE_PIXELACION, 0 + i * INDICE_PIXELACION )->Blue = color->getColorAzul();
+	oBMP( 0 + j * INDICE_PIXELACION, 2 + i * INDICE_PIXELACION )->Red = color->getColorRojo();
+	oBMP( 0 + j * INDICE_PIXELACION, 2 + i * INDICE_PIXELACION )->Green = color->getColorVerde();
+	oBMP( 0 + j * INDICE_PIXELACION, 2 + i * INDICE_PIXELACION )->Blue = color->getColorAzul();
 	// Fila 2
-	oBMP( 1 + i * INDICE_PIXELACION, 1 + i * INDICE_PIXELACION )->Red = color->getColorRojo();
-	oBMP( 1 + i * INDICE_PIXELACION, 1 + i * INDICE_PIXELACION )->Green = color->getColorVerde();
-	oBMP( 1 + i * INDICE_PIXELACION, 1 + i * INDICE_PIXELACION )->Blue = color->getColorAzul();
+	oBMP( 1 + j * INDICE_PIXELACION, 1 + i * INDICE_PIXELACION )->Red = color->getColorRojo();
+	oBMP( 1 + j * INDICE_PIXELACION, 1 + i * INDICE_PIXELACION )->Green = color->getColorVerde();
+	oBMP( 1 + j * INDICE_PIXELACION, 1 + i * INDICE_PIXELACION )->Blue = color->getColorAzul();
 	// Fila 3
-	oBMP( 2 + i * INDICE_PIXELACION, 0 + i * INDICE_PIXELACION )->Red = color->getColorRojo();
-	oBMP( 2 + i * INDICE_PIXELACION, 0 + i * INDICE_PIXELACION )->Green = color->getColorVerde();
-	oBMP( 2 + i * INDICE_PIXELACION, 0 + i * INDICE_PIXELACION )->Blue = color->getColorAzul();
-	oBMP( 2 + i * INDICE_PIXELACION, 2 + i * INDICE_PIXELACION )->Red = color->getColorRojo();
-	oBMP( 2 + i * INDICE_PIXELACION, 2 + i * INDICE_PIXELACION )->Green = color->getColorVerde();
-	oBMP( 2 + i * INDICE_PIXELACION, 2 + i * INDICE_PIXELACION )->Blue = color->getColorAzul();
+	oBMP( 2 + j * INDICE_PIXELACION, 0 + i * INDICE_PIXELACION )->Red = color->getColorRojo();
+	oBMP( 2 + j * INDICE_PIXELACION, 0 + i * INDICE_PIXELACION )->Green = color->getColorVerde();
+	oBMP( 2 + j * INDICE_PIXELACION, 0 + i * INDICE_PIXELACION )->Blue = color->getColorAzul();
+	oBMP( 2 + j * INDICE_PIXELACION, 2 + i * INDICE_PIXELACION )->Red = color->getColorRojo();
+	oBMP( 2 + j * INDICE_PIXELACION, 2 + i * INDICE_PIXELACION )->Green = color->getColorVerde();
+	oBMP( 2 + j * INDICE_PIXELACION, 2 + i * INDICE_PIXELACION )->Blue = color->getColorAzul();
 }
 
 void Graficas::dibujarAvion( Casillero * casillero, Jugador * jugador, BMP & oBMP, ColorJugador * color ) {
 	int i = casillero->getCoordenada()->getCoordenada_x();
 	int j = casillero->getCoordenada()->getCoordenada_y();
-	if (jugador == NULL) { // Vista tablero general
-		color->setJugador( 0 );
+	if ( jugador == NULL ) { // Vista tablero general
+		// color->setJugador( 0 );
+		color->setJugador( casillero->getAvion()->getJugador() );
 	}
 	else {
 		if ( casillero->getAvion() != NULL ) {
@@ -556,8 +327,9 @@ void Graficas::dibujarAvion( Casillero * casillero, Jugador * jugador, BMP & oBM
 void Graficas::dibujarBarco( Casillero * casillero, Jugador * jugador, BMP & oBMP, ColorJugador * color ) {
 	int i = casillero->getCoordenada()->getCoordenada_x();
 	int j = casillero->getCoordenada()->getCoordenada_y();
-	if (jugador == NULL) { // Vista tablero general
-		color->setJugador( 0 );
+	if ( jugador == NULL ) { // Vista tablero general
+		// color->setJugador( 0 );
+		color->setJugador( casillero->getBarco()->getJugador() );
 	}
 	else {
 		if ( casillero->getBarco() != NULL ) {
@@ -568,19 +340,19 @@ void Graficas::dibujarBarco( Casillero * casillero, Jugador * jugador, BMP & oBM
 		}
 	}
 	// Fila 1
-	oBMP(0 + j * INDICE_PIXELACION, 1 + i * INDICE_PIXELACION)->Red = color->getColorRojo();
-	oBMP(0 + j * INDICE_PIXELACION, 1 + i * INDICE_PIXELACION)->Green = color->getColorVerde();
-	oBMP(0 + j * INDICE_PIXELACION, 1 + i * INDICE_PIXELACION)->Blue = color->getColorAzul();
+	oBMP( 1 + j * INDICE_PIXELACION, 0 + i * INDICE_PIXELACION )->Red = color->getColorRojo();
+	oBMP( 1 + j * INDICE_PIXELACION, 0 + i * INDICE_PIXELACION )->Green = color->getColorVerde();
+	oBMP( 1 + j * INDICE_PIXELACION, 0 + i * INDICE_PIXELACION )->Blue = color->getColorAzul();
 	// Fila 2
-	oBMP(1 + j * INDICE_PIXELACION, 0 + i * INDICE_PIXELACION)->Red = color->getColorRojo();
-	oBMP(1 + j * INDICE_PIXELACION, 0 + i * INDICE_PIXELACION)->Green = color->getColorVerde();
-	oBMP(1 + j * INDICE_PIXELACION, 0 + i * INDICE_PIXELACION)->Blue = color->getColorAzul();
-	oBMP(1 + j * INDICE_PIXELACION, 1 + i * INDICE_PIXELACION)->Red = color->getColorRojo();
-	oBMP(1 + j * INDICE_PIXELACION, 1 + i * INDICE_PIXELACION)->Green = color->getColorVerde();
-	oBMP(1 + j * INDICE_PIXELACION, 1 + i * INDICE_PIXELACION)->Blue = color->getColorAzul();
-	oBMP(1 + j * INDICE_PIXELACION, 2 + i * INDICE_PIXELACION)->Red = color->getColorRojo();
-	oBMP(1 + j * INDICE_PIXELACION, 2 + i * INDICE_PIXELACION)->Green = color->getColorVerde();
-	oBMP(1 + j * INDICE_PIXELACION, 2 + i * INDICE_PIXELACION)->Blue = color->getColorAzul();
+	oBMP( 0 + j * INDICE_PIXELACION, 1 + i * INDICE_PIXELACION )->Red = color->getColorRojo();
+	oBMP( 0 + j * INDICE_PIXELACION, 1 + i * INDICE_PIXELACION )->Green = color->getColorVerde();
+	oBMP( 0 + j * INDICE_PIXELACION, 1 + i * INDICE_PIXELACION )->Blue = color->getColorAzul();
+	oBMP( 1 + j * INDICE_PIXELACION, 1 + i * INDICE_PIXELACION )->Red = color->getColorRojo();
+	oBMP( 1 + j * INDICE_PIXELACION, 1 + i * INDICE_PIXELACION )->Green = color->getColorVerde();
+	oBMP( 1 + j * INDICE_PIXELACION, 1 + i * INDICE_PIXELACION )->Blue = color->getColorAzul();
+	oBMP( 2 + j * INDICE_PIXELACION, 1 + i * INDICE_PIXELACION )->Red = color->getColorRojo();
+	oBMP( 2 + j * INDICE_PIXELACION, 1 + i * INDICE_PIXELACION )->Green = color->getColorVerde();
+	oBMP( 2 + j * INDICE_PIXELACION, 1 + i * INDICE_PIXELACION )->Blue = color->getColorAzul();
 	// Fila 3
 }
 

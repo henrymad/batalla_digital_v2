@@ -48,15 +48,17 @@ int ColorJugador::getColorAzul( int  jugador ) {
 
 void ColorJugador::setJugador( int jugador ) {
 	this->jugador = jugador;
+	this->setColores();
 }
 
 void ColorJugador::setColores() {
 	switch ( this->jugador )
 	{
 	case 0:
-		this->colorVerde = 255;
-		this->colorRojo = 255;
-		this->colorAzul = 255;
+		this->colorVerde = 0;
+		this->colorRojo = 0;
+		this->colorAzul = 0;
+		break;
 	case 1:
 		this->colorVerde = 255;
 		this->colorRojo = 0;
@@ -78,9 +80,9 @@ void ColorJugador::setColores() {
 		this->colorAzul = 100;
 		break;
 	default:
-		this->colorVerde = 0;
-		this->colorRojo = 0;
-		this->colorAzul = 0;
+		this->colorVerde = 255;
+		this->colorRojo = 255;
+		this->colorAzul = 255;
 		break;
 	}
 
