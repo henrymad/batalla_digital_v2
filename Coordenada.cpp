@@ -28,8 +28,10 @@ void Coordenada::setCoordenadaZ(int coordenadaZ) {
     this->coordenadaZ = coordenadaZ;
 }
 
-Coordenada::Coordenada(int, int, int) {
-
+Coordenada::Coordenada(int x, int y , int z) {
+    this->coordenadaX = x;
+    this->coordenadaY = y;
+    this->coordenadaZ = z;
 }
 
 Coordenada::Coordenada(const Coordenada & coordenada) {

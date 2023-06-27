@@ -21,6 +21,7 @@ private:
 
 public:
 	Jugador();
+    Jugador(int idJugador);
 	Jugador( string );
 	~Jugador();
 	int NuevoID( int );

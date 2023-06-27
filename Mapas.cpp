@@ -2,6 +2,7 @@
 
 Mapas::Mapas( Tablero3D * tablero ) {
 	this->tablero = tablero;
+	this->jugador = NULL;
 }
 
 //  Setters
@@ -9,23 +10,26 @@ Mapas::Mapas( Tablero3D * tablero ) {
 void Mapas::cargarMapaDefault() {
 	Casillero * casillero;
 	if ( this->tablero != NULL ) {
-		for ( int i = 1; i <= this->tablero->getSize_x(); i++ ) {
-			for ( int j = 1; j <= this->tablero->getSize_y(); j++ ) {
-				for (int k = 1; k <= this->tablero->getSize_z(); k++ ) {
+		int size_x = this->tablero->getSize_x();
+		int size_y = this->tablero->getSize_y();
+		int size_z = this->tablero->getSize_z();
+		for ( int i = 1; i <= size_x; i++ ) {
+			for ( int j = 1; j <= size_y; j++ ) {
+				for (int k = 1; k <= size_z; k++ ) {
 					casillero = tablero->getCasillero( i, j, k );
 					if ( k > NIVEL_SUPERFICIE ) {
-						casillero->setTipoTerreno( TipoTerrenoCasillero::aire );
+						casillero->setTipoTerreno( aire );
 					}
 					else {
-						casillero->setTipoTerreno( TipoTerrenoCasillero::tierra );
+						casillero->setTipoTerreno( tierra );
 						if ( i > 160 && j < 150 ) {
-							casillero->setTipoTerreno( TipoTerrenoCasillero::agua );
+							casillero->setTipoTerreno( agua );
 						}
 						else if (  ( j > 70 && j < 140 ) && ( i >  110 && i <= 160 ) ) {
-							casillero->setTipoTerreno( TipoTerrenoCasillero::agua );
+							casillero->setTipoTerreno( agua );
 						}
 						else if ( ( j > 100 && j < 120 ) && ( i > 80  && i <= 110 ) ) {
-							casillero->setTipoTerreno( TipoTerrenoCasillero::agua );
+							casillero->setTipoTerreno( agua );
 						}
 					}
 				}
@@ -34,14 +38,113 @@ void Mapas::cargarMapaDefault() {
 	}
 }
 
-void Mapas::leerMapa( string archivo ) {
+void Mapas::cargarMapa2D( string archivo ) {
 	if ( archivo == "" ) { 
+		return;
+	}
+	if ( this->tablero == NULL ) {
 		return;
 	}
 	ifstream entrada( archivo.c_str() );
 	if ( entrada.is_open() ) {
-
+		string linea;
+		int size_x = this->tablero->getSize_x();
+		int size_y = this->tablero->getSize_y();
+		for ( int j = 1; j <= size_y; j++ ) {
+			if ( ! std::getline(entrada, linea) ) {
+				break;
+			}
+			if ( linea.length() == size_y ) {
+				for ( int i = 1; i <= size_x; i++ ) {
+					Casillero * casillero = this->tablero->getCasillero(i, j, NIVEL_SUPERFICIE);
+					char caracter = linea[i];
+					if ( caracter == '0' ) {
+						casillero->setTipoTerreno( tierra );
+					}
+					else if ( caracter == '1' ) {
+						casillero->setTipoTerreno( agua );
+					}
+				}
+			}
+		}
 	}
+}
+
+void Mapas::cargarMapa3D( string archivo, bool superficie = true ) {
+	if (archivo == "") {
+		return;
+	}
+	if (this->tablero == NULL) {
+		return;
+	}
+	ifstream entrada(archivo.c_str());
+	if ( entrada.is_open() ) {
+		string linea;
+		int size_x = this->tablero->getSize_x();
+		int size_y = this->tablero->getSize_y();
+		int size_z = this->tablero->getSize_z();
+		for (int j = 1; j <= size_y; j++) {
+			if ( !std::getline( entrada, linea ) ) {
+				break;
+			}
+			if ( linea.length() == size_y ) {
+				for ( int i = 1; i <= size_x; i++ ) {
+					char caracter = linea[i];
+					for ( int k = 1; k <= size_z; k++ ) {
+						Casillero * casillero = this->tablero->getCasillero( i, j, k );
+						if ( k <= NIVEL_SUPERFICIE ) {
+							if (caracter == '0') {
+								casillero->setTipoTerreno( tierra );
+							}
+							else if (caracter == '1') {
+								casillero->setTipoTerreno( agua );
+							}
+						}
+						else {
+							casillero->setTipoTerreno( aire );
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+void Mapas::grabarMapa2D( string archivo ) {
+	if (archivo == "") {
+		return;
+	}
+	ofstream salida;
+	salida.open( archivo.c_str(), fstream::out );
+	for (int j = 1; j <= this->tablero->getSize_y(); j++) {
+		for (int i = 1; i <= this->tablero->getSize_x(); i++) {
+			TipoTerrenoCasillero terreno = tablero->getCasillero( i, j, NIVEL_SUPERFICIE )->getTipoTerreno();
+			salida << terreno;
+		}
+		salida << std::endl;
+	}
+	// Liberar recursos y memoria
+	salida.close();
+}
+
+void Mapas::grabarMapa3D( string archivo ) {
+	if (archivo == "") {
+		return;
+	}
+	ofstream salida;
+	salida.open(archivo.c_str(), fstream::out);
+	for ( int z = 1; z < this->tablero->getSize_z(); z++ ) {
+		for (int i = 1; i <= this->tablero->getSize_x(); i++) {
+			for (int j = 1; j <= this->tablero->getSize_y(); j++) {
+				TipoTerrenoCasillero terreno = tablero->getCasillero( i, j, z )->getTipoTerreno();
+				salida << terreno;
+			}
+			salida << std::endl;
+		}
+		salida << std::endl;
+	}
+	// Liberar recursos y memoria
+	salida.close();
 }
 
 void Mapas::imprimirMapa( string archivo, Jugador * jugador ) {
@@ -65,6 +168,17 @@ void Mapas::imprimirMapa( string archivo, Jugador * jugador ) {
 	}
 }
 
+void Mapas::imprimirGraficoSuperficie( string archivo ) {
+	if (archivo == "") {
+		archivo = "GraficoSuperfice.bmp";
+	}
+	Graficas * grafico;
+	grafico = new Graficas( this->tablero );
+	grafico->graficarSuperficie( archivo );
+	// Liberar recursos
+	delete grafico;
+}
+
 void Mapas::setNombreArchivo(string archivo) {
 	this->nombreArchivo = archivo;
 
@@ -79,7 +193,7 @@ string Mapas::Celda( Casillero * casillero, Jugador * jugador ) {
 	if ( casillero == NULL ) {
 		return celda;
 	}
-	if ( casillero->getEstadoCasillero() == EstadoCasillero::casilleroinactivo ) {
+	if ( casillero->getEstadoCasillero() == casilleroinactivo ) {
 		/*
 		if ( casillero->getBomba() != NULL ) {
 			celda = "B";
@@ -89,7 +203,7 @@ string Mapas::Celda( Casillero * casillero, Jugador * jugador ) {
 		}
 		*/
 	}
-	else if ( casillero->getEstadoCasillero() == EstadoCasillero::casillerovacio ) {
+	else if ( casillero->getEstadoCasillero() == casillerovacio ) {
 
 	}
 	else if ( casillero->getSoldado() != NULL ) {
@@ -103,7 +217,7 @@ string Mapas::Celda( Casillero * casillero, Jugador * jugador ) {
 			celda = " ";
 		}
 	}
-	else if ( casillero->getMina(0) != NULL ) {
+	else if ( casillero->getMina() != NULL ) {
 		if ( jugador == NULL ) {
 			celda = "M";
 		}
@@ -139,8 +253,8 @@ string Mapas::hayAvion( Casillero * casillero, Jugador * jugador ) {
 	if ( this->tablero != NULL ) {
 		Casillero * casilleroactual;
 		for ( int i = 1; i <= tablero->getSize_z(); i++ ) {
-			casilleroactual = this->tablero->getCasillero( casillero->getCoordenada()->getCoordenada_x(), casillero->getCoordenada()->getCoordenada_y(), i);
-			if ( casillero->getTipoTerreno() == TipoTerrenoCasillero::aire ) {
+			casilleroactual = this->tablero->getCasillero( casillero->getCoordenada()->getCoordenadaX(), casillero->getCoordenada()->getCoordenadaY(), i);
+			if ( casillero->getTipoTerreno() == aire ) {
 				if ( casilleroactual->getAvion() != NULL ) {
 					if ( jugador == NULL ) {
 						sValor = "A";

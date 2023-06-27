@@ -11,7 +11,7 @@ private:
 
 public:
 	Soldado();
-	Soldado( int );
+    Soldado(int idSoldado);
 	Soldado( int, Coordenada * );
 	~Soldado();
 	int NuevoID(int);

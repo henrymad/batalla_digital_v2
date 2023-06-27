@@ -18,7 +18,6 @@ Tablero3D::Tablero3D() {
             for (int z = 0; z < this->size_z; z++) {
                 Casillero * casillero;
                 casillero = new Casillero(x, y, z);
-                // casillero = new Casillero();
                 subelemento->agregar( casillero);
             }
             elemento->agregar(subelemento);
@@ -93,9 +92,6 @@ Casillero * Tablero3D::getCasillero( int x, int y, int z ) {
     Lista < Casillero * > * subelemento;
     // Traslaci�n de coordenadas
     x--; y--; z--;
-    if ( z == 18 ) {
-        z = z;
-    }
     elemento = this->tablero->obtenerDato( x );
     subelemento = elemento->obtenerDato( y );
     Casillero * Casillero;
@@ -126,5 +122,36 @@ bool Tablero3D::checkCoordenadas( int x, int y, int z ) {
         return false;
     }
     return true;
+}
+
+Casillero *Tablero3D::buscarCasilleroPorCoordenada(int x, int y, int z) {
+    this->tablero->iniciarCursor();
+    while(this->tablero->avanzarCursor()){
+        Lista < Lista < Casillero * > * > * elemento = this->tablero->obtenerCursor();
+        elemento->iniciarCursor();
+        while (elemento->avanzarCursor()){
+            Lista < Casillero * > * subelemento = elemento->obtenerCursor();
+            subelemento->iniciarCursor();
+            while(subelemento->avanzarCursor()){
+                Casillero *casillero = subelemento->obtenerCursor();
+                if(casillero->getCoordenada()->getCoordenadaX() == x && casillero->getCoordenada()->getCoordenadaY() == y && casillero->getCoordenada()->getCoordenadaZ() == z ){
+                    return casillero;
+                }
+            }
+        }
+    }
+    return NULL;
+}
+
+void Tablero3D::guardarCasilleroPorCoordenada(Casillero *casillero, int x, int y, int z) {
+    this->tablero->iniciarCursor();
+    while(this->tablero->avanzarCursor()){
+        Lista < Lista < Casillero * > * > * elemento = this->tablero->obtenerCursor();
+        elemento->iniciarCursor();
+        while (elemento->avanzarCursor()){
+            Lista < Casillero * > * subelemento = elemento->obtenerCursor();
+            subelemento->agregar(casillero, z);
+        }
+    }
 }
 

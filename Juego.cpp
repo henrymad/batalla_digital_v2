@@ -11,6 +11,9 @@ Juego::Juego() {
     this->cartas = new Lista<Carta*>();
     this->jugadores = new Lista<Jugador*>();
     this->pantallaGraficos = new PantallaGraficos();
+    this->graficocasillero = NULL;
+    this->mostrar = NULL;
+    this->salidaTablero = NULL;
 }
 
 void Juego::configurarPartida() {
@@ -36,7 +39,7 @@ void Juego::configurarPartida() {
 
 void Juego::configurarJugadores() {
         for (int i=0;i<this->cantidadDeJugadores;i++){
-            Jugador *jugador = new Jugador();
+            Jugador *jugador = new Jugador(i+1);
 
             string nombre =  this->pantallaGraficos->entradaUsuarioTexto("Ingresar nombre jugador: ");
             Lista<Soldado*> *soldados = this->configurarSoldados(this->cantidadDeSoldados, jugador->getIdJugador());
@@ -53,7 +56,8 @@ Lista<Soldado *> *Juego::configurarSoldados(int cantidadDeSoldados, int idJugado
     Lista<Soldado*> *resultado = new Lista<Soldado*>();
     srand(time(NULL));
     for(int i=0;i<cantidadDeSoldados;i++){
-        Soldado *soldado = new Soldado();
+        Soldado *soldado;
+        soldado = new Soldado(i+1);
         soldado->getCoordenada()->setCoordenadaX(rand()%FILAS_TABLERO);
         soldado->getCoordenada()->setCoordenadaY(rand()%COLUMNAS_TABLERO);
         soldado->getCoordenada()->setCoordenadaZ(rand()%NIVEL_SUPERFICIE);
@@ -65,9 +69,28 @@ Lista<Soldado *> *Juego::configurarSoldados(int cantidadDeSoldados, int idJugado
 
 void Juego::empezarPartida() {
     this->tablero = new Tablero3D();
+    /**this->mapa = new Mapas(this->tablero);
+    mapa->cargarMapa3D( "prueba.txt", false );
+    mapa->imprimirMapa( "prueba1.txt", NULL );
+    this->graficocasillero = new GraficoCasillero(this->tablero);
+    Casillero *casillero = this->tablero->getCasillero(5,10,2);
+    this->graficocasillero->setCasillero(casillero);
+
+    this->mostrar = new MostrarCasillero( graficocasillero );
+    for (int i = 0; i < 3; i++ ) {
+        cout << mostrar->emitir(i) << "\n";
+    }
+
+    this->salidaTablero = new MostrarTablero( tablero, this->jugadores->obtenerDato(1));
+    this->salidaTablero->imprimir( "prueba2.txt" );
+    Graficas * bmpMapa;
+    bmpMapa = new Graficas( tablero );
+    bmpMapa->graficarSuperficie( "grafico.bmp", this->jugadores->obtenerDato(1));**/
+
     this->jugadores->iniciarCursor();
-    int count = 0;
-    while (this->jugadores->avanzarCursor()){
+    int cantidadDeJugadas = 1;
+    int seTErminoELJuego = 0;
+    while (this->jugadores->avanzarCursor() && seTErminoELJuego !=1){
         Jugador *jugador = this->jugadores->obtenerCursor();
         this->pantallaGraficos->imprimirEspaciosVertical(5);
         this->pantallaGraficos->imprimirLineaHorizontal(200);
@@ -95,11 +118,8 @@ void Juego::empezarPartida() {
         this->pantallaGraficos->imprimirTitulo("Mover soldado");
         int idSoldado = this->pantallaGraficos->entradaUsuarioNumero("Ingresar id del soldado que desea mover: ");
 
-        Coordenada *nuevaCoordenada;
-        nuevaCoordenada = new Coordenada();
-        nuevaCoordenada->setCoordenadaX(this->pantallaGraficos->entradaUsuarioNumero("Ingresar nueva coordenda en X: "));
-        nuevaCoordenada->setCoordenadaY(this->pantallaGraficos->entradaUsuarioNumero("Ingresar nueva coordenda en Y: "));
-        nuevaCoordenada->setCoordenadaZ(this->pantallaGraficos->entradaUsuarioNumero("Ingresar nueva coordenda en Z: "));
+        Coordenada *nuevaCoordenada = this->pantallaGraficos->entradaCoordenada();
+        nuevaCoordenada = this->coordenadaValida(nuevaCoordenada);
 
         this->jugadores->obtenerCursor()->actualizarPosicionSoldado(nuevaCoordenada, idSoldado, jugador);
         this->jugadores->obtenerCursor()->moverSoldado(tablero,nuevaCoordenada,idSoldado,this->jugadores);
@@ -107,28 +127,33 @@ void Juego::empezarPartida() {
         this->pantallaGraficos->imprimirEspaciosVertical(1);
         this->pantallaGraficos->imprimirTitulo("Minar Casiilero");
 
-        Coordenada *coordenadaMina;
-        coordenadaMina = new Coordenada();
-        coordenadaMina->setCoordenadaX(this->pantallaGraficos->entradaUsuarioNumero("Coordenda en X: "));
-        coordenadaMina->setCoordenadaY(this->pantallaGraficos->entradaUsuarioNumero("Coordenda en Y: "));
-        coordenadaMina->setCoordenadaZ(this->pantallaGraficos->entradaUsuarioNumero("Coordenda en Z: "));
+        Coordenada *coordenadaMina = this->pantallaGraficos->entradaCoordenada();
+        coordenadaMina = this->coordenadaValida(coordenadaMina);
+
+        this->jugadores->obtenerCursor()->minarCasillero(tablero,coordenadaMina,this->jugadores);
 
         string respuesta = this->pantallaGraficos->entradaUsuarioTexto("Desea jugar una carta: si/no: ");
         if(respuesta == "si"){
             respuesta = this->pantallaGraficos->entradaUsuarioTexto("Ingresar nombre de la carta: ");
             this->jugadores->obtenerCursor()->jugarCarta(respuesta);
         }
+        this->eliminarJugador(jugador, cantidadDeJugadas);
 
-        this->jugadores->obtenerCursor()->minarCasillero(tablero,coordenadaMina,this->jugadores);
-        if(count == 1){
-            this->jugadores->iniciarCursor();
-            count = 0;
-        }else{
-            count =+1;
+        if(this->cantidadDeJugadores == 1){
+            seTErminoELJuego = 1;
         }
 
+        if(cantidadDeJugadas == this->jugadores->contarElementos()){
+            this->jugadores->iniciarCursor();
+            cantidadDeJugadas = 1;
+        }else{
+            cantidadDeJugadas =+1;
+        }
     }
-
+    this->pantallaGraficos->imprimirTitulo("GANADOR");
+    this->pantallaGraficos->imprimirLineaHorizontal(200);
+    this->pantallaGraficos->imprimirTitulo(this->jugadores->obtenerDato(0)->getNombreJugador());
+    this->pantallaGraficos->entradaUsuarioTexto("Ingresar cualquier caracter para terminar el juego");
 }
 
 void Juego::configurarCartas(int niverlJuego) {
@@ -152,6 +177,22 @@ Juego::~Juego() {
     this->cartas->borrarLista();
     this->jugadores->borrarLista();
     this->pantallaGraficos = NULL;
+}
+
+void Juego::eliminarJugador(Jugador *jugador, int posicion) {
+    if(jugador->getSoldados()->contarElementos() ==0){
+        this->jugadores->remover(posicion);
+    }
+}
+
+Coordenada *Juego::coordenadaValida(Coordenada *nuevoCoordenada) {
+    Casillero *casillero = this->tablero->buscarCasilleroPorCoordenada(nuevoCoordenada->getCoordenadaX(), nuevoCoordenada->getCoordenadaY(),nuevoCoordenada->getCoordenadaZ());
+    while(casillero->getEstadoCasillero() == casilleroinactivo){
+        this->pantallaGraficos->imprimirTitulo("EL Casillero esta inactivo, ingresar nuevamente las coordenadas");
+        nuevoCoordenada = this->pantallaGraficos->entradaCoordenada();
+        casillero = this->tablero->buscarCasilleroPorCoordenada(nuevoCoordenada->getCoordenadaX(), nuevoCoordenada->getCoordenadaY(),nuevoCoordenada->getCoordenadaZ());
+    }
+    return nuevoCoordenada;
 }
 
 

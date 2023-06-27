@@ -68,6 +68,12 @@ void PantallaGraficos::imprimirMenuJugador(Jugador *jugador) {
     cout<<"Menu Jugador"<<endl;
     cout<<"Nombre: "<<jugador->getNombreJugador()<<endl;
     cout<<"Cantidad de Soldados: "<<jugador->getCantidadSoldados()<<endl;
+    jugador->getSoldados()->iniciarCursor();
+    while(jugador->getSoldados()->avanzarCursor()){
+        cout<<"id_soldado: "<<jugador->getSoldados()->obtenerCursor()->getIDSoldado()<<endl;
+        cout<<"Coordenadas: "<<"("<<jugador->getSoldados()->obtenerCursor()->getCoordenada()->getCoordenadaX()
+        <<","<<jugador->getSoldados()->obtenerCursor()->getCoordenada()->getCoordenadaY()<<","<<jugador->getSoldados()->obtenerCursor()->getCoordenada()->getCoordenadaZ()<<")"<<endl;
+    }
     if(jugador->getListaCartas()->estaVacia()){
         cout<<"Cartas: "<<" "<<endl;
     }
@@ -81,6 +87,12 @@ void PantallaGraficos::imprimirMenuJugador(Jugador *jugador) {
     }
 
     cout<<"Minas Activas: "<<jugador->getMinasActivas()->contarElementos()<<endl;
+    jugador->getMinasActivas()->iniciarCursor();
+    while(jugador->getMinasActivas()->avanzarCursor()){
+        cout<<"id_mina: "<<jugador->getMinasActivas()->obtenerCursor()->getIdMina()<<endl;
+        cout<<"Coordenadas: "<<"("<<jugador->getMinasActivas()->obtenerCursor()->getCordenada()->getCoordenadaX()
+            <<","<<jugador->getMinasActivas()->obtenerCursor()->getCordenada()->getCoordenadaY()<<","<<jugador->getMinasActivas()->obtenerCursor()->getCordenada()->getCoordenadaZ()<<")"<<endl;
+    }
     cout<<" "<<endl;
     this->imprimirLineaHorizontal(20);
 }
@@ -90,6 +102,15 @@ void PantallaGraficos::imprimirTituloCentrado(std::string titulo, int margenDere
         cout<<" ";
     }
     cout<<titulo<<endl;
+}
+
+Coordenada *PantallaGraficos::entradaCoordenada() {
+    Coordenada *nuevaCoordenada;
+    nuevaCoordenada = new Coordenada();
+    nuevaCoordenada->setCoordenadaX(this->entradaUsuarioNumero("Ingresar coordenda en X: "));
+    nuevaCoordenada->setCoordenadaY(this->entradaUsuarioNumero("Ingresar coordenda en Y: "));
+    nuevaCoordenada->setCoordenadaZ(this->entradaUsuarioNumero("Ingresar coordenda en Z: "));
+    return nuevaCoordenada;
 }
 
 

@@ -1,23 +1,27 @@
 #include "BombaQuimica.h"
 
 BombaQuimica::BombaQuimica( int jugador ) 
-: coordenada(NULL), turnos(TIEMPO_INHABILITADA_BOMBA)
+//: coordenada(NULL), turnos(TIEMPO_INHABILITADA_BOMBA)
 {
 	if ( jugador > 0 ) {
 		this->jugador = jugador;
 	}
+	this->coordenada = NULL;
+	this->turnos = TIEMPO_INHABILITADA_BOMBA;
 	this->turnos = TIEMPO_INHABILITADA_BOMBA;
 	this->cantidadCasilleros = 0;
 }
 
 BombaQuimica::BombaQuimica( int jugador, Coordenada * coordenada )
-: coordenada(NULL), turnos(TIEMPO_INHABILITADA_BOMBA)
+//: coordenada(NULL), turnos(TIEMPO_INHABILITADA_BOMBA)
 {
 	if ( jugador > 0 ) {
 		this->jugador = jugador;
 	}
+	this->coordenada = NULL;
+	this->turnos = TIEMPO_INHABILITADA_BOMBA;
 	if ( coordenada != NULL ) {
-		if ( coordenada->getCoordenada_z() == NIVEL_SUPERFICIE) {
+		if ( coordenada->getCoordenadaZ() == NIVEL_SUPERFICIE) {
 			this->coordenada = coordenada;
 		}
 	}
@@ -25,14 +29,14 @@ BombaQuimica::BombaQuimica( int jugador, Coordenada * coordenada )
 }
 
 BombaQuimica::BombaQuimica( int jugador, Coordenada * coordenada, int turnos )
-: coordenada(NULL), turnos(TIEMPO_INHABILITADA_BOMBA)
+//: coordenada(NULL), turnos(TIEMPO_INHABILITADA_BOMBA)
 {
 	if ( jugador > 0 ) {
 		this->jugador = jugador;
 	}
 	this->coordenada = NULL;
 	if ( coordenada != NULL ) {
-		if ( coordenada->getCoordenada_z() == NIVEL_SUPERFICIE ) {
+		if ( coordenada->getCoordenadaZ() == NIVEL_SUPERFICIE ) {
 			this->coordenada = coordenada;
 		}
 	}
@@ -57,7 +61,7 @@ Coordenada * BombaQuimica::getCoordenadas() {
 
 void BombaQuimica::setCoordenadas( Coordenada * coordenada ) {
 	if ( coordenada != NULL ) {
-		if ( coordenada->getCoordenada_z() == NIVEL_SUPERFICIE ) {
+		if ( coordenada->getCoordenadaZ() == NIVEL_SUPERFICIE ) {
 			this->coordenada = coordenada;
 		}
 	}
@@ -96,9 +100,9 @@ void BombaQuimica::computoCasillerosAfectados( Coordenada * coordenada, int cant
 	if ( coordenada != NULL ) {
 		Casillero * casillero = NULL;
 		casillero = this->tablero->getCasillero( coordenada );
-		// Cálculo del rango de la onda expansiva y el tiempo residual.
+		// Cï¿½lculo del rango de la onda expansiva y el tiempo residual.
 		if ( cantidadCasilleros == 0 ) {
-			// Sólo el casillero.
+			// Sï¿½lo el casillero.
 			casillero->setBomba( this );
 			casillero->setEstadoCasillero(EstadoCasillero::casilleroinactivo);
 			casillero->setTurnosDeInactividad( this->turnos );

@@ -3,7 +3,7 @@
 Mina::Mina() {
     this->jugador = 0;
     this->idMina =  this->NuevoID(0);
-    this->coordenada = new Coordenada();
+    this->coordenada = new Coordenada();;
 
 }
 
@@ -25,8 +25,9 @@ Mina::Mina( Coordenada * coordenada, int jugador ) {
 }
 
 Mina::Mina( Coordenada * coordenada ) {
-	this->jugador = 0;
-	this->coordenada = coordenada;
+    this->jugador = 0;
+    this->idMina =  this->NuevoID(0);
+    this->coordenada = coordenada;
 }
 
 Mina::~Mina() {

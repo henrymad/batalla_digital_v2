@@ -10,6 +10,7 @@
 #include "PropiedadesDelJuego.h"
 #include "Barco.h"
 #include "Avion.h"
+#include "BombaQuimica.h"
 
 class Casillero {
 private:
@@ -18,11 +19,11 @@ private:
     EstadoCasillero estado;
     int estadoInactivoCasillero;	// Lo imagino bool
     int turnosDeInactividad;		// valor >= 0 y cambia con cada turno
-    Soldado * soldado;
-    Mina *mina;
-    Lista< Mina *> * minas;
-    Barco * barco;
-    Avion * avion;
+    Soldado * soldadoInfanteria;
+    Mina * minacomun;
+    Barco * barcoGuerra;
+    Avion * aeronave;
+    BombaQuimica * bomba;				// Se marca el casillero donde deton�.
 public:
     Casillero();
     Casillero( Coordenada * );
@@ -38,18 +39,19 @@ public:
     void setSoldado( Soldado * );
     void setBarco( Barco * );
     void setAvion( Avion * );
-    void agregarMina( Mina * );
-
-    void setMina(Mina * mina);
-    Mina *getMina();
+    void setBomba( BombaQuimica * );
+    void setMina( Mina * );
+    //void agregarMina(Mina*);
     TipoTerrenoCasillero getTipoTerreno();
     EstadoCasillero getEstadoCasillero();
     int getTurnosDeInactividad();
     Soldado * getSoldado();
-    Lista<Mina *> * getListaMinas();
-    Mina * getMina( int );
+    //Lista<Mina *> * getListaMinas();
+    //Mina * getMina( int );
+    Mina * getMina();
     Barco * getBarco();
     Avion * getAvion();
+    BombaQuimica * getBomba();
 };
 
 #endif  // _CASILLERO_H_

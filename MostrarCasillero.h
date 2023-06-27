@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include "GraficoCasillero.h"
+#include "Jugador.h"
 
 class MostrarCasillero
 {
@@ -14,7 +15,7 @@ public:
 	~MostrarCasillero();
 	void setCasillero( GraficoCasillero * );
 	void setJugador( Jugador * );
-	string emitir( int );
+	std::string emitir( int );
 private:
 	GraficoCasillero * graficoCasillero;
 	Jugador * jugador;

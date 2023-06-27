@@ -19,6 +19,7 @@ public:
     void imprimirItemsMenu();
     void imprimirPantalla();
     void imprimirMenuJugador(Jugador *jugador);
+    Coordenada *entradaCoordenada();
 
     std::string  entradaUsuarioTexto(std::string textoInput);
     int entradaUsuarioNumero(std::string textoInput);

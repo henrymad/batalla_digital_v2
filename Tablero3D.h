@@ -18,6 +18,8 @@ public:
     virtual ~Tablero3D();
     void setCasillero( Casillero *casillero, int, int, int );
     Casillero * getCasillero( int, int, int );
+    Casillero * buscarCasilleroPorCoordenada( int x, int y, int z);
+    void guardarCasilleroPorCoordenada(Casillero *casillero, int x, int y, int z);
     int getSize_x();
     int getSize_y();
     int getSize_z();

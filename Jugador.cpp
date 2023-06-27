@@ -8,6 +8,14 @@ Jugador::Jugador() {
     this->cartas = NULL;
 }
 
+Jugador::Jugador(int idJugador) {
+    this->idJugador = this->NuevoID( 0 );
+    this->nombre = "";
+    this->soldados = NULL;
+    this->minasActivas = NULL;
+    this->cartas = NULL;
+}
+
 int Jugador::NuevoID( int numero = 0 ) {
 	// Cada vez que se instancia un nuevo jugador en la partida se crea un ID de bando del Jugador.
 	static int numeroInicial;
@@ -83,7 +91,7 @@ void Jugador::moverSoldado( Tablero3D * tablero, Coordenada * coordenadaDestino,
 }*/
 
 void Jugador::moverSoldado(Tablero3D *tablero1, Coordenada *coordenadaDestino, int idSoldado, Lista<Jugador*> *jugadores) {
-    Casillero *casillero = tablero1->getCasillero(coordenadaDestino->getCoordenadaX(),coordenadaDestino->getCoordenadaY(),coordenadaDestino->getCoordenadaZ());
+    Casillero *casillero = tablero1->buscarCasilleroPorCoordenada(coordenadaDestino->getCoordenadaX(),coordenadaDestino->getCoordenadaY(),coordenadaDestino->getCoordenadaZ());
     if(casillero->getEstadoCasillero() != casillerovacio){
         if(casillero->getEstadoCasillero() == soldado){
             int encontroSoldado = 0;
@@ -116,6 +124,7 @@ void Jugador::moverSoldado(Tablero3D *tablero1, Coordenada *coordenadaDestino, i
     }else{
         casillero->setEstadoCasillero(soldado);
         casillero->setSoldado(this->obtenerSoldadoPorId(idSoldado));
+        tablero1->guardarCasilleroPorCoordenada(casillero, coordenadaDestino->getCoordenadaX(), coordenadaDestino->getCoordenadaY(), coordenadaDestino->getCoordenadaZ());
     }
 }
 
@@ -136,7 +145,7 @@ Lista<Soldado *> *Jugador::getSoldados() {
 
 void Jugador::eliminarSoldado(int idSoldado) {
     this->soldados->iniciarCursor();
-    int contador = 0;
+    int contador = 1;
     while (this->soldados->avanzarCursor()){
         if(this->soldados->obtenerCursor()->getIDSoldado() == idSoldado){
             this->soldados->remover(contador);
@@ -170,9 +179,8 @@ Soldado *Jugador::obtenerSoldadoPorId(int idSolado) {
 
 void Jugador::minarCasillero(Tablero3D *tablero, Coordenada *coordenadaDestino, Lista<Jugador *> *jugadores) {
     Mina *minaActiva;
-    minaActiva = new Mina();
-    minaActiva->setCoordenada(coordenadaDestino);
-    Casillero *casillero = tablero->getCasillero(coordenadaDestino->getCoordenadaX(),coordenadaDestino->getCoordenadaY(),coordenadaDestino->getCoordenadaZ());
+    minaActiva = new Mina(coordenadaDestino);
+    Casillero *casillero = tablero->buscarCasilleroPorCoordenada(coordenadaDestino->getCoordenadaX(),coordenadaDestino->getCoordenadaY(),coordenadaDestino->getCoordenadaZ());
     if(casillero->getEstadoCasillero() != casillerovacio){
         if(casillero->getEstadoCasillero() == soldado){
             jugadores->iniciarCursor();
@@ -206,6 +214,7 @@ void Jugador::minarCasillero(Tablero3D *tablero, Coordenada *coordenadaDestino, 
         casillero->setMina(minaActiva);
         casillero->setEstadoCasillero(mina);
         this->minasActivas->agregarFinal(minaActiva);
+        tablero->guardarCasilleroPorCoordenada(casillero,coordenadaDestino->getCoordenadaX(),coordenadaDestino->getCoordenadaY(),coordenadaDestino->getCoordenadaZ());
     }
 }
 

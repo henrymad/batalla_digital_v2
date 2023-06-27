@@ -11,7 +11,7 @@ private:
 public:
     Coordenada();
 
-    Coordenada( int, int, int );
+    Coordenada( int x, int y , int z );
     Coordenada( Coordenada const & );
     ~Coordenada();
 

@@ -6,12 +6,10 @@ Soldado::Soldado() {
 	this->idSoldado = this->NuevoID(0);
 }
 
-Soldado::Soldado( int jugador ) {
-	if ( jugador > 0 ) {
-		this->jugador = jugador;
-	}
+Soldado::Soldado( int idSolado ) {
+    this->jugador = 0;
     this->coordenada = new Coordenada();
-    this->idSoldado = this->NuevoID(0);
+    this->idSoldado = idSolado;
 }
 
 Soldado::Soldado( int jugador, Coordenada * coordenada ) {
