@@ -193,10 +193,13 @@ void Mapas::imprimirMapa( string archivo, Jugador * jugador ) {
 		salida.open( this->nombreArchivo.c_str(), fstream::out );
 		for ( int i = 1; i <= this->tablero->getSize_x(); i++ ) {
 			for ( int j = 1; j <= this->tablero->getSize_y(); j++ ) {
-				if ( i == 60 && j == 160 ) {
-					this->Celda( tablero->getCasillero(i, j, NIVEL_SUPERFICIE), jugador );
+				if ( tablero->getCasillero(i, j, NIVEL_SUPERFICIE)->getTipoTerreno() == agua ) {
+					salida << '/';
 				}
-				salida << '|' << this->Celda( tablero->getCasillero( i, j, NIVEL_SUPERFICIE), jugador );
+				else {
+					salida << '|' ;
+				}
+				salida << this->Celda(tablero->getCasillero(i, j, NIVEL_SUPERFICIE), jugador);
 			}
 			salida << '|' << std::endl;
 		}
