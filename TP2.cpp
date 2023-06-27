@@ -5,8 +5,8 @@
 
 #include "Tablero3D.h"
 
-#include "MostrarCasillero.h"
-#include "MostrarTablero.h"
+//#include "MostrarCasillero.h"
+//#include "MostrarTablero.h"
 #include "Mapas.h"
 #include "Graficas.h"
 
@@ -62,7 +62,7 @@ int main()
     casillero1->setAvion( avion2 );
 
     // tablero->setCasillero(casillero1, 1, 1, NIVEL_SUPERFICIE);
-
+    /*
     GraficoCasillero * graficocasillero;
     graficocasillero = new GraficoCasillero( tablero );
     graficocasillero->setCasillero( casillero1 );
@@ -75,6 +75,8 @@ int main()
     MostrarTablero * salidaTablero;
     salidaTablero = new MostrarTablero( tablero, equipo1 );
     salidaTablero->imprimir( "prueba2.txt" );
+    */
+
     Graficas * bmpMapa;
     bmpMapa = new Graficas( tablero );
     bmpMapa->graficarSuperficie( "grafico.bmp", equipo1 );
@@ -92,9 +94,9 @@ int main()
     delete coordenada;
     delete equipo1;
 
-    delete graficocasillero;
+    // delete graficocasillero;
     delete casillero1;
-    delete salidaTablero;
+    // delete salidaTablero;
     delete tablero;
 
 }

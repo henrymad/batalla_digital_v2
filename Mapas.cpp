@@ -219,7 +219,6 @@ void Mapas::imprimirGraficoSuperficie( string archivo ) {
 	delete grafico;
 }
 
-
 void Mapas::imprimirGraficoSuperficie( string archivo, Jugador * jugador ) {
 	if ( archivo == "" ) {
 		archivo = "GraficoSuperfice.bmp";
@@ -236,7 +235,6 @@ void Mapas::imprimirGraficoSuperficie( string archivo, Jugador * jugador ) {
 
 void Mapas::setNombreArchivo(string archivo) {
 	this->nombreArchivo = archivo;
-
 }
 
 void Mapas::setJugador( Jugador * jugador ) {
