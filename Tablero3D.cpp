@@ -8,6 +8,7 @@ Tablero3D::Tablero3D() {
     this->size_y = COLUMNAS_TABLERO;
     this->size_z = ALTURA_TABLERO;
     this->tablero = new Lista < Lista < Lista < Casillero * > * > * >;
+    this->casillerosInactivos = new Lista<Casillero*>();
 
     for (int x = 0; x < this->size_x; x++) {
         Lista < Lista < Casillero * > * > * elemento;
@@ -94,9 +95,9 @@ Casillero * Tablero3D::getCasillero( int x, int y, int z ) {
     x--; y--; z--;
     elemento = this->tablero->obtenerDato( x );
     subelemento = elemento->obtenerDato( y );
-    Casillero * Casillero;
-    Casillero = subelemento->obtenerDato( z );
-    return Casillero;
+    Casillero * casillero;
+    casillero = subelemento->obtenerDato( z );
+    return casillero;
 }
 
 int Tablero3D::getSize_x() {
@@ -153,5 +154,31 @@ void Tablero3D::guardarCasilleroPorCoordenada(Casillero *casillero, int x, int y
             subelemento->agregar(casillero, z);
         }
     }
+}
+
+void Tablero3D::guardarCasilleroInactivo(Casillero *casillero) {
+    this->casillerosInactivos->agregarFinal(casillero);
+}
+
+void Tablero3D::actualizarEstadoCasillero() {
+    if(!this->casillerosInactivos->estaVacia()){
+        this->casillerosInactivos->iniciarCursor();
+        int posicion = 1;
+        while(this->casillerosInactivos->avanzarCursor()){
+            Casillero * casillero = this->casillerosInactivos->obtenerCursor();
+            if(casillero->getTurnosDeInactividad() == 0){
+                casillero->setEstadoCasillero(casillerovacio);
+                this->guardarCasilleroPorCoordenada(casillero, casillero->getCoordenada()->getCoordenadaX(),casillero->getCoordenada()->getCoordenadaY(),casillero->getCoordenada()->getCoordenadaZ());
+                this->casillerosInactivos->remover(posicion);
+                posicion++;
+            }else{
+                int turnos = casillero->getTurnosDeInactividad();
+                turnos--;
+                casillero->setTurnosDeInactividad(turnos);
+                posicion++;
+            }
+        }
+    }
+
 }
 

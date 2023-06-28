@@ -102,6 +102,7 @@ void Jugador::moverSoldado(Tablero3D *tablero1, Coordenada *coordenadaDestino, i
                     encontroSoldado = 1;
                     casillero->setSoldado(NULL);
                     casillero->setEstadoCasillero(casillerovacio);
+                    tablero1->guardarCasilleroInactivo(casillero);
                 }
             }
             this->eliminarSoldado(idSoldado);
@@ -117,6 +118,7 @@ void Jugador::moverSoldado(Tablero3D *tablero1, Coordenada *coordenadaDestino, i
                     casillero->setSoldado(NULL);
                     casillero->setEstadoCasillero(casilleroinactivo);
                     casillero->setTurnosDeInactividad(5);
+                    tablero1->guardarCasilleroInactivo(casillero);
                 }
             }
             this->eliminarSoldado(idSoldado);
@@ -191,6 +193,7 @@ void Jugador::minarCasillero(Tablero3D *tablero, Coordenada *coordenadaDestino, 
                     casillero->setTurnosDeInactividad(5);
                     casillero->setMina(NULL);
                     casillero->setSoldado(NULL);
+                    tablero->guardarCasilleroInactivo(casillero);
                     return;
                 }
             }
@@ -205,6 +208,7 @@ void Jugador::minarCasillero(Tablero3D *tablero, Coordenada *coordenadaDestino, 
                     casillero->setTurnosDeInactividad(5);
                     casillero->setMina(NULL);
                     casillero->setSoldado(NULL);
+                    tablero->guardarCasilleroInactivo(casillero);
                     return;
                 }
             }

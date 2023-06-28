@@ -11,6 +11,7 @@ Juego::Juego() {
     this->cartas = new Lista<Carta*>();
     this->jugadores = new Lista<Jugador*>();
     this->pantallaGraficos = new PantallaGraficos();
+    this->tablero = new Tablero3D();
     this->graficocasillero = NULL;
     this->mostrar = NULL;
     this->salidaTablero = NULL;
@@ -56,52 +57,48 @@ Lista<Soldado *> *Juego::configurarSoldados(int cantidadDeSoldados, int idJugado
     Lista<Soldado*> *resultado = new Lista<Soldado*>();
     srand(time(NULL));
     for(int i=0;i<cantidadDeSoldados;i++){
-        Soldado *soldado;
-        soldado = new Soldado(i+1);
-        soldado->getCoordenada()->setCoordenadaX(rand()%FILAS_TABLERO);
-        soldado->getCoordenada()->setCoordenadaY(rand()%COLUMNAS_TABLERO);
-        soldado->getCoordenada()->setCoordenadaZ(rand()%NIVEL_SUPERFICIE);
-        soldado->setJugador(idJugador);
-        resultado->agregarFinal(soldado);
+        Soldado *soldado1;
+        soldado1 = new Soldado(i+1);
+        soldado1->getCoordenada()->setCoordenadaX(rand()%FILAS_TABLERO);
+        soldado1->getCoordenada()->setCoordenadaY(rand()%COLUMNAS_TABLERO);
+        soldado1->getCoordenada()->setCoordenadaZ(rand()%NIVEL_SUPERFICIE);
+        soldado1->setJugador(idJugador);
+        resultado->agregarFinal(soldado1);
+        Casillero *casillero = new Casillero(soldado1->getCoordenada()->getCoordenadaX(),soldado1->getCoordenada()->getCoordenadaY(), soldado1->getCoordenada()->getCoordenadaZ());
+        casillero->setEstadoCasillero(soldado);
+        casillero->setSoldado(soldado1);
+        this->tablero->guardarCasilleroPorCoordenada(casillero, casillero->getCoordenada()->getCoordenadaX(), casillero->getCoordenada()->getCoordenadaY(), casillero->getCoordenada()->getCoordenadaZ());
     }
     return resultado;
 }
 
 void Juego::empezarPartida() {
-    this->tablero = new Tablero3D();
-    /**this->mapa = new Mapas(this->tablero);
-    mapa->cargarMapa3D( "prueba.txt", false );
-    mapa->imprimirMapa( "prueba1.txt", NULL );
-    this->graficocasillero = new GraficoCasillero(this->tablero);
-    Casillero *casillero = this->tablero->getCasillero(5,10,2);
-    this->graficocasillero->setCasillero(casillero);
 
-    this->mostrar = new MostrarCasillero( graficocasillero );
-    for (int i = 0; i < 3; i++ ) {
-        cout << mostrar->emitir(i) << "\n";
-    }
-
-    this->salidaTablero = new MostrarTablero( tablero, this->jugadores->obtenerDato(1));
-    this->salidaTablero->imprimir( "prueba2.txt" );
-    Graficas * bmpMapa;
-    bmpMapa = new Graficas( tablero );
-    bmpMapa->graficarSuperficie( "grafico.bmp", this->jugadores->obtenerDato(1));**/
+    this->mapa = new Mapas(this->tablero);
+    //this->mapa->cargarMapa3D( "mapadefault.txt", false );
+    //this->mapa->grabarMapa2D( "prueba1.txt" );
 
     this->jugadores->iniciarCursor();
     int cantidadDeJugadas = 1;
     int seTErminoELJuego = 0;
     while (this->jugadores->avanzarCursor() && seTErminoELJuego !=1){
         Jugador *jugador = this->jugadores->obtenerCursor();
+
+
         this->pantallaGraficos->imprimirEspaciosVertical(5);
         this->pantallaGraficos->imprimirLineaHorizontal(200);
         this->pantallaGraficos->imprimirTituloCentrado("BATALLA DIGITAL",100);
         this->pantallaGraficos->imprimirLineaHorizontal(200);
 
-        cout<<"imprimir tablero"<<endl;
-
         this->pantallaGraficos->imprimirMenuJugador(jugador);
         this->pantallaGraficos->imprimirEspaciosVertical(1);
         this->pantallaGraficos->imprimirTitulo("Seleccionar Carta: ");
+
+        //Graficas * bmpMapa;
+        //bmpMapa = new Graficas( tablero );
+        //bmpMapa->graficarSuperficie( "grafico.bmp", jugador );
+       // mapa->imprimirMapa("prueba1.txt", NULL);
+
         int posicionCarta;
 
         if(this->nivelPartida >= 5){
@@ -142,18 +139,19 @@ void Juego::empezarPartida() {
         if(this->cantidadDeJugadores == 1){
             seTErminoELJuego = 1;
         }
-
+        this->tablero->actualizarEstadoCasillero();
         if(cantidadDeJugadas == this->jugadores->contarElementos()){
             this->jugadores->iniciarCursor();
             cantidadDeJugadas = 1;
         }else{
-            cantidadDeJugadas =+1;
+            cantidadDeJugadas +=1;
         }
     }
     this->pantallaGraficos->imprimirTitulo("GANADOR");
     this->pantallaGraficos->imprimirLineaHorizontal(200);
     this->pantallaGraficos->imprimirTitulo(this->jugadores->obtenerDato(0)->getNombreJugador());
     this->pantallaGraficos->entradaUsuarioTexto("Ingresar cualquier caracter para terminar el juego");
+    this->cartas->borrarLista();
 }
 
 void Juego::configurarCartas(int niverlJuego) {
@@ -174,9 +172,9 @@ void Juego::configurarCartas(int niverlJuego) {
 }
 
 Juego::~Juego() {
-    this->cartas->borrarLista();
     this->jugadores->borrarLista();
     this->pantallaGraficos = NULL;
+    delete tablero;
 }
 
 void Juego::eliminarJugador(Jugador *jugador, int posicion) {

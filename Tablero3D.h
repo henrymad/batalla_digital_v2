@@ -12,6 +12,7 @@ private:
     Lista<Lista<Lista<Casillero*>*>*> *tablero;
     int size_x, size_y, size_z;
     bool checkCoordenadas( int , int , int );
+    Lista<Casillero*>*casillerosInactivos;
 public:
     Tablero3D();
     Tablero3D( int, int, int );
@@ -19,6 +20,8 @@ public:
     void setCasillero( Casillero *casillero, int, int, int );
     Casillero * getCasillero( int, int, int );
     Casillero * buscarCasilleroPorCoordenada( int x, int y, int z);
+    void guardarCasilleroInactivo(Casillero * casillero);
+    void actualizarEstadoCasillero();
     void guardarCasilleroPorCoordenada(Casillero *casillero, int x, int y, int z);
     int getSize_x();
     int getSize_y();

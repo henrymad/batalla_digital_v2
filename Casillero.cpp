@@ -94,16 +94,19 @@ void Casillero::setEstadoCasillero( EstadoCasillero estado ) {
 void Casillero::setSoldado( Soldado * soldadoInfanteria) {
     this->soldadoInfanteria = soldadoInfanteria;
     this->estado = soldado;
+    this->soldadoInfanteria->setCoordenada(  this->getCoordenada() );
 }
 
 void Casillero::setBarco( Barco * nave ) {
     this->barcoGuerra = nave;
     this->estado = barco;
+    this->barcoGuerra->setCoordenada( this->getCoordenada() );
 }
 
 void Casillero::setAvion( Avion * aeronave ) {
     this->aeronave = aeronave;
     this->estado = avion;
+    this->aeronave->setCoordenada( this->getCoordenada() );
 }
 
 void Casillero::setBomba( BombaQuimica * bomba ) {
@@ -124,29 +127,8 @@ void Casillero::setMina( Mina * minacomun ) {
     this->estadoInactivoCasillero = TIEMPO_INHABILITADA_MINA;
     this->turnosDeInactividad = TIEMPO_INHABILITADA_MINA;
     this->estado = mina;
+    this->minacomun->setCoordenada( this->getCoordenada() );
 }
-
-/*
-void Casillero::agregarMina( Mina * mina ) {
-	if ( mina != NULL ) {
-		if ( mina->getJugador() > 0 ) {
-			bool encontrado = false;
-			Lista< Mina * > * listaminas = this->minas;
-			listaminas->iniciarCursor();
-			while ( listaminas->avanzarCursor() ) {
-				Mina * aux = listaminas->obtenerCursor();
-				if ( mina->getJugador() == aux->getJugador() ) {
-					encontrado = true;
-					break;
-				}
-			}
-			if ( encontrado ) {
-				listaminas->agregar( mina );
-			}
-		}
-	}
-}
-*/
 
 // Getters
 
@@ -174,27 +156,6 @@ Avion *  Casillero::getAvion() {
     return this->aeronave;
 }
 
-/*
-Lista< Mina * > * Casillero::getListaMinas() {
-	return this->minas;
-}
-
-Mina * Casillero::getMina( int jugador ) {
-	Mina * mina = NULL;
-	Lista< Mina * > * listaminas = this->minas;
-	if ( this->minas != NULL ) {
-		listaminas->iniciarCursor();
-		while ( listaminas->avanzarCursor() ) {
-			Mina* aux = listaminas->obtenerCursor();
-			if ( aux->getJugador() == jugador ) {
-				mina = aux;
-				break;
-			}
-		}
-	}
-	return mina;
-}
-*/
 
 Mina * Casillero::getMina() {
     return this->minacomun;

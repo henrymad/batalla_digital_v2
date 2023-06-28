@@ -32,7 +32,7 @@ void Barco::setJugador( int jugador) {
 	}
 }
 
-void Barco::setCoordenadas( Coordenada * coordenada) {
+void Barco::setCoordenada( Coordenada * coordenada) {
 	/* Importante es que el aeroplano este en el aire */
 	if ( coordenada->getCoordenadaZ() == NIVEL_SUPERFICIE ) {
 		this->coordenada = coordenada;

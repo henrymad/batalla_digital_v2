@@ -50,7 +50,7 @@ void Avion::setJugador( int jugador ) {
 	}
 }
 
-void Avion::setCoordenadas( Coordenada * coordenada ) {
+void Avion::setCoordenada( Coordenada * coordenada ) {
 	/* Importante es que el aeroplano este en el aire */
 	if ( coordenada->getCoordenadaZ() > NIVEL_SUPERFICIE ) {
 		this->coordenada = coordenada;

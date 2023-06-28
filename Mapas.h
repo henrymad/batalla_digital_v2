@@ -3,8 +3,9 @@
 
 #include <iostream>
 #include <fstream>
-#include "Graficas.h"
+
 #include "Jugador.h"
+#include "Graficas.h"
 
 using namespace std;
 
@@ -19,6 +20,7 @@ public:
 	void grabarMapa3D( string );
 	void imprimirMapa( string, Jugador * );
 	void imprimirGraficoSuperficie( string );
+	void imprimirGraficoSuperficie( string, Jugador * );
 	void verMapa();
 	void setJugador( Jugador * );
 	void setNombreArchivo( string );
@@ -30,4 +32,4 @@ private:
 	string hayAvion( Casillero *, Jugador * );
 };
 
-#endif
+#endif   // _MAPAS_H_INCLUDED_
