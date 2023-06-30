@@ -8,7 +8,6 @@ Tablero3D::Tablero3D() {
     this->size_y = COLUMNAS_TABLERO;
     this->size_z = ALTURA_TABLERO;
     this->tablero = new Lista < Lista < Lista < Casillero * > * > * >;
-    this->casillerosInactivos = new Lista<Casillero*>();
 
     for (int x = 0; x < this->size_x; x++) {
         Lista < Lista < Casillero * > * > * elemento;
@@ -19,11 +18,12 @@ Tablero3D::Tablero3D() {
             for (int z = 0; z < this->size_z; z++) {
                 Casillero * casillero;
                 casillero = new Casillero(x, y, z);
-                subelemento->agregar( casillero);
+                // casillero = new Casillero();
+                subelemento->agregarFinal( casillero);
             }
-            elemento->agregar(subelemento);
+            elemento->agregarFinal(subelemento);
         }
-        this->tablero->agregar(elemento);
+        this->tablero->agregarFinal(elemento);
     }
 }
 
@@ -75,7 +75,7 @@ void Tablero3D::setCasillero( Casillero * casillero, int x, int y, int z ) {
     Lista < Lista < Casillero * > * > * elemento;
     Lista < Casillero * > * subelemento;
 
-    // Traslaci�n de coordenadas
+    // Traslaci�n de las coordenadas del usuario
     x--; y--; z--;
     casillero->getCoordenada()->setCoordenadaX( x );
     casillero->getCoordenada()->setCoordenadaY( y );
@@ -91,13 +91,14 @@ Casillero * Tablero3D::getCasillero( int x, int y, int z ) {
     }
     Lista < Lista < Casillero * > * > * elemento;
     Lista < Casillero * > * subelemento;
-    // Traslaci�n de coordenadas
+
+    // Traslaci�n de las coordenadas del usuario
     x--; y--; z--;
     elemento = this->tablero->obtenerDato( x );
     subelemento = elemento->obtenerDato( y );
-    Casillero * casillero;
-    casillero = subelemento->obtenerDato( z );
-    return casillero;
+    Casillero * Casillero;
+    Casillero = subelemento->obtenerDato( z );
+    return Casillero;
 }
 
 int Tablero3D::getSize_x() {
@@ -168,7 +169,7 @@ void Tablero3D::actualizarEstadoCasillero() {
             Casillero * casillero = this->casillerosInactivos->obtenerCursor();
             if(casillero->getTurnosDeInactividad() == 0){
                 casillero->setEstadoCasillero(casillerovacio);
-                this->guardarCasilleroPorCoordenada(casillero, casillero->getCoordenada()->getCoordenadaX(),casillero->getCoordenada()->getCoordenadaY(),casillero->getCoordenada()->getCoordenadaZ());
+                this->setCasillero(casillero, casillero->getCoordenada()->getCoordenadaX(),casillero->getCoordenada()->getCoordenadaY(),casillero->getCoordenada()->getCoordenadaZ());
                 this->casillerosInactivos->remover(posicion);
                 posicion++;
             }else{

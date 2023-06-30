@@ -61,13 +61,19 @@ Lista<Soldado *> *Juego::configurarSoldados(int cantidadDeSoldados, int idJugado
         soldado1 = new Soldado(i+1);
         soldado1->getCoordenada()->setCoordenadaX(rand()%FILAS_TABLERO);
         soldado1->getCoordenada()->setCoordenadaY(rand()%COLUMNAS_TABLERO);
-        soldado1->getCoordenada()->setCoordenadaZ(rand()%NIVEL_SUPERFICIE);
+        int z = rand()%ALTURA_TABLERO;
+        if(z<5){
+            soldado1->getCoordenada()->setCoordenadaZ(z+NIVEL_SUPERFICIE);
+        }
+        else{
+            soldado1->getCoordenada()->setCoordenadaZ(z);
+        }
         soldado1->setJugador(idJugador);
         resultado->agregarFinal(soldado1);
-        Casillero *casillero = new Casillero(soldado1->getCoordenada()->getCoordenadaX(),soldado1->getCoordenada()->getCoordenadaY(), soldado1->getCoordenada()->getCoordenadaZ());
+        Casillero *casillero = this->tablero->getCasillero(soldado1->getCoordenada()->getCoordenadaX(),soldado1->getCoordenada()->getCoordenadaY(), soldado1->getCoordenada()->getCoordenadaZ());
         casillero->setEstadoCasillero(soldado);
         casillero->setSoldado(soldado1);
-        this->tablero->guardarCasilleroPorCoordenada(casillero, casillero->getCoordenada()->getCoordenadaX(), casillero->getCoordenada()->getCoordenadaY(), casillero->getCoordenada()->getCoordenadaZ());
+        this->tablero->setCasillero(casillero, casillero->getCoordenada()->getCoordenadaX(), casillero->getCoordenada()->getCoordenadaY(), casillero->getCoordenada()->getCoordenadaZ());
     }
     return resultado;
 }
@@ -173,8 +179,11 @@ void Juego::configurarCartas(int niverlJuego) {
 
 Juego::~Juego() {
     this->jugadores->borrarLista();
+    this->cartas->borrarLista();
+    delete this->pantallaGraficos;
+    delete this->tablero;
     this->pantallaGraficos = NULL;
-    delete tablero;
+    this->tablero= NULL;
 }
 
 void Juego::eliminarJugador(Jugador *jugador, int posicion) {

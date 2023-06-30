@@ -91,7 +91,7 @@ void Jugador::moverSoldado( Tablero3D * tablero, Coordenada * coordenadaDestino,
 }*/
 
 void Jugador::moverSoldado(Tablero3D *tablero1, Coordenada *coordenadaDestino, int idSoldado, Lista<Jugador*> *jugadores) {
-    Casillero *casillero = tablero1->buscarCasilleroPorCoordenada(coordenadaDestino->getCoordenadaX(),coordenadaDestino->getCoordenadaY(),coordenadaDestino->getCoordenadaZ());
+    Casillero *casillero = tablero1->getCasillero(coordenadaDestino->getCoordenadaX(),coordenadaDestino->getCoordenadaY(),coordenadaDestino->getCoordenadaZ());
     if(casillero->getEstadoCasillero() != casillerovacio){
         if(casillero->getEstadoCasillero() == soldado){
             int encontroSoldado = 0;
@@ -102,7 +102,7 @@ void Jugador::moverSoldado(Tablero3D *tablero1, Coordenada *coordenadaDestino, i
                     encontroSoldado = 1;
                     casillero->setSoldado(NULL);
                     casillero->setEstadoCasillero(casillerovacio);
-                    tablero1->guardarCasilleroInactivo(casillero);
+                    tablero1->setCasillero(casillero, casillero->getCoordenada()->getCoordenadaX(), casillero->getCoordenada()->getCoordenadaY(), casillero->getCoordenada()->getCoordenadaZ());
                 }
             }
             this->eliminarSoldado(idSoldado);
@@ -118,7 +118,7 @@ void Jugador::moverSoldado(Tablero3D *tablero1, Coordenada *coordenadaDestino, i
                     casillero->setSoldado(NULL);
                     casillero->setEstadoCasillero(casilleroinactivo);
                     casillero->setTurnosDeInactividad(5);
-                    tablero1->guardarCasilleroInactivo(casillero);
+                    tablero1->setCasillero(casillero, casillero->getCoordenada()->getCoordenadaX(), casillero->getCoordenada()->getCoordenadaY(), casillero->getCoordenada()->getCoordenadaZ());
                 }
             }
             this->eliminarSoldado(idSoldado);
@@ -126,7 +126,7 @@ void Jugador::moverSoldado(Tablero3D *tablero1, Coordenada *coordenadaDestino, i
     }else{
         casillero->setEstadoCasillero(soldado);
         casillero->setSoldado(this->obtenerSoldadoPorId(idSoldado));
-        tablero1->guardarCasilleroPorCoordenada(casillero, coordenadaDestino->getCoordenadaX(), coordenadaDestino->getCoordenadaY(), coordenadaDestino->getCoordenadaZ());
+        tablero1->setCasillero(casillero, casillero->getCoordenada()->getCoordenadaX(), casillero->getCoordenada()->getCoordenadaY(), casillero->getCoordenada()->getCoordenadaZ());
     }
 }
 
@@ -194,6 +194,7 @@ void Jugador::minarCasillero(Tablero3D *tablero, Coordenada *coordenadaDestino, 
                     casillero->setMina(NULL);
                     casillero->setSoldado(NULL);
                     tablero->guardarCasilleroInactivo(casillero);
+                    tablero->setCasillero(casillero, casillero->getCoordenada()->getCoordenadaX(), casillero->getCoordenada()->getCoordenadaY(), casillero->getCoordenada()->getCoordenadaZ());
                     return;
                 }
             }
@@ -209,6 +210,7 @@ void Jugador::minarCasillero(Tablero3D *tablero, Coordenada *coordenadaDestino, 
                     casillero->setMina(NULL);
                     casillero->setSoldado(NULL);
                     tablero->guardarCasilleroInactivo(casillero);
+                    tablero->setCasillero(casillero, casillero->getCoordenada()->getCoordenadaX(), casillero->getCoordenada()->getCoordenadaY(), casillero->getCoordenada()->getCoordenadaZ());
                     return;
                 }
             }
@@ -219,6 +221,7 @@ void Jugador::minarCasillero(Tablero3D *tablero, Coordenada *coordenadaDestino, 
         casillero->setEstadoCasillero(mina);
         this->minasActivas->agregarFinal(minaActiva);
         tablero->guardarCasilleroPorCoordenada(casillero,coordenadaDestino->getCoordenadaX(),coordenadaDestino->getCoordenadaY(),coordenadaDestino->getCoordenadaZ());
+        tablero->setCasillero(casillero, casillero->getCoordenada()->getCoordenadaX(), casillero->getCoordenada()->getCoordenadaY(), casillero->getCoordenada()->getCoordenadaZ());
     }
 }
 
