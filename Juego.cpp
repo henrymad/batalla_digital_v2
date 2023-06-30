@@ -75,8 +75,8 @@ Lista<Soldado *> *Juego::configurarSoldados(int cantidadDeSoldados, int idJugado
 void Juego::empezarPartida() {
 
     this->mapa = new Mapas(this->tablero);
-    //this->mapa->cargarMapa3D( "mapadefault.txt", false );
-    //this->mapa->grabarMapa2D( "prueba1.txt" );
+    this->mapa->cargarMapa3D( "mapadefault.txt", false );
+    this->mapa->grabarMapa2D( "prueba1.txt" );
 
     this->jugadores->iniciarCursor();
     int cantidadDeJugadas = 1;
@@ -93,11 +93,6 @@ void Juego::empezarPartida() {
         this->pantallaGraficos->imprimirMenuJugador(jugador);
         this->pantallaGraficos->imprimirEspaciosVertical(1);
         this->pantallaGraficos->imprimirTitulo("Seleccionar Carta: ");
-
-        //Graficas * bmpMapa;
-        //bmpMapa = new Graficas( tablero );
-        //bmpMapa->graficarSuperficie( "grafico.bmp", jugador );
-       // mapa->imprimirMapa("prueba1.txt", NULL);
 
         int posicionCarta;
 
@@ -135,6 +130,11 @@ void Juego::empezarPartida() {
             this->jugadores->obtenerCursor()->jugarCarta(respuesta);
         }
         this->eliminarJugador(jugador, cantidadDeJugadas);
+
+        Graficas * bmpMapa;
+        bmpMapa = new Graficas( tablero );
+        bmpMapa->graficarSuperficie( "grafico.bmp", jugador );
+        mapa->imprimirMapa("prueba1.txt", NULL);
 
         if(this->cantidadDeJugadores == 1){
             seTErminoELJuego = 1;

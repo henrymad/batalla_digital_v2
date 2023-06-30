@@ -113,13 +113,13 @@ int Tablero3D::getSize_z() {
 }
 
 bool Tablero3D::checkCoordenadas( int x, int y, int z ) {
-    if ( x < 0 || x > this->size_x - 1 ) {
+    if ( x < 1 || x > this->size_x ) {
         return false;
     }
-    if ( y < 0 || y > this->size_y - 1) {
+    if ( y < 1 || y > this->size_y ) {
         return false;
     }
-    if ( z < 0 || z > this->size_z - 1) {
+    if ( z < 1 || z > this->size_z ) {
         return false;
     }
     return true;
