@@ -33,6 +33,7 @@ private:
     Lista<Soldado*> *configurarSoldados(int cantidadDeSoldados,int idJugador);
     void eliminarJugador(Jugador *jugador, int posicion);
     Coordenada *coordenadaValida(Coordenada *nuevoCoordenada);
+    Coordenada *coordenadaValidaCarta(Coordenada *nuevoCoordenada);
 
 public:
     Juego();

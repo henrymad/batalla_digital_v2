@@ -14,6 +14,7 @@ Jugador::Jugador(int idJugador) {
     this->soldados = NULL;
     this->minasActivas = NULL;
     this->cartas = NULL;
+    this->barco1 = NULL;
 }
 
 int Jugador::NuevoID( int numero = 0 ) {
@@ -233,9 +234,13 @@ Lista<Carta *> *Jugador::getListaCartas() {
     return this->cartas;
 }
 
-void Jugador::jugarCarta(std::string carta) {
-    if(carta == "barco" ){
-        Barco *barco = new Barco();
-        barco->getJugador();
-    }
+void Jugador::jugarCarta(EstadoCasillero estadoCasillero, Tablero3D *tablero, Coordenada *coordenada) {
+        if(estadoCasillero == barco){
+            if(this->barco1 == NULL){
+                this->barco1 = new Barco();
+                barco1->setCoordenada(coordenada);
+                barco1->setJugador(this->idJugador);
+            }
+        }
 }
+

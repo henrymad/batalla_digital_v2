@@ -133,14 +133,19 @@ void Juego::empezarPartida() {
         string respuesta = this->pantallaGraficos->entradaUsuarioTexto("Desea jugar una carta: si/no: ");
         if(respuesta == "si"){
             respuesta = this->pantallaGraficos->entradaUsuarioTexto("Ingresar nombre de la carta: ");
-            this->jugadores->obtenerCursor()->jugarCarta(respuesta);
+            if(respuesta == "barco"){
+                Coordenada *coordenadaBarco = this->pantallaGraficos->entradaCoordenada();
+                coordenadaBarco = this->coordenadaValidaCarta(coordenadaBarco);
+                this->jugadores->obtenerCursor()->jugarCarta(barco, this->tablero, coordenadaBarco);
+            }
+
         }
         this->eliminarJugador(jugador, cantidadDeJugadas);
 
         Graficas * bmpMapa;
-        bmpMapa = new Graficas( tablero );
-        bmpMapa->graficarSuperficie( "grafico.bmp", jugador );
-        mapa->imprimirMapa("prueba1.txt", NULL);
+        //bmpMapa = new Graficas( tablero );
+        //bmpMapa->graficarSuperficie( "grafico.bmp", jugador );
+        //mapa->imprimirMapa("prueba1.txt", NULL);
 
         if(this->cantidadDeJugadores == 1){
             seTErminoELJuego = 1;
@@ -193,11 +198,28 @@ void Juego::eliminarJugador(Jugador *jugador, int posicion) {
 }
 
 Coordenada *Juego::coordenadaValida(Coordenada *nuevoCoordenada) {
-    Casillero *casillero = this->tablero->buscarCasilleroPorCoordenada(nuevoCoordenada->getCoordenadaX(), nuevoCoordenada->getCoordenadaY(),nuevoCoordenada->getCoordenadaZ());
-    while(casillero->getEstadoCasillero() == casilleroinactivo){
-        this->pantallaGraficos->imprimirTitulo("EL Casillero esta inactivo, ingresar nuevamente las coordenadas");
+    Casillero *casillero = this->tablero->getCasillero(nuevoCoordenada->getCoordenadaX(), nuevoCoordenada->getCoordenadaY(),nuevoCoordenada->getCoordenadaZ());
+    while(casillero->getEstadoCasillero() == casilleroinactivo || casillero->getTipoTerreno() == agua){
+        if(casillero->getTipoTerreno() == agua){
+            this->pantallaGraficos->imprimirTitulo("EL tipo de terreno del casillero es agua , ingresar nuevamente las coordenadas");
+            nuevoCoordenada = this->pantallaGraficos->entradaCoordenada();
+            casillero = this->tablero->getCasillero(nuevoCoordenada->getCoordenadaX(), nuevoCoordenada->getCoordenadaY(),nuevoCoordenada->getCoordenadaZ());
+        }
+        else{
+            this->pantallaGraficos->imprimirTitulo("EL Casillero esta inactivo o , ingresar nuevamente las coordenadas");
+            nuevoCoordenada = this->pantallaGraficos->entradaCoordenada();
+            casillero = this->tablero->getCasillero(nuevoCoordenada->getCoordenadaX(), nuevoCoordenada->getCoordenadaY(),nuevoCoordenada->getCoordenadaZ());
+        }
+    }
+    return nuevoCoordenada;
+}
+
+Coordenada *Juego::coordenadaValidaCarta(Coordenada *nuevoCoordenada) {
+    Casillero *casillero = this->tablero->getCasillero(nuevoCoordenada->getCoordenadaX(), nuevoCoordenada->getCoordenadaY(),nuevoCoordenada->getCoordenadaZ());
+    while(casillero->getTipoTerreno() != tierra){
+        this->pantallaGraficos->imprimirTitulo("EL barco solo se puede posicionar en tierra , ingresar nuevamente las coordenadas");
         nuevoCoordenada = this->pantallaGraficos->entradaCoordenada();
-        casillero = this->tablero->buscarCasilleroPorCoordenada(nuevoCoordenada->getCoordenadaX(), nuevoCoordenada->getCoordenadaY(),nuevoCoordenada->getCoordenadaZ());
+        casillero = this->tablero->getCasillero(nuevoCoordenada->getCoordenadaX(), nuevoCoordenada->getCoordenadaY(),nuevoCoordenada->getCoordenadaZ());
     }
     return nuevoCoordenada;
 }

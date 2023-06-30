@@ -8,6 +8,7 @@
 #include "Mina.h"
 #include "Tablero3D.h"
 #include "Carta.h"
+#include "PropiedadesDelJuego.h"
 
 using namespace std;
 
@@ -18,6 +19,8 @@ private:
 	Lista<Soldado *> * soldados;
 	Lista<Mina *> * minasActivas;
     Lista<Carta *> *cartas;
+
+    Barco *barco1;
 
 public:
 	Jugador();
@@ -38,7 +41,7 @@ public:
 
     void setListaCartas( Lista<Carta *> *cartas);
     Lista<Carta *> *getListaCartas();
-    void jugarCarta(std::string carta);
+    void jugarCarta(EstadoCasillero, Tablero3D *tablero, Coordenada *coordenada);
 
     void actualizarPosicionSoldado(Coordenada *coordenada, int idSoldado, Jugador *jugador);
     void eliminarSoldado(int idSoldado);
